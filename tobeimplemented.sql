@@ -1,13 +1,14 @@
+CREATE TABLE Chain (
+    chain_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    headquarters_address VARCHAR(255) NOT NULL,
+    number_of_hotels INT,
+    headquarters_email VARCHAR(100) NOT NULL,
+    headquarters_phone_number VARCHAR(20) NOT NULL
+);
+
 -- Not final
 -- This is a draft of stuff that will be implemented in the final project
-
-CREATE TABLE HotelChain (
-    chain_id SERIAL PRIMARY KEY,
-    chain_name VARCHAR(100) NOT NULL,
-    headquarters_addr VARCHAR(255) NOT NULL,
-    contact_email VARCHAR(100) NOT NULL,
-    contact_phone VARCHAR(20) NOT NULL
-);
 
 CREATE TABLE Hotel (
     hotel_id SERIAL PRIMARY KEY,
