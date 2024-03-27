@@ -1,13 +1,18 @@
-const express = require('express')
-const app = express()
-const port = 3001
+const express = require('express');
+const app = express();
+const cors = require('cors');
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`)
-})
+//middleware
+app.use(cors());
+app.use(express.json());
 
-//await client.connect()
-//const res = await
-// client.query('SELECT * FROM laboratories.artist;')
-// console.log(res.rows)
-// await client.end()
+//routes
+// Register and Login Routes
+app.use('/auth', require('./routes/jwtAuth'));
+
+// Dashboard Route
+app.use('/dashboard', require('./routes/dashboard'));
+
+app.listen(3000, () => {
+    console.log(`Server is running on port 3000`);
+});
