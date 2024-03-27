@@ -1,5 +1,9 @@
--- Final Usable queries
--- APPLY QUERIES IN ORDER (or else it won't work)
+/*
+--------------------------------------------------------------
+Table Creation Queries
+APPLY QUERIES IN ORDER (or else it won't work)
+--------------------------------------------------------------
+*/
 CREATE TABLE Chain (
     ChainID SERIAL PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
@@ -99,6 +103,124 @@ Random Data Pop Queries
 --------------------------------------------------------------
 */
 
+-- Insert data for Chain 1
+INSERT INTO Chain (Name, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber) 
+VALUES ('Chain 1', '123 Main Street, City1, Country1', 8, 'hq1@example.com', '+1234567890');
+
+-- Insert data for Chain 1 Hotels
+INSERT INTO Hotel (Address, PhoneNumber, Email, StarRating, NumberOfRooms, ChainID)
+VALUES 
+    ('123 Hotel Ave, City1, Country1', '+1234567890', 'hotel1@example.com', 4, 50, 1), -- Hotel 1
+    ('456 Resort St, City2, Country1', '+1234567890', 'resort1@example.com', 5, 100, 1), -- Hotel 2
+    ('789 Lodge Blvd, City3, Country1', '+1234567890', 'lodge1@example.com', 3, 80, 1), -- Hotel 3
+    ('987 Inn Ln, City4, Country1', '+1234567890', 'inn1@example.com', 4, 120, 1), -- Hotel 4
+    ('543 Motel Rd, City5, Country1', '+1234567890', 'motel1@example.com', 2, 60, 1), -- Hotel 5
+    ('654 Plaza Dr, City6, Country1', '+1234567890', 'plaza1@example.com', 3, 90, 1), -- Hotel 6
+    ('876 Villa Ave, City7, Country1', '+1234567890', 'villa1@example.com', 4, 110, 1), -- Hotel 7
+    ('210 Retreat Blvd, City8, Country1', '+1234567890', 'retreat1@example.com', 5, 150, 1); -- Hotel 8
+
+-- Insert data for rooms in each hotel
+-- Hotel 1 Rooms
+INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Issues, HotelID, ChainID)
+VALUES
+    (100.00, 'Wi-Fi, TV, AC', 2, 'City view', 'Yes', NULL, 1, 1), -- Room 1
+    (150.00, 'Wi-Fi, TV, AC, Mini Fridge', 4, 'Ocean view', 'No', NULL, 1, 1), -- Room 2
+    (120.00, 'Wi-Fi, TV, AC', 2, 'City view', 'Yes', NULL, 1, 1), -- Room 3
+    (200.00, 'Wi-Fi, TV, AC, Kitchenette', 3, 'Mountain view', 'No', NULL, 1, 1), -- Room 4
+    (180.00, 'Wi-Fi, TV, AC, Balcony', 2, 'City view', 'Yes', NULL, 1, 1) -- Room 5
+;
+
+-- Insert data for Clients
+INSERT INTO Client (FirstName, LastName, Address, SSN, RegistrationDate)
+VALUES 
+    ('John', 'Doe', '123 Client St, City1, Country1', 123456789, '2024-03-26'),
+    ('Jane', 'Smith', '456 Client Ave, City2, Country1', 987654321, '2024-03-27'),
+    -- Add more clients for Chain 1 as needed
+;
+
+-- Insert data for Employees
+INSERT INTO Employee (FirstName, LastName, Address, SSN, Role, HotelID, ChainID)
+VALUES 
+    ('Alice', 'Johnson', '123 Employee St, City1, Country1', 111111111, 'Manager', 1, 1),
+    ('Bob', 'Smith', '456 Employee Ave, City2, Country1', 222222222, 'Front Desk Clerk', 1, 1),
+    -- Add more employees for Chain 1 as needed
+;
+
+-- Insert data for Reservations
+INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID)
+VALUES 
+    ('2024-04-01', '2024-04-05', 1, 1, 1), -- Client John Doe reserves Hotel 1 Room 1
+    ('2024-04-02', '2024-04-06', 2, 2, 2), -- Client Jane Smith reserves Hotel 2 Room 2
+    -- Add more reservations for Chain 1 as needed
+;
+
+-- Insert data for Positions
+INSERT INTO Position (JobTitle, Responsibilities, Level, HotelID)
+VALUES 
+    ('Manager', 'Oversee hotel operations', 3, 1), -- Manager position at Hotel 1
+    ('Front Desk Clerk', 'Assist guests with check-in and check-out', 1, 1), -- Front Desk Clerk position at Hotel 1
+    -- Add more positions for Chain 1 as needed
+;
+
+
+-- Insert data for Chain 2
+INSERT INTO Chain (Name, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber) 
+VALUES ('Chain 2', '456 Elm Street, City2, Country2', 8, 'hq2@example.com', '+1234567890');
+
+-- Insert data for Chain 2 Hotels
+INSERT INTO Hotel (Address, PhoneNumber, Email, StarRating, NumberOfRooms, ChainID)
+VALUES 
+    ('123 Resort Ave, City1, Country2', '+1234567890', 'resort2@example.com', 4, 50, 2), -- Hotel 1
+    ('456 Lodge St, City2, Country2', '+1234567890', 'lodge2@example.com', 5, 100, 2), -- Hotel 2
+    ('789 Inn Blvd, City3, Country2', '+1234567890', 'inn2@example.com', 3, 80, 2), -- Hotel 3
+    ('987 Motel Ln, City4, Country2', '+1234567890', 'motel2@example.com', 4, 120, 2), -- Hotel 4
+    ('543 Plaza Rd, City5, Country2', '+1234567890', 'plaza2@example.com', 2, 60, 2), -- Hotel 5
+    ('654 Villa Dr, City6, Country2', '+1234567890', 'villa2@example.com', 3, 90, 2), -- Hotel 6
+    ('876 Retreat Ave, City7, Country2', '+1234567890', 'retreat2@example.com', 4, 110, 2), -- Hotel 7
+    ('210 Beach Blvd, City8, Country2', '+1234567890', 'beach2@example.com', 5, 150, 2); -- Hotel 8
+
+-- Insert data for rooms in each hotel in Chain 2
+-- Repeat the process similarly to Chain 1 for each hotel in Chain 2
+
+-- Insert data for Clients for Chain 2
+INSERT INTO Client (FirstName, LastName, Address, SSN, RegistrationDate)
+VALUES 
+    ('Michael', 'Brown', '123 Client St, City1, Country2', 111111111, '2024-03-28'),
+    ('Jennifer', 'Davis', '456 Client Ave, City2, Country2', 222222222, '2024-03-29'),
+    -- Add more clients for Chain 2 as needed
+;
+
+-- Insert data for Employees for Chain 2
+INSERT INTO Employee (FirstName, LastName, Address, SSN, Role, HotelID, ChainID)
+VALUES 
+    ('David', 'Wilson', '123 Employee St, City1, Country2', 333333333, 'Manager', 1, 2),
+    ('Jessica', 'Martinez', '456 Employee Ave, City2, Country2', 444444444, 'Front Desk Clerk', 1, 2),
+    -- Add more employees for Chain 2 as needed
+;
+
+-- Insert data for Reservations for Chain 2
+INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID)
+VALUES 
+    ('2024-04-03', '2024-04-07', 1, 1, 1), -- Client Michael Brown reserves Hotel 1 Room 1
+    ('2024-04-04', '2024-04-08', 2, 2, 2), -- Client Jennifer Davis reserves Hotel 2 Room 2
+    -- Add more reservations for Chain 2 as needed
+;
+
+-- Insert data for Positions for Chain 2
+INSERT INTO Position (JobTitle, Responsibilities, Level, HotelID)
+VALUES 
+    ('Manager', 'Oversee hotel operations', 3, 1), -- Manager position at Hotel 1
+    ('Front Desk Clerk', 'Assist guests with check-in and check-out', 1, 1), -- Front Desk Clerk position at Hotel 1
+    -- Add more positions for Chain 2 as needed
+;
+
+
+
+
+
+
+
+
 -- Inserting data into Chain table
 INSERT INTO Chain (Name, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
 VALUES 
@@ -172,53 +294,3 @@ INSERT INTO Position (JobTitle, Responsibilities, Level, HotelID)
 VALUES 
     ('Manager', 'Oversee hotel operations', 3, 1),
     ('Receptionist', 'Manage check-ins and check-outs', 2, 2),
-
-
-
-
-/*
---------------------------------------------------------------
-Not final Yet
---------------------------------------------------------------
-*/
--- SQL Queries
-SELECT * FROM Hotel WHERE chain_id = 1;
-SELECT COUNT(*) FROM Room WHERE hotel_id = 1;
-SELECT * FROM Client WHERE social_security = '987-65-4321';
-UPDATE Room SET price = 120.00 WHERE RoomID = 1;
-
-
--- Triggers
-CREATE OR REPLACE FUNCTION prevent_manager_deletion()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF OLD.role = 'Manager' THEN
-        IF NOT EXISTS (SELECT 1 FROM Employee WHERE hotel_id = OLD.hotel_id AND role = 'Manager' AND EmployeeID != OLD.employee_id) THEN
-            RAISE EXCEPTION 'Cannot delete the only manager of the hotel';
-        END IF;
-    END IF;
-    RETURN OLD;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER manager_deletion_trigger
-BEFORE DELETE ON Employee
-FOR EACH ROW
-EXECUTE FUNCTION prevent_manager_deletion();
-
-
-
-CREATE OR REPLACE FUNCTION update_available_rooms()
-RETURNS TRIGGER AS $$
-BEGIN
-    UPDATE Hotel
-    SET available_rooms = available_rooms - 1
-    WHERE hotel_id = NEW.hotel_id;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER reservation_trigger
-AFTER INSERT ON Client
-FOR EACH ROW
-EXECUTE FUNCTION update_available_rooms();
