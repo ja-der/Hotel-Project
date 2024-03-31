@@ -214,83 +214,56 @@ VALUES
     -- Add more positions for Chain 2 as needed
 ;
 
+--- .... continue 
 
 
+/*
+--------------------------------------------------------------
+Indexes
+--------------------------------------------------------------
+*/
+-- On Reservation.RoomID to speed up room availability searches:
+CREATE INDEX idx_reservation_roomid ON Reservation(RoomID);
+
+-- On Hotel.ChainID to optimize queries filtering hotels by their chain:
+CREATE INDEX idx_hotel_chainid ON Hotel(ChainID);
+
+-- On Client.LastName and Client.FirstName to improve search performance for clients by name:
+CREATE INDEX idx_client_lastname_firstname ON Client(LastName, FirstName);
 
 
+/*
+--------------------------------------------------------------
+Triggers
+--------------------------------------------------------------
+*/
 
+-- Before deleting a hotel chain, ensure no hotels are linked to this chain:
 
+CREATE OR REPLACE FUNCTION prevent_chain_deletion()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF (SELECT count(*) FROM Hotel WHERE ChainID = OLD.ChainID) > 0 THEN
+        RAISE EXCEPTION 'Cannot delete chain % because it still has hotels.', OLD.Name;
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
 
--- Inserting data into Chain table
-INSERT INTO Chain (Name, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
-VALUES 
-    ('Chain A', '123 Main St, CityA', 10, 'chainA@example.com', '123-456-7890'),
-    ('Chain B', '456 Elm St, CityB', 8, 'chainB@example.com', '987-654-3210'),
-    ('Chain C', '789 Oak St, CityC', 12, 'chainC@example.com', '555-123-4567'),
-    ('Chain D', '321 Pine St, CityD', 9, 'chainD@example.com', '111-222-3333'),
-    ('Chain E', '654 Maple St, CityE', 11, 'chainE@example.com', '999-888-7777');
+CREATE TRIGGER BeforeChainDeletion
+BEFORE DELETE ON Chain
+FOR EACH ROW EXECUTE FUNCTION prevent_chain_deletion();
 
--- Inserting data into Hotel table
-INSERT INTO Hotel (Address, PhoneNumber, Email, StarRating, NumberOfRooms, ChainID)
-VALUES 
-    ('123 Broadway, CityA', '111-222-3333', 'hotelA1@example.com', 4, 50, 1),
-    ('456 Broadway, CityB', '222-333-4444', 'hotelB1@example.com', 3, 60, 2),
-    ('789 Broadway, CityC', '333-444-5555', 'hotelC1@example.com', 5, 70, 3),
-    ('321 Broadway, CityD', '444-555-6666', 'hotelD1@example.com', 4, 55, 4),
-    ('654 Broadway, CityE', '555-666-7777', 'hotelE1@example.com', 3, 65, 5);
+-- After inserting a reservation, verify room capacity and adjust the available number of rooms accordingly:1
+-- Assuming you have a column or logic to manage availability, this trigger is conceptual
+CREATE OR REPLACE FUNCTION update_room_availability()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE Hotel SET NumberOfRooms = NumberOfRooms - 1 WHERE HotelID = NEW.HotelID;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
--- Inserting data into Room table
-INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Issues, HotelID, ChainID)
-VALUES 
-    (100.00, 'WiFi, TV', 2, 'City View', 'Yes', NULL, 1, 1),
-    (120.00, 'WiFi, TV, Mini-Bar', 2, 'Ocean View', 'No', NULL, 1, 1),
-    (150.00, 'WiFi, TV, Kitchenette', 4, 'Mountain View', 'Yes', 'None', 2, 2),
-    (80.00, 'WiFi', 1, 'No View', 'Yes', 'None', 2, 2),
-    (200.00, 'WiFi, TV, Mini-Bar, Kitchenette', 4, 'Lake View', 'No', 'None', 3, 3),
-    (180.00, 'WiFi, TV', 3, 'Garden View', 'Yes', 'None', 3, 3),
-    (90.00, 'WiFi', 2, 'City View', 'No', 'None', 4, 4),
-    (110.00, 'WiFi, TV', 2, 'City View', 'Yes', 'None', 4, 4),
-    (130.00, 'WiFi, TV', 3, 'Ocean View', 'Yes', 'None', 5, 5),
-    (160.00, 'WiFi, TV, Mini-Bar', 3, 'Mountain View', 'No', 'None', 5, 5);
-
--- Inserting data into Client table
-INSERT INTO Client (FirstName, LastName, Address, SSN, RegistrationDate)
-VALUES 
-    ('John', 'Doe', '789 Elm St, CityX', 123456789, '2023-01-15'),
-    ('Jane', 'Smith', '456 Oak St, CityY', 987654321, '2023-02-20'),
-    ('Alice', 'Johnson', '123 Maple St, CityZ', 456789123, '2023-03-25'),
-    ('Bob', 'Brown', '654 Pine St, CityW', 789123456, '2023-04-30'),
-    ('Emily', 'Davis', '321 Cedar St, CityV', 654321789, '2023-05-05');
-
--- Inserting data into Reservation table
-INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID)
-VALUES 
-    ('2023-06-01', '2023-06-05', 1, 1, 1),
-    ('2023-06-10', '2023-06-15', 2, 2, 3),
-    ('2023-07-01', '2023-07-07', 3, 3, 5),
-    ('2023-07-15', '2023-07-20', 4, 4, 7),
-    ('2023-08-01', '2023-08-10', 5, 5, 9);
-
--- Inserting data into Employee table
-INSERT INTO Employee (FirstName, LastName, Address, SSN, Role, HotelID, ChainID)
-VALUES 
-    ('Michael', 'Johnson', '123 Elm St, CityM', 987654321, 'Manager', 1, 1),
-    ('Jennifer', 'Williams', '456 Oak St, CityN', 123456789, 'Receptionist', 2, 2),
-    ('David', 'Brown', '789 Maple St, CityO', 456789123, 'Housekeeping', 3, 3),
-    ('Michelle', 'Garcia', '321 Pine St, CityP', 789123456, 'Chef', 4, 4),
-    ('Christopher', 'Martinez', '654 Cedar St, CityQ', 654321789, 'Waiter', 5, 5);
-
--- Inserting data into Rental table
-INSERT INTO Rental (StartDate, EndDate, ReservationID, EmployeeID, ChainID, HotelID, RoomID)
-VALUES 
-    ('2023-06-01', '2023-06-05', 1, 1, 1, 1, 1),
-    ('2023-06-10', '2023-06-15', 2, 2, 2, 2, 3),
-    ('2023-07-01', '2023-07-07', 3, 3, 3, 3, 5),
-    ('2023-07-15', '2023-07-20', 4, 4, 4, 4, 7),
-    ('2023-08-01', '2023-08-10', 5, 5, 5, 5, 9);
-
--- Inserting data into Position table
-INSERT INTO Position (JobTitle, Responsibilities, Level, HotelID)
-VALUES 
-    ('Manager', 'Oversee hotel operations', 3, 1),
-    ('Receptionist', 'Manage check-ins and check-outs', 2, 2),
+CREATE TRIGGER AfterReservationInsertion
+AFTER INSERT ON Reservation
+FOR EACH ROW EXECUTE FUNCTION update_room_availability();

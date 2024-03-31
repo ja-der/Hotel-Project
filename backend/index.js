@@ -43,9 +43,3 @@ app.listen(3000, () => {
 //   );
 //   next();
 // });
-
-
-
-app.listen(port, () => {
-  console.log(`App listening on port ${port}.`)
-})
