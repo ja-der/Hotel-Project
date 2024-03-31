@@ -1,5 +1,5 @@
 import './App.css';
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 
 // Components
@@ -16,6 +16,26 @@ function App() {
     setIsAuthenticated(boolean);
     if (boolean && userRole) {
       setRole(userRole);
+    }
+  }
+
+  useEffect(() => {
+    isAuth();
+  }, []);
+
+  async function isAuth() {
+    try {
+      const response = await fetch("http://localhost:3000/auth/is-verify", {
+        method: "GET",
+        headers: { token: localStorage.token }
+      });
+
+      const parseRes = await response.json();
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+      parseRes === true ? setRole(localStorage.role) : setRole('');
+    }
+    catch (err) {
+      console.error(err.message);
     }
   }
 

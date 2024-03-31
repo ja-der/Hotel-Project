@@ -26,6 +26,7 @@ const Login = ({ setAuth }) => {
 
             const parseRes = await response.json();
             localStorage.setItem("token", parseRes.token);
+            localStorage.setItem("role", role);
             setAuth(true, role);
 
         } catch (err) {

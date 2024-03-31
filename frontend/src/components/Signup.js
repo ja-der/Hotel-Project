@@ -32,6 +32,7 @@ const Signup = ({setAuth}) => {
 
             const parseRes = await response.json();
             localStorage.setItem("token", parseRes.token);
+            localStorage.setItem("role", "client");
             setAuth(true, "client");
         } catch (err) {
             console.error(err.message);
