@@ -6,18 +6,18 @@ APPLY QUERIES IN ORDER (or else it won't work)
 */
 CREATE TABLE Chain (
     ChainID SERIAL PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
+    ChainName VARCHAR(255) NOT NULL,
     HeadquartersAddress VARCHAR(255) NOT NULL,
-    NumberOfHotels INT,
-    HeadquartersEmail VARCHAR(100) NOT NULL,
+    NumberOfHotels INT NOT NULL,
+    HeadquartersEmail VARCHAR(255) NOT NULL,
     HeadquartersPhoneNumber VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Hotel (
     HotelID SERIAL PRIMARY KEY,
-    Address VARCHAR(255) NOT NULL,
-    PhoneNumber VARCHAR(20) NOT NULL,
-    Email VARCHAR(100) NOT NULL,
+    HotelAddress VARCHAR(255) NOT NULL,
+    HotelPhoneNumber VARCHAR(20) NOT NULL,
+    HotelEmail VARCHAR(100) NOT NULL,
     StarRating INT NOT NULL,
     NumberOfRooms INT NOT NULL,
     ChainID INT NOT NULL,
@@ -40,11 +40,13 @@ CREATE TABLE Room (
 
 CREATE TABLE Client (
     ClientID SERIAL PRIMARY KEY,
-    FirstName VARCHAR(20) NOT NULL,
-    LastName VARCHAR(20) NOT NULL,
-    Address VARCHAR(255) NOT NULL,
-    SSN INT NOT NULL,
-    RegistrationDate DATE NOT NULL
+    ClientFirstName VARCHAR(20) NOT NULL,
+    ClientLastName VARCHAR(20) NOT NULL,
+    ClientAddress VARCHAR(255) NOT NULL,
+    ClientSSN INT NOT NULL,
+    RegistrationDate DATE NOT NULL,
+    ClientEmail VARCHAR(100),
+    ClientPassword VARCHAR(255)
 );
 
 CREATE TABLE Reservation (
@@ -61,11 +63,11 @@ CREATE TABLE Reservation (
 
 CREATE TABLE Employee (
     EmployeeID SERIAL PRIMARY KEY,
-    FirstName VARCHAR(20) NOT NULL,
-    LastName VARCHAR(20) NOT NULL,
-    Address VARCHAR(255) NOT NULL,
-    SSN INT NOT NULL,
-    Role VARCHAR(50) NOT NULL,
+    EmployeeFirstName VARCHAR(20) NOT NULL,
+    EmployeeLastName VARCHAR(20) NOT NULL,
+    EmployeeAddress VARCHAR(255) NOT NULL,
+    EmployeeSSN INT NOT NULL,
+    EmployeeRole VARCHAR(50) NOT NULL,
     HotelID INT NOT NULL,
     ChainID INT NOT NULL,
     FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
@@ -93,7 +95,9 @@ CREATE TABLE Position (
     Responsibilities VARCHAR(1000),
     Level INT,
     HotelID INT NOT NULL,
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID)
+    ChainID INT NOT NULL,
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
 );
 
 
@@ -239,7 +243,6 @@ Triggers
 */
 
 -- Before deleting a hotel chain, ensure no hotels are linked to this chain:
-
 CREATE OR REPLACE FUNCTION prevent_chain_deletion()
 RETURNS TRIGGER AS $$
 BEGIN
