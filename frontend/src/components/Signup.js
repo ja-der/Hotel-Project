@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from 'react';
+import {Link} from 'react-router-dom';
 
 const Signup = ({setAuth}) => {
 
@@ -49,6 +50,7 @@ const Signup = ({setAuth}) => {
             <input type="password" name="password" placeholder="Password" className="form-control my-3" onChange={e => onChange(e)} required />
             <button className="btn btn-success btn-block">Submit</button>
         </form>
+        <Link to="/login">Login</Link>
         </Fragment>
     );
 }
