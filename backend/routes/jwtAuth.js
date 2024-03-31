@@ -7,7 +7,7 @@ const authorize = require('../middleware/authorization');
 const authorization = require('../middleware/authorization');
 
 // Register
-router.post('/register', validInfo, async(req, res) => {
+router.post('/signup', validInfo, async(req, res) => {
     try {
         // destructure the req.body (firstName, lastName, address, ssn, registrationDate, email, password)
         const { firstName, lastName, address, ssn, registrationDate, email, password } = req.body;
@@ -27,7 +27,7 @@ router.post('/register', validInfo, async(req, res) => {
 
         // enter the new user inside our database
         const newUser = await pool.query(
-            'INSERT INTO client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstName, lastName, address, ssn, registrationDate, email, bcryptPassword]
+            'INSERT INTO client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstName, lastName, address, parseInt(ssn), registrationDate, email, bcryptPassword]
         );
         // generating our jwt token
         const token = jwtGenerator(newUser.rows[0].clientid);
