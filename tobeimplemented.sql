@@ -223,6 +223,19 @@ VALUES
 
 /*
 --------------------------------------------------------------
+Example Queries
+--------------------------------------------------------------
+*/
+INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID)
+VALUES ('2024-04-20', '2024-04-25', 1, 2, 3);
+
+UPDATE Room SET Issues = 'Water leak' WHERE RoomID = 3;
+
+DELETE FROM Chain WHERE ChainID = 1;
+
+
+/*
+--------------------------------------------------------------
 Indexes
 --------------------------------------------------------------
 */
@@ -252,7 +265,6 @@ BEGIN
     RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
-
 CREATE TRIGGER BeforeChainDeletion
 BEFORE DELETE ON Chain
 FOR EACH ROW EXECUTE FUNCTION prevent_chain_deletion();
