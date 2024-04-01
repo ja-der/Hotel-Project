@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 const Login = ({ setAuth }) => {
     const [inputs, setInputs] = useState({
@@ -18,16 +19,23 @@ const Login = ({ setAuth }) => {
         e.preventDefault();
         try {
             const body = { email, password, role };
-            const response = await fetch("http://localhost:3000/auth/login", {
+            const response = await fetch("http://localhost:4000/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
 
             const parseRes = await response.json();
-            localStorage.setItem("token", parseRes.token);
-            localStorage.setItem("role", role);
-            setAuth(true, role);
+            
+            if (parseRes.token) {
+                localStorage.setItem("token", parseRes.token);
+                localStorage.setItem("role", role);
+                setAuth(true, role);
+                toast.success("Logged in successfully");
+            } else {
+                setAuth(false, '');
+                toast.error(parseRes);
+            }
 
         } catch (err) {
             console.error(err.message);

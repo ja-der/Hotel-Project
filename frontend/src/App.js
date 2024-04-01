@@ -1,6 +1,8 @@
 import './App.css';
 import React, {Fragment, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Components
 import ClientHomepage from './components/ClientHomepage';
@@ -25,7 +27,7 @@ function App() {
 
   async function isAuth() {
     try {
-      const response = await fetch("http://localhost:3000/auth/is-verify", {
+      const response = await fetch("http://localhost:4000/auth/is-verify", {
         method: "GET",
         headers: { token: localStorage.token }
       });
@@ -58,12 +60,14 @@ function App() {
         <div className="container">
           <Routes>
             <Route path='/login' element={!isAuthenticated ? <Login setAuth={setAuth} /> : renderHomepage()} />
-            <Route path='/signup' element={!isAuthenticated ? <Signup setAuth={setAuth}  /> : renderHomepage()} />
+            <Route path='/signup' element={<Signup/>}/>
             <Route path='/clienthomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} /> 
-            <Route path='/employeehomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} />          
+            <Route path='/employeehomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} />         
+            <Route path='/' element={<Navigate to='/login'/>}/> 
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </Fragment>
   );
 }
