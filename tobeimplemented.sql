@@ -278,7 +278,6 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
 CREATE TRIGGER AfterReservationInsertion
 AFTER INSERT ON Reservation
 FOR EACH ROW EXECUTE FUNCTION update_room_availability();
