@@ -5,7 +5,7 @@ const ClientHomepage = ({setAuth} ) => {
 
     async function getName() {
         try {
-            const response = await fetch("http://localhost:3000/dashboard/", {
+            const response = await fetch("http://localhost:4000/dashboard/", {
                 method: "GET",
                 headers: { token: localStorage.token }
             });
@@ -21,7 +21,7 @@ const ClientHomepage = ({setAuth} ) => {
         e.preventDefault();
         localStorage.removeItem("token");
         localStorage.removeItem("role");
-        setAuth(false);
+        setAuth(false, '');
     }
 
 
@@ -32,6 +32,7 @@ const ClientHomepage = ({setAuth} ) => {
     return (
         <Fragment>
         <h1>Hello {name}</h1>
+        <p>Yay! You are logged in as a client!</p>
         <button className="btn btn-danger" onClick={e => logout(e)}>Logout</button>
         </Fragment>
     );
