@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const Signup = () => {
       
       // Redirect to login page after successful signup
         if (response.status === 200) {
+            toast.success('Signed up sucessfully!');
             navigate('/login');
         }
     } catch (err) {

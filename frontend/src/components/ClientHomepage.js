@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import {toast} from 'react-toastify';
 
 const ClientHomepage = ({setAuth} ) => {
     const [name, setName] = useState("");
@@ -22,6 +23,7 @@ const ClientHomepage = ({setAuth} ) => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         setAuth(false, '');
+        toast.success("Logged out successfully");
     }
 
 

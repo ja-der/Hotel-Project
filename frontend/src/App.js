@@ -1,6 +1,8 @@
 import './App.css';
 import React, {Fragment, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Components
 import ClientHomepage from './components/ClientHomepage';
@@ -65,6 +67,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </Fragment>
   );
 }
