@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const initialRooms = [
   { id: 1, name: "Room 101", capacity: 2, price: 100 },
@@ -7,9 +6,8 @@ const initialRooms = [
   // Add more predefined rooms
 ];
 
-const BookedRoomsList = () => {
+const BookedRoomsList = ({ onToggleShowList }) => {
   const [rooms, setRooms] = useState(initialRooms);
-  const navigate = useNavigate();
 
   const deleteRoom = (roomId) => {
     setRooms(rooms.filter((room) => room.id !== roomId));
@@ -30,7 +28,7 @@ const BookedRoomsList = () => {
       ) : (
         <p>No rooms booked yet.</p>
       )}
-      <button onClick={() => navigate("/")}>Go Back</button>
+      <button onClick={onToggleShowList}>Go Back</button>
     </div>
   );
 };

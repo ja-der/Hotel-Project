@@ -6,7 +6,7 @@ import BookedRoomsList from "./BookedRoomsList";
 
 const ClientHomepage = ({ setAuth }) => {
   const [name, setName] = useState("");
-
+  const [showList, setShowList] = useState(true);
   async function getName() {
     try {
       const response = await fetch("http://localhost:4000/dashboard/", {
@@ -20,6 +20,9 @@ const ClientHomepage = ({ setAuth }) => {
       console.error(err.message);
     }
   }
+  const toggleShowList = () => {
+    setShowList(!showList);
+  };
 
   const logout = (e) => {
     e.preventDefault();
@@ -37,10 +40,11 @@ const ClientHomepage = ({ setAuth }) => {
     <Fragment>
       <h1>Hello {name}</h1>
       <p>Yay! You are logged in as a client!</p>
-      <Routes>
-        <Route path="/" element={<HotelBookingForm />} />
-        <Route path="/booked-rooms" element={<BookedRoomsList />} />
-      </Routes>
+      {showList ? (
+        <BookedRoomsList onToggleShowList={toggleShowList} />
+      ) : (
+        <HotelBookingForm onToggleShowList={toggleShowList} />
+      )}
       <button className="btn btn-danger" onClick={(e) => logout(e)}>
         Logout
       </button>

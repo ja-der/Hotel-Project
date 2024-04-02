@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const HotelBookingForm = () => {
+const HotelBookingForm = ({ onToggleShowList }) => {
   const [formData, setFormData] = useState({
     arrivalDate: "",
     roomCapacity: "",
@@ -23,6 +22,7 @@ const HotelBookingForm = () => {
     event.preventDefault();
     console.log("Form Data Submitted:", formData);
     // Add your submission logic here (e.g., sending data to a server)
+    onToggleShowList();
   };
 
   return (
