@@ -26,7 +26,7 @@ CREATE TABLE Room (
     Amenities VARCHAR(255) NOT NULL,
     Capacity INT NOT NULL,
     RoomView VARCHAR(255) NOT NULL,
-    Extendable BOOLEAN NOT NULL,
+    Extendable VARCHAR(25) NOT NULL,
     Issues VARCHAR(255) NOT NULL,
     HotelID INT NOT NULL,
     ChainID INT NOT NULL,

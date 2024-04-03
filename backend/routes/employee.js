@@ -10,10 +10,10 @@ router.post('/rental', async(req, res) => {
         // check if user exists 
         const user = await pool.query('SELECT * FROM client WHERE ClientSSN = $1', [ssn]);
 
-        // check if the name matches the ssn
+        // check if the name and address matches the ssn
         if (user.rows.length !== 0) {
-            if (user.rows[0].clientfirstname !== firstName || user.rows[0].clientlastname !== lastName) {
-                return res.status(401).json('Name does not match SSN');
+            if (user.rows[0].clientfirstname !== firstName || user.rows[0].clientlastname !== lastName || user.rows[0].clientaddress !== address) {
+                return res.status(401).json('Name or Address does not match SSN');
             }
         }
 
@@ -108,17 +108,20 @@ router.post('/checkin', async(req, res) => {
 // search for rooms
 router.post('/rooms', async(req, res) => {
     try {
-        const {hotelID, chainID, priceRange, capacity, start_date, end_date} = req.body;
+        const {hotelID, chainID, minPrice, maxPrice, capacity, start_date, end_date} = req.body;
 
-        // get the start and end of price range
-        const priceRangeArray = priceRange.split('-');
-        const minPrice = priceRangeArray[0];
-        const maxPrice = priceRangeArray[1];
 
         // find the rooms that are available during the given time period
-        const availableRooms = await pool.query(
-            'SELECT * FROM Room WHERE HotelID = $1 AND CHAINID = $2 AND RoomID NOT IN (SELECT RoomID FROM Rental WHERE (StartDate >= $6 AND EndDate <= $7)) AND RoomID NOT IN (SELECT RoomID FROM Reservation WHERE (CheckinDate >= $6 AND CheckoutDate <= $7)) AND RoomID IN (SELECT RoomID FROM Room WHERE Price >= $3 AND Price <= $4 AND Capacity >= $5)', [hotelID, chainID, minPrice, maxPrice, capacity, start_date, end_date]
+        let availableRooms;
+        if (capacity === 'any') {
+            availableRooms = await pool.query(
+                'SELECT * FROM Room WHERE HotelID = $1 AND CHAINID = $2 AND RoomID NOT IN (SELECT RoomID FROM Rental WHERE (StartDate >= $5 AND EndDate <= $6)) AND RoomID NOT IN (SELECT RoomID FROM Reservation WHERE (CheckinDate >= $5 AND CheckoutDate <= $6)) AND RoomID IN (SELECT RoomID FROM Room WHERE Price >= $3 AND Price <= $4)', [hotelID, chainID, minPrice, maxPrice, start_date, end_date]
             );
+        } else {
+            availableRooms = await pool.query(
+                'SELECT * FROM Room WHERE HotelID = $1 AND CHAINID = $2 AND RoomID NOT IN (SELECT RoomID FROM Rental WHERE (StartDate >= $6 AND EndDate <= $7)) AND RoomID NOT IN (SELECT RoomID FROM Reservation WHERE (CheckinDate >= $6 AND CheckoutDate <= $7)) AND RoomID IN (SELECT RoomID FROM Room WHERE Price >= $3 AND Price <= $4 AND Capacity = $5)', [hotelID, chainID, minPrice, maxPrice, capacity, start_date, end_date]
+                );
+        }
 
         res.json(availableRooms.rows);
     } catch (err) {
