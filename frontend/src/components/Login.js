@@ -58,7 +58,7 @@ const Login = ({ setAuth }) => {
                 </div>
                 <button className="mt-3 btn btn-success btn-block">Submit</button>
             </form>
-            <Link to="/signup">Signup</Link>
+            <Link to="/signup" className="mt-2 btn btn-primary btn-block">Signup</Link>
         </Fragment>
     );
 };

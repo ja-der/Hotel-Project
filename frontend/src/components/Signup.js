@@ -105,7 +105,7 @@ const Signup = () => {
         />
         <button className="btn btn-success btn-block">Submit</button>
       </form>
-      <Link to="/login">Login</Link>
+      <Link to="/login" className="mt-2 btn btn-primary btn-block">Login</Link>
     </Fragment>
   );
 };

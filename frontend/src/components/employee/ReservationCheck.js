@@ -133,8 +133,8 @@ const ReservationCheck = ( ) => {
             </tbody>
         </table>
         <div className="d-flex flex-row align-items-center justify-content-center">
-        <button className="btn btn-success mr-5" onClick={onCheckin}>Check-in</button>
-        <Link to="/employeehomepage" className="btn btn-warning">Go back</Link>
+        <button className="btn btn-success btn-lg mr-5" onClick={onCheckin}>Check-in</button>
+        <Link to="/employeehomepage" className="btn btn-lg btn-warning">Go back</Link>
         </div>
     </div>
         </Fragment>
