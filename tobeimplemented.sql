@@ -34,10 +34,8 @@ CREATE TABLE Chain (
     HeadquartersPhoneNumber VARCHAR(20) NOT NULL
 );
 
--- added hotel city and hotel name
 CREATE TABLE Hotel (
     HotelID SERIAL PRIMARY KEY,
-    HotelName VARCHAR(50) NOT NULL,
     HotelAddress VARCHAR(255) NOT NULL,
     HotelCity VARCHAR(50) NOT NULL,
     HotelPhoneNumber VARCHAR(20) NOT NULL,

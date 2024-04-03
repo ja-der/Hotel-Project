@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+/* HotelBookingForm.css */
+
+.amenities-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to next line if space is insufficient */
+  gap: 10px; /* Add some spacing between items */
+}
+
+.amenities-checkbox {
+  display: flex; /* Align checkbox and label in a row */
+  align-items: center; /* Align items vertically */
+}
+
+.amenities-checkbox input[type="checkbox"] {
+  margin-right: 5px; /* Add spacing between checkbox and label */
+}
+
+.amenities-checkbox label {
+  font-size: 14px; /* Set font size */
+  color: #333; /* Set text color */
+}
