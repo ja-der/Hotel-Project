@@ -1,8 +1,10 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const RentForm = () => {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         firstName: '',
         lastName: '',
@@ -48,10 +50,12 @@ const RentForm = () => {
             const parseRes = await response.json();
             if (parseRes.rentalid) {
                 toast.success("Rental created successfully!");
+                navigate("/rental");
             }
             else {
                 toast.error(parseRes);
             }
+
         } catch (err) {
             console.error(err.message);
         }
@@ -102,6 +106,21 @@ const RentForm = () => {
                     value={ssn}
                     onChange={onChange} required
                 />
+                <input
+                    type="number"
+                    name="Credit Card Number"
+                    placeholder="Credit Card Number"
+                    className="form-control my-3"
+                    onChange={onChange} required
+                />
+                <input
+                    type="number"
+                    name="CVC"
+                    placeholder="CVC"
+                    className="form-control my-3"
+                    onChange={onChange} required
+                />
+
                 <button className="btn btn-success btn-block">Submit</button>
                 <Link to="/rental" className="btn btn-block btn-danger" onClick={goBack}>Go back</Link>
             </form>
