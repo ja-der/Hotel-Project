@@ -1,5 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
+import {Link} from 'react-router-dom';
 
 const EmployeeHomepage = ({setAuth} ) => {
     const [name, setName] = useState("");
@@ -27,10 +28,6 @@ const EmployeeHomepage = ({setAuth} ) => {
         toast.success("Logged out successfully");
     }
 
-    
-    
-
-
     useEffect(() => {
         getName();
     }, []);
@@ -41,8 +38,8 @@ const EmployeeHomepage = ({setAuth} ) => {
             <h1 className="text-center mb-3">Welcome {name}!</h1>
             <div className="button-group-container" style={{ display: 'flex', justifyContent: 'center' }}>
                     <div className="btn-group-vertical">
-                        <a href="#Link" className="btn btn-primary mb-3">Make a rental</a>
-                        <button className="btn btn-primary mb-3">Reservation Check-in</button>
+                    <Link to="/reservationcheck"><button className="btn btn-primary mb-3">Reservation Check-in</button></Link>
+                        <button className="btn btn-primary mb-3">Make a rental</button>
                         <button className="btn btn-danger" onClick={e => logout(e)}>Logout</button>
                     </div>
             </div>

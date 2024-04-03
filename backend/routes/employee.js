@@ -40,6 +40,28 @@ router.post('/rental', async(req, res) => {
     }
 });
 
+// Retrieve reservation details
+router.get('/reservation', async (req, res) => {
+    try {
+       const {reservationID} = req.query;
+
+        // check if reservation exists
+        const clientid = await pool.query('SELECT ClientID FROM reservation WHERE ReservationID = $1', [reservationID]);
+
+        // if reservation does not exist then throw error
+        if (clientid.rows.length === 0) {
+            return res.status(401).json('Reservation does not exist');
+        }
+        // retrieve client details and reservation details
+        const details = await pool.query('SELECT * FROM reservation INNER JOIN Client ON ReservationID = $1 AND Reservation.clientid = Client.clientid', [reservationID]);
+        res.json(details.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+}
+);
+
 // Reservations check in
 router.post('/checkin', async(req, res) => {
     try {
@@ -61,13 +83,21 @@ router.post('/checkin', async(req, res) => {
         const roomID = reservation.rows[0].roomid;
         const hotelID = reservation.rows[0].hotelid;
         const chainID = reservation.rows[0].chainid;
+
+        // check if the rental already exists
+        const rental = await pool.query('SELECT * FROM rental WHERE ReservationID = $1', [reservationID]);
+
+        // if rental already exists then throw error
+        if (rental.rows.length !== 0) {
+            return res.status(401).json('Reservation already checked in');
+        }
         
         // add the rental to the database
         const newRental = await pool.query(
-            'INSERT INTO rental (StartDate, EndDate, RoomID, HotelID, ChainID, EmployeeID, ClientID) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *', [start_date, end_date, roomID, hotelID, chainID, employeeID, clientID]
+            'INSERT INTO rental (StartDate, EndDate, RoomID, HotelID, ChainID, EmployeeID, ClientID, ReservationID) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [start_date, end_date, roomID, hotelID, chainID, employeeID, clientID, reservationID]
         );
 
-        res.json(newRental.rows);
+        res.json(newRental.rows[0]);
 
     } catch (err) {
         console.error(err.message);

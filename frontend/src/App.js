@@ -6,9 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Components
 import ClientHomepage from './components/ClientHomepage';
-import EmployeeHomepage from './components/EmployeeHomepage';
+import EmployeeHomepage from './components/employee/EmployeeHomepage';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import ReservationCheck from './components/employee/ReservationCheck';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -62,7 +63,8 @@ function App() {
             <Route path='/login' element={!isAuthenticated ? <Login setAuth={setAuth} /> : renderHomepage()} />
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/clienthomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} /> 
-            <Route path='/employeehomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} />         
+            <Route path='/employeehomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} /> 
+            <Route path='/reservationcheck' element={!isAuthenticated ? <Navigate to='/login'/> : <ReservationCheck/>} />        
             <Route path='/' element={<Navigate to='/login'/>}/> 
           </Routes>
         </div>
