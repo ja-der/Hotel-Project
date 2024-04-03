@@ -14,6 +14,8 @@ const ReservationCheck = ( ) => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [roomID, setRoomID] = useState("");
+    const [employeeHotelID, setHotelID] = useState("");
+    const [employeeChainID, setChainID] = useState("");
     
 
     const {reservationID, employeeID} = inputs;
@@ -28,10 +30,14 @@ const ReservationCheck = ( ) => {
 
             const parseRes = await response.json();
             setInputs({ ...inputs, employeeID: parseRes.employeeid });
+            setHotelID(parseRes.hotelid);
+            setChainID(parseRes.chainid);
+
         } catch (err) {
             console.error(err.message);
         }
     }
+    
     
     const onChange = e => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -81,12 +87,19 @@ const ReservationCheck = ( ) => {
 
             const response = await fetch(`http://localhost:4000/employee/reservation?reservationID=${reservationID}`);
             const parseRes = await response.json();
+
+            // check if the reservation is at the hotel of the employee
+            if (parseRes.hotelid !== employeeHotelID || parseRes.chainid !== employeeChainID) {
+                toast.error("Reservation does not exist");
+                return;
+            }
             setClientID(parseRes.clientid);
             setFirstName(parseRes.clientfirstname);
             setLastName(parseRes.clientlastname);
             setStartDate(trimDate(parseRes.checkindate));
             setEndDate(trimDate(parseRes.checkoutdate));
             setRoomID(parseRes.roomid);
+
         } catch (err) {
             toast.error("Reservation does not exist");
             console.error(err.message);

@@ -12,10 +12,6 @@ const Rental = ( ) => {
     });
 
     const [inputs, setInputs] = useState({
-        firstName: '',
-        lastName: '',
-        address: '',
-        ssn: 0,
         roomID: 0,
         hotelID: 0,
         chainID: 0,
@@ -25,7 +21,7 @@ const Rental = ( ) => {
     const [rooms, setRooms] = useState([]);
 
     const {minPrice, maxPrice, capacity, startDate, endDate} = search;
-    const {firstName, lastName, address, ssn, roomID, hotelID, chainID, employeeID} = inputs;
+    const {hotelID, chainID, employeeID} = inputs;
 
     // retrieve employeeID, hotelID, chainID from localStorage
     async function getInfo() {
