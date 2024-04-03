@@ -19,6 +19,10 @@ app.use("/api/hotelChains", require("./routes/booking/hotelChains"));
 app.use("/api/hotelcities", require("./routes/booking/hotelCities"));
 app.use("/api/search", require("./routes/booking/searchRooms"));
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Employee Route
+app.use('/employee', require('./routes/employee'));
+
+
+app.listen(4000, () => {
+    console.log(`Server is running on port 4000`);
 });
