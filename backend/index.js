@@ -17,12 +17,11 @@ app.use("/dashboard", require("./routes/dashboard"));
 
 app.use("/api/hotelChains", require("./routes/booking/hotelChains"));
 app.use("/api/hotelcities", require("./routes/booking/hotelCities"));
-app.use("/api/search", require("./routes/booking/searchRooms"));
+app.use("/api/searchRooms", require("./routes/booking/searchRooms"));
 
 // Employee Route
-app.use('/employee', require('./routes/employee'));
-
+app.use("/employee", require("./routes/employee"));
 
 app.listen(4000, () => {
-    console.log(`Server is running on port 4000`);
+  console.log(`Server is running on port 4000`);
 });

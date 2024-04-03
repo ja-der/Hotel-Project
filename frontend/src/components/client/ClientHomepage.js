@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HotelBookingForm from "./HotelBookingForm";
 import BookedRoomsList from "./BookedRoomsList";
+import "./Client.css";
 
 const ClientHomepage = ({ setAuth }) => {
   const [name, setName] = useState("");

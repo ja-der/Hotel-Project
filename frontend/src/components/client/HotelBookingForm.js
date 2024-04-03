@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../../App.css"; // Import CSS file
+import "./Client.css"; // Import CSS file
+import ResultCard from "./ResultCard"; // Adjust the path as necessary
 
 const HotelBookingForm = ({ onToggleShowList }) => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const HotelBookingForm = ({ onToggleShowList }) => {
   useEffect(() => {
     const fetchHotelChains = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/hotelChains");
+        const response = await fetch("http://localhost:4000/api/hotelChains");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setHotelChains(data);
@@ -35,7 +36,7 @@ const HotelBookingForm = ({ onToggleShowList }) => {
   useEffect(() => {
     const fetchHotelCities = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/hotelCities");
+        const response = await fetch("http://localhost:4000/api/hotelCities");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setHotelCities(data);
@@ -75,7 +76,7 @@ const HotelBookingForm = ({ onToggleShowList }) => {
     event.preventDefault();
     try {
       const queryParams = new URLSearchParams(formData);
-      const url = `http://localhost:3000/api/hotelCities?${queryParams}`;
+      const url = `http://localhost:4000/api/searchRooms?${queryParams}`;
       const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -267,6 +268,12 @@ const HotelBookingForm = ({ onToggleShowList }) => {
       <br />
 
       <button type="submit">Search</button>
+
+      <div className="results-container">
+        {searchResults.map((result, index) => (
+          <ResultCard key={index} result={result} />
+        ))}
+      </div>
     </form>
   );
 };
