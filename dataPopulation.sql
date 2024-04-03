@@ -14,9 +14,9 @@ INSERT INTO Chain (ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersE
 VALUES ('Chain 1', '123 Main Street, City1, Countryhq1@example.com', '+1231', 8, '4567890');
 
 -- Insert data for Chain 1 Hotels
-INSERT INTO Hotel (HotelAddress, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID)
+INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID)
 VALUES 
-    ('123 Hotel Ave, City1, Country1', '+1234567890', 'hotel1@example.com', 4, 50, 1), -- Hotel 1
+    ('123 Hotel Ave, City1', 'Country1', '+1234567890', 'hotel1@example.com', 4, 50, 1), -- Hotel 1
     ('456 Resort St, City2, Country1', '+1234567890', 'resort1@example.com', 5, 100, 1), -- Hotel 2
     ('789 Lodge Blvd, City3, Country2', '+1234567890', 'lodge1@example.com', 3, 80, 1), -- Hotel 3
     ('987 Inn Ln, City4, Country2', '+1234567890', 'inn1@example.com', 4, 120, 1), -- Hotel 4

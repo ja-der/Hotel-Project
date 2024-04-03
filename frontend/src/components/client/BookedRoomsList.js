@@ -28,7 +28,7 @@ const BookedRoomsList = ({ onToggleShowList }) => {
       ) : (
         <p>No rooms booked yet.</p>
       )}
-      <button onClick={onToggleShowList}>Go Back</button>
+      <button onClick={onToggleShowList}>Book your next Stay!</button>
     </div>
   );
 };

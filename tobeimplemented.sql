@@ -1,7 +1,14 @@
+-- Nous devons stocker dans la base de données l’historique des 
+-- réservations et des locations (archives), mais nous n’avons pas besoin de stocker l’historique 
+-- des paiements. Les informations sur une ancienne réservation / location de chambre 
+-- (archivée) doivent exister dans la base de données, même si les informations sur la chambre 
+-- elle-même n’existent plus dans la base de données.
+
+-- Surppprimer base de donnes des chaines, 
+
 /*
 --------------------------------------------------------------
 Drop Table Queries
-For testing only
 --------------------------------------------------------------
 */
 DROP TABLE Rental;
@@ -30,6 +37,7 @@ CREATE TABLE Chain (
 CREATE TABLE Hotel (
     HotelID SERIAL PRIMARY KEY,
     HotelAddress VARCHAR(255) NOT NULL,
+    HotelCity VARCHAR(50) NOT NULL,
     HotelPhoneNumber VARCHAR(20) NOT NULL,
     HotelEmail VARCHAR(100) NOT NULL,
     StarRating INT NOT NULL,
@@ -160,7 +168,7 @@ FOR EACH ROW
 EXECUTE FUNCTION delete_related_reservations();
 
 --Updating the address of a hotel:
-UPDATE Hotel SET HotelAddress = 'New Address' WHERE HotelID = 1;
+UPDATE Hotel SET HotelAddress = 'New Address', HotelCity = 'New City' WHERE HotelID = 1;
 
 -- Finding all reservations for a specific client
 SELECT * FROM Reservation WHERE ClientID = 1;
@@ -192,14 +200,21 @@ Views
 --------------------------------------------------------------
 */
 --Number of Available Rooms per City
--- Problem is what do they mean by zone, and if they do mean city, may need to change column in Hotel table
 CREATE VIEW AvailableRoomsPerCity AS
-SELECT h.HotelAddress AS City,
-       COUNT(r.RoomID) AS AvailableRooms
-FROM Hotel h
-LEFT JOIN Room r ON h.HotelID = r.HotelID
-WHERE r.RoomID NOT IN (SELECT Reservation.RoomID FROM Reservation)
-GROUP BY h.HotelAddress;
+SELECT
+    HotelCity,
+    COUNT(Room.RoomID) AS AvailableRooms
+FROM
+    Hotel
+LEFT JOIN
+    Room ON Hotel.HotelID = Room.HotelID
+LEFT JOIN
+    Reservation ON Room.RoomID = Reservation.RoomID
+WHERE
+    Reservation.RoomID IS NULL
+GROUP BY
+    HotelCity;
+
 
 --Capacity of All Rooms in a Specific Hotel
 CREATE VIEW RoomCapacityPerHotel AS
