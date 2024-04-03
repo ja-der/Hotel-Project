@@ -209,3 +209,28 @@ SELECT h.HotelID,
 FROM Hotel h
 JOIN Room r ON h.HotelID = r.HotelID
 GROUP BY h.HotelID, h.HotelName;
+
+
+
+/*
+--------------------------------------------------------------
+Actual Implemented SQL
+--------------------------------------------------------------
+*/
+
+SELECT DISTINCT h.HotelID, h.HotelAddress, h.HotelPhoneNumber, h.HotelEmail, h.StarRating, h.NumberOfRooms, c.ChainName, r.RoomID, r.Price, r.Capacity
+FROM Hotel h
+JOIN Chain c ON h.ChainID = c.ChainID
+JOIN Room r ON h.HotelID = r.HotelID
+WHERE
+    h.StarRating == <minimum_star_rating>
+    AND r.Capacity == <minimum_capacity>
+    AND r.Price <= <maximum_price>
+    AND h.ChainID = <selected_chain_id>
+    AND r.View = '<selected_view>'
+    AND EXISTS (
+        SELECT 1 FROM Reservation res
+        WHERE res.HotelID = h.HotelID
+        AND res.CheckInDate <= '<selected_check_in_date>'
+        AND res.CheckOutDate >= '<selected_check_out_date>'
+    );

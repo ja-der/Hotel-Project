@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const HotelBookingForm = ({ onToggleShowList }) => {
   const [formData, setFormData] = useState({
@@ -9,7 +9,40 @@ const HotelBookingForm = ({ onToggleShowList }) => {
     totalRooms: "",
     price: "",
   });
+  
+  const [hotelChains, setHotelChains] = useState([]);
+  useEffect(() => {
+    const fetchHotelChains = async () => {
+      try {
+        const response = await fetch('/api/hotelChains');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setHotelChains(data);
+      } catch (error) {
+        console.error('Error fetching hotel chains:', error);
+      }
+    };
 
+    fetchHotelChains();
+  }, []);
+
+  const [hotelAreas, setHotelAreas] = useState([]);
+  useEffect(() => {
+    const fetchHotelAreas = async () => {
+      try {
+        const response = await fetch('/api/hotelAreas');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setHotelAreas(data);
+      } catch (error) {
+        console.error('Error fetching hotel areas:', error);
+      }
+    };
+  
+    fetchHotelAreas();
+  }, []);
+  
+  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -48,23 +81,31 @@ const HotelBookingForm = ({ onToggleShowList }) => {
       </label>
       <br />
       <label>
-        Area:
-        <select name="area" value={formData.area} onChange={handleInputChange}>
-          <option value="">Select Area</option>
-          {/* Add options here */}
-        </select>
-      </label>
+  Area:
+  <select name="area" value={formData.area} onChange={handleInputChange}>
+    <option value="">Select Area</option>
+    {hotelAreas.map((area, index) => (
+      <option key={index} value={area}>{area}</option>
+    ))}
+  </select>
+</label>
+
       <br />
       <label>
         Hotel Chain:
         <select
-          name="hotelChain"
-          value={formData.hotelChain}
-          onChange={handleInputChange}
-        >
-          <option value="">Select Hotel Chain</option>
-          {/* Add options here */}
-        </select>
+  name="hotelChain"
+  value={formData.hotelChain}
+  onChange={handleInputChange}
+>
+  <option value="">Select Hotel Chain</option>
+  {hotelChains.map((chain) => (
+    <option key={chain.ChainID} value={chain.ChainID}>
+      {chain.ChainName}
+    </option>
+  ))}
+</select>
+
       </label>
       <br />
       <label>
