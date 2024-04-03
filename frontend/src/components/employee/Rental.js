@@ -1,5 +1,4 @@
 import React, {Fragment, useState, useEffect} from 'react';
-import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
 
 const Rental = ( ) => {
@@ -41,6 +40,8 @@ const Rental = ( ) => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             const tomorrowString = tomorrow.toISOString().split('T')[0];
+            document.getElementById("endDate").setAttribute('min', tomorrowString);
+
         } catch (err) {
             console.error(err.message);
         }
