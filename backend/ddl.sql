@@ -52,9 +52,11 @@ CREATE TABLE Reservation (
     ClientID INT NOT NULL,
     HotelID INT NOT NULL,
     RoomID INT NOT NULL,
+    ChainID INT NOT NULL,
     FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
     FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID),
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
 );
 
 CREATE TABLE Employee (
@@ -76,7 +78,7 @@ CREATE TABLE Rental (
     RentalID SERIAL PRIMARY KEY,
     StartDate DATE,
     EndDate DATE,
-    ReservationID INT NOT NULL,
+    ReservationID INT,
     EmployeeID INT NOT NULL,
     ClientID INT NOT NULL,
     ChainID INT NOT NULL,
@@ -104,3 +106,22 @@ CREATE TABLE Position (
 INSERT INTO Chain(ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber) VALUES ('Fairmont', '1234 Elm St', 2, 'headquarters@fairmont.com', '123-456-7890');
 INSERT INTO Hotel(HotelAddress, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) VALUES ('1234 Elm St', '123-456-7890', '2laurier@fairmont.com', 5, 100, 1);
 INSERT INTO Employee(EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, EmployeeRole, HotelID, ChainID) VALUES ('Alice', 'Johnson', '1234 Elm St', 'alice.johnson@ottawa.com', 'password', 123456789, 'Manager', 1, 1);
+
+INSERT INTO Room(Price, Amenities, Capacity, RoomView, Extendable, Issues, HotelID, ChainID) VALUES (200.00, 'TV, mini fridge, coffee maker', 2, 'City view', TRUE, 'None', 1, 1);
+INSERT INTO Reservation(CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) VALUES ('2021-12-01', '2021-12-05', 1, 1, 1, 1);
+
+-- Find available rooms
+SELECT Rooms.*
+FROM Rooms
+WHERE Rooms.RoomID NOT IN (
+    -- Subquery for rooms with overlapping reservations
+    SELECT Reservation.RoomID
+    FROM Reservation
+    WHERE NOT (Reservation.StartDate > @EndDate OR Reservation.EndDate < @StartDate)
+)
+AND Rooms.RoomID NOT IN (
+    -- Subquery for rooms with overlapping rentals
+    SELECT Rental.RoomID
+    FROM Rental
+    WHERE NOT (Rental.StartDate > @EndDate OR Rental.EndDate < @StartDate)
+)

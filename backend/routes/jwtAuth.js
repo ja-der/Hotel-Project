@@ -3,7 +3,6 @@ const pool = require('../db');
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../utils/jwtGenerator');
 const validInfo = require('../middleware/validInfo');
-const authorize = require('../middleware/authorization');
 const authorization = require('../middleware/authorization');
 
 // Register
@@ -16,7 +15,14 @@ router.post('/signup', validInfo, async(req, res) => {
         const user = await pool.query('SELECT * FROM client WHERE ClientEmail = $1', [email]);
 
         if (user.rows.length !== 0) {
-            return res.status(401).send('User already exists');
+            return res.status(401).json('User already exists');
+        }
+
+        // check if the ssn exists
+        const ssnCheck = await pool.query('SELECT * FROM client WHERE ClientSSN = $1', [ssn]);
+
+        if (ssnCheck.rows.length !== 0) {
+            return res.status(401).json('SSN already exists');
         }
 
         // Bcrypt the user password
@@ -35,7 +41,7 @@ router.post('/signup', validInfo, async(req, res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).json('Server error');
     }
 });
 
@@ -49,24 +55,24 @@ router.post('/login', validInfo, async(req, res) => {
         if (role === 'client') {
             user = await pool.query('SELECT * FROM client WHERE ClientEmail = $1', [email]);
             if (user.rows.length === 0) {
-                return res.status(401).send('Password or Email is incorrect');
+                return res.status(401).json('Password or Email is incorrect');
             }
         } else if (role === 'employee') {
             user = await pool.query('SELECT * FROM employee WHERE EmployeeEmail = $1', [email]);
             if (user.rows.length === 0) {
-                return res.status(401).send('Password or Email is incorrect');
+                return res.status(401).json('Password or Email is incorrect');
             }
         }
         // check if incoming password is the same as the database password
         if (role === 'client') {
             const validPassword = await bcrypt.compare(password, user.rows[0].clientpassword);
             if (!validPassword) {
-                return res.status(401).send('Password or Email is incorrect');
+                return res.status(401).json('Password or Email is incorrect');
             }
         } else if (role === 'employee') {
             const employeePassword = user.rows[0].employeepassword;
             if (password !== employeePassword) {
-                return res.status(401).send('Password or Email is incorrect');
+                return res.status(401).json('Password or Email is incorrect');
             }
         }
 
@@ -81,7 +87,7 @@ router.post('/login', validInfo, async(req, res) => {
     } 
     catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).json('Server error');
     }
 });
 
@@ -90,7 +96,7 @@ router.get('/is-verify', authorization, require('../middleware/authorization'), 
         res.json(true);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).json('Server error');
     }
 });
 module.exports = router;

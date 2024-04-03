@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
 
-const EmployeeHomepage = ({setAuth} ) => {
+const ClientHomepage = ({setAuth} ) => {
     const [name, setName] = useState("");
 
     async function getName() {
@@ -12,8 +12,7 @@ const EmployeeHomepage = ({setAuth} ) => {
             });
 
             const parseRes = await response.json();
-            console.log(parseRes);
-            setName(parseRes.employeefirstname);
+            setName(parseRes.clientfirstname);
         } catch (err) {
             console.error(err.message);
         }
@@ -27,9 +26,6 @@ const EmployeeHomepage = ({setAuth} ) => {
         toast.success("Logged out successfully");
     }
 
-    
-    
-
 
     useEffect(() => {
         getName();
@@ -37,18 +33,11 @@ const EmployeeHomepage = ({setAuth} ) => {
     
     return (
         <Fragment>
-        <div className="d-flex flex-column align-items-center justify-content-center vh-100"> 
-            <h1 className="text-center mb-3">Welcome {name}!</h1>
-            <div className="button-group-container" style={{ display: 'flex', justifyContent: 'center' }}>
-                    <div className="btn-group-vertical">
-                        <a href="#Link" className="btn btn-primary mb-3">Make a rental</a>
-                        <button className="btn btn-primary mb-3">Reservation Check-in</button>
-                        <button className="btn btn-danger" onClick={e => logout(e)}>Logout</button>
-                    </div>
-            </div>
-        </div>
+        <h1>Hello {name}</h1>
+        <p>Yay! You are logged in as a client!</p>
+        <button className="btn btn-danger" onClick={e => logout(e)}>Logout</button>
         </Fragment>
     );
 }
 
-export default EmployeeHomepage;
+export default ClientHomepage;

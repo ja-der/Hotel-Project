@@ -13,6 +13,9 @@ app.use('/auth', require('./routes/jwtAuth'));
 // Dashboard Route
 app.use('/dashboard', require('./routes/dashboard'));
 
-app.listen(3000, () => {
-    console.log(`Server is running on port 3000`);
+// Employee Route
+app.use('/employee', require('./routes/employee'));
+
+app.listen(4000, () => {
+    console.log(`Server is running on port 4000`);
 });
