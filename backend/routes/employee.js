@@ -68,6 +68,10 @@ router.post('/checkin', async(req, res) => {
         // destructure the req.body
         const {reservationID, employeeID} = req.body;
 
+        // check hotelid and chainid of the employee
+        const employeehotelID = await pool.query('SELECT HotelID FROM employee WHERE EmployeeID = $1', [employeeID]);
+        const employeechainID = await pool.query('SELECT ChainID FROM employee WHERE EmployeeID = $1', [employeeID]);
+
         // check if reservation exists
         const reservation = await pool.query('SELECT * FROM reservation WHERE ReservationID = $1', [reservationID]);
 
@@ -84,6 +88,11 @@ router.post('/checkin', async(req, res) => {
         const hotelID = reservation.rows[0].hotelid;
         const chainID = reservation.rows[0].chainid;
 
+        // check if the employee is working at the hotel of the reservation
+        if (employeehotelID !== hotelID || employeechainID !== chainID) {
+            return res.status(401).json('You are not authorized to check in this reservation');
+        }
+        
         // check if the rental already exists
         const rental = await pool.query('SELECT * FROM rental WHERE ReservationID = $1', [reservationID]);
 
