@@ -58,7 +58,7 @@ const ReservationCheck = ( ) => {
             if (parseRes.rentalid) {
                 toast.success("Reservation checked in successfully!");
             } else {
-                toast.error("Reservation check-in failed. Please try again.");
+                toast.error(parseRes);
             }
 
         } catch (err) {
