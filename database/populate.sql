@@ -412,9 +412,6 @@ CREATE TABLE Reservation (
     RoomID INT NOT NULL,
     ChainID INT NOT NULL,
     FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
 );
 
 -- INSERT RESERVATION DATA
@@ -493,10 +490,7 @@ CREATE TABLE Rental (
     RoomID INT NOT NULL,
     FOREIGN KEY (ReservationID) REFERENCES Reservation(ReservationID),
     FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
-    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID),
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
 );
 
 -- INSERT RENTAL DATA
@@ -536,5 +530,115 @@ CREATE TABLE EmployeePosition (
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 1);
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 2);
 
+CREATE TABLE ArchivesReservation (
+    ArchiveID SERIAL PRIMARY KEY,
+    ReservationID INT,
+    CheckinDate DATE NOT NULL,
+    CheckoutDate DATE NOT NULL,
+    ClientID INT NOT NULL,
+    ClientFirstName VARCHAR(20) NOT NULL,
+    ClientLastName VARCHAR(20) NOT NULL,
+    ClientAddress VARCHAR(255) NOT NULL,
+    ClientSSN INT NOT NULL,
+    RoomID INT NOT NULL,
+    RoomPrice DECIMAL(10, 2) NOT NULL,
+    RoomAmenities VARCHAR(255) NOT NULL,
+    RoomCapacity INT NOT NULL,
+    RoomView VARCHAR(255) NOT NULL,
+    RoomExtendable VARCHAR(3) NOT NULL,
+    RoomIssues VARCHAR(255) NOT NULL,
+    HotelID INT NOT NULL,
+    HotelAddress VARCHAR(255) NOT NULL,
+    HotelCity VARCHAR(255) NOT NULL,
+    HotelPhoneNumber VARCHAR(20) NOT NULL,
+    HotelEmail VARCHAR(100) NOT NULL,
+    StarRating INT NOT NULL,
+    NumberOfRooms INT NOT NULL,
+    ChainID INT NOT NULL,
+    ChainName VARCHAR(255) NOT NULL,
+    HeadquartersAddress VARCHAR(255) NOT NULL,
+    NumberOfHotels INT NOT NULL,
+    HeadquartersEmail VARCHAR(255) NOT NULL,
+    HeadquartersPhoneNumber VARCHAR(20) NOT NULL
+);
 
+CREATE TABLE ArchivesRental (
+    ArchiveID SERIAL PRIMARY KEY,
+    RentalID INT NOT NULL,
+    ReservationID INT,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    ClientID INT NOT NULL,
+    ClientFirstName VARCHAR(20) NOT NULL,
+    ClientLastName VARCHAR(20) NOT NULL,
+    ClientAddress VARCHAR(255) NOT NULL,
+    ClientSSN INT NOT NULL,
+    EmployeeID INT NOT NULL,
+    EmployeeFirstName VARCHAR(20) NOT NULL,
+    EmployeeLastName VARCHAR(20) NOT NULL,
+    EmployeeAddress VARCHAR(255) NOT NULL,
+    EmployeeSSN INT NOT NULL,
+    RoomID INT NOT NULL,
+    RoomPrice DECIMAL(10, 2) NOT NULL,
+    RoomAmenities VARCHAR(255) NOT NULL,
+    RoomCapacity INT NOT NULL,
+    RoomView VARCHAR(255) NOT NULL,
+    RoomExtendable VARCHAR(3) NOT NULL,
+    RoomIssues VARCHAR(255) NOT NULL,
+    HotelID INT NOT NULL,
+    HotelAddress VARCHAR(255) NOT NULL,
+    HotelCity VARCHAR(255) NOT NULL,
+    HotelPhoneNumber VARCHAR(20) NOT NULL,
+    HotelEmail VARCHAR(100) NOT NULL,
+    StarRating INT NOT NULL,
+    NumberOfRooms INT NOT NULL,
+    ChainID INT NOT NULL,
+    ChainName VARCHAR(255) NOT NULL,
+    HeadquartersAddress VARCHAR(255) NOT NULL,
+    NumberOfHotels INT NOT NULL,
+    HeadquartersEmail VARCHAR(255) NOT NULL,
+    HeadquartersPhoneNumber VARCHAR(20) NOT NULL
+);
 
+-- CREATE TRIGGER TO ARCHIVE RESERVATION DATA
+CREATE OR REPLACE FUNCTION archive_reservation()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO ArchivesReservation (ReservationID, CheckinDate, CheckoutDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
+    SELECT ReservationID, CheckInDate, CheckOutDate, Reservation.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Reservation.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Reservation.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Reservation.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
+    FROM Reservation
+    JOIN Client ON Reservation.ClientID = Client.ClientID
+    JOIN Room ON Reservation.RoomID = Room.RoomID
+    JOIN Hotel ON Reservation.HotelID = Hotel.HotelID
+    JOIN Chain ON Reservation.ChainID = Chain.ChainID
+    WHERE ReservationID = NEW.ReservationID;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER archive_reservation_trigger
+AFTER INSERT ON Reservation
+FOR EACH ROW
+EXECUTE FUNCTION archive_reservation();
+
+-- CREATE TRIGGER TO ARCHIVE RENTAL DATA
+CREATE OR REPLACE FUNCTION archive_rental()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO ArchivesRental (RentalID, ReservationID, StartDate, EndDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
+    SELECT RentalID, Rental.ReservationID, StartDate, EndDate, Rental.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Rental.EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, Rental.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Rental.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Rental.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
+    FROM Rental
+    JOIN Client ON Rental.ClientID = Client.ClientID
+    JOIN Employee ON Rental.EmployeeID = Employee.EmployeeID
+    JOIN Room ON Rental.RoomID = Room.RoomID
+    JOIN Hotel ON Rental.HotelID = Hotel.HotelID
+    JOIN Chain ON Rental.ChainID = Chain.ChainID
+    WHERE RentalID = NEW.RentalID;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER archive_rental_trigger
+AFTER INSERT ON Rental
+FOR EACH ROW
+EXECUTE FUNCTION archive_rental();
