@@ -89,7 +89,7 @@ router.post('/checkin', async(req, res) => {
         const chainID = reservation.rows[0].chainid;
 
         // check if the employee is working at the hotel of the reservation
-        if (employeehotelID !== hotelID || employeechainID !== chainID) {
+        if (employeehotelID.rows[0].hotelid !== hotelID || employeechainID.rows[0].chainid !== chainID) {
             return res.status(401).json('You are not authorized to check in this reservation');
         }
         

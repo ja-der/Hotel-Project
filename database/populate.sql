@@ -399,9 +399,9 @@ CREATE TABLE Client (
 );
 
 -- INSERT CLIENT DATA
-INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Lea', 'De Cruze', '5083 Westport Junction', '294676900', '2024-04-03', 'ldecruze0@nps.gov', '$2b$10$mmnQAu66wWWHhxVqpMXXJ.1wlLll/Qyp9P4z6mAqdIFda8Oa17gIi');
-INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Red', 'Galiero', '1139 Novick Road', '322803219', '2024-04-03', 'rgaliero1@answers.com', '$2b$10$P/sFOzclauQABqTMZZJfZuUWSXz4KeCxaT0fifqUQYZPOKi68pgG.');
-INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Philip', 'Ubank', '1 Warrior Road', '535798918', '2024-04-03', 'pubank2@narod.ru', '$2b$10$40lFuv9H2tp0T7mIqxW6t.8amRdAwE2dx69264QluBUgVBqfHK79m');
+INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Lea', 'De Cruze', '5083 Westport Junction', '294676900', '2024-04-03', 'ldecruze0@nps.gov', 'password');
+INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Red', 'Galiero', '1139 Novick Road', '322803219', '2024-04-03', 'rgaliero1@answers.com', 'password');
+INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Philip', 'Ubank', '1 Warrior Road', '535798918', '2024-04-03', 'pubank2@narod.ru', 'password');
 
 CREATE TABLE Reservation (
     ReservationID SERIAL PRIMARY KEY,

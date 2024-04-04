@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const pool = require('../db');
-const bcrypt = require('bcrypt');
 const jwtGenerator = require('../utils/jwtGenerator');
 const validInfo = require('../middleware/validInfo');
 const authorization = require('../middleware/authorization');
@@ -25,15 +24,9 @@ router.post('/signup', validInfo, async(req, res) => {
             return res.status(401).json('SSN already exists');
         }
 
-        // Bcrypt the user password
-        const saltRounds = 10;
-        const salt = await bcrypt.genSaltSync(saltRounds);
-
-        const bcryptPassword = await bcrypt.hash(password, salt);
-
         // enter the new user inside our database
         const newUser = await pool.query(
-            'INSERT INTO client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstName, lastName, address, parseInt(ssn), registrationDate, email, bcryptPassword]
+            'INSERT INTO client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstName, lastName, address, parseInt(ssn), registrationDate, email, password]
         );
         // generating our jwt token
         const token = jwtGenerator(newUser.rows[0].clientid);
@@ -65,8 +58,8 @@ router.post('/login', validInfo, async(req, res) => {
         }
         // check if incoming password is the same as the database password
         if (role === 'client') {
-            const validPassword = await bcrypt.compare(password, user.rows[0].clientpassword);
-            if (!validPassword) {
+            const clientPassword = user.rows[0].clientpassword;
+            if (password !== clientPassword) {
                 return res.status(401).json('Password or Email is incorrect');
             }
         } else if (role === 'employee') {
