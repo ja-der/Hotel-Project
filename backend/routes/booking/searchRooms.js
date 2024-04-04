@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
       maxPrice, // Include minPrice and maxPrice
     } = req.query;
 
-    console.log(amenities);
     // Construct the base SQL query
     let sqlQuery = `
     SELECT 

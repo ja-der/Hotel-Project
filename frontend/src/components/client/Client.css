@@ -151,3 +151,136 @@ input[type="date"]:focus {
 .book-now-button:hover {
   background-color: #0056b3;
 }
+
+/* Style selector elements */
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  color: #333;
+  appearance: none; /* Remove default arrow */
+}
+
+/* Style select dropdown arrow */
+select::-ms-expand {
+  display: none; /* Remove arrow in IE */
+}
+
+/* Style select dropdown arrow for other browsers */
+select::-webkit-scrollbar {
+  width: 8px;
+}
+select::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+/* Hover effect */
+select:hover {
+  border-color: #aaa;
+}
+
+/* Focus effect */
+select:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px #66afe9;
+}
+
+/* Style input elements */
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Hover effect */
+input[type="text"]:hover,
+input[type="number"]:hover,
+input[type="date"]:hover {
+  border-color: #aaa;
+}
+
+/* Focus effect */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px #66afe9;
+}
+
+/* Style for amenities checkboxes */
+.amenities-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.amenities-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.amenities-checkbox input[type="checkbox"] {
+  margin-right: 10px;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.amenities-checkbox input[type="checkbox"]:hover {
+  border-color: #007bff;
+}
+
+.amenities-checkbox input[type="checkbox"]:checked {
+  border-color: #007bff;
+  background-color: #007bff;
+}
+
+.amenities-checkbox input[type="checkbox"]:checked::before {
+  content: "\2713"; /* Checkmark symbol */
+  display: block;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.amenities-checkbox label {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Style for the search button */
+button[type="submit"] {
+  padding: 12px 24px; /* Adjust padding as needed */
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Add border radius for rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker background color on hover */
+}

@@ -289,15 +289,6 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           <div className="amenities-checkbox">
             <input
               type="checkbox"
-              name="minibar"
-              checked={formData.amenities.includes("minibar")}
-              onChange={handleAmenitiesChange}
-            />
-            Minibar
-          </div>
-          <div className="amenities-checkbox">
-            <input
-              type="checkbox"
               name="roomService"
               checked={formData.amenities.includes("roomService")}
               onChange={handleAmenitiesChange}
