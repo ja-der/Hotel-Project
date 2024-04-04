@@ -139,4 +139,30 @@ router.post('/rooms', async(req, res) => {
     }
 });
 
+// get all the chainNames
+router.get('/chain', async(req, res) => {
+    try {
+        const chainNames = await pool.query('SELECT ChainName FROM Chain');
+        const chains = chainNames.rows.map(chain => chain.chainname);
+        res.json(chains);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// get all the hotelIDs
+router.get('/hotel', async(req, res) => {
+    try {
+        const hotelIDs = await pool.query('SELECT DISTINCT HotelID FROM Hotel ORDER BY HotelID ASC');
+        const hotels = hotelIDs.rows.map(hotel => hotel.hotelid);
+        res.json(hotels);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
 module.exports = router;

@@ -110,6 +110,8 @@ const ReservationCheck = ( ) => {
     function trimDate(date) {
         return date.substring(0, 10);
     }
+    
+
 
     return (
         <Fragment>

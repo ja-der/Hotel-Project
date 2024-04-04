@@ -40,9 +40,9 @@ const EmployeeHomepage = ({setAuth} ) => {
                     <div className="btn-group-vertical">
                         <Link to="/rental" className="btn btn-warning mb-3">Book a rental</Link>
                         <Link to="/reservationcheck" className="btn btn-success mb-3">Reservations check-in</Link>
-                        <Link to="/newaccount" className="btn btn-primary mb-3">Create account for new employees</Link>
-                        <Link to="/editaccount" className="btn btn-primary mb-3">Edit profile</Link>
-                        <Link to="/editaccount" className="btn btn-primary mb-3">Edit hotel and rooms information</Link>
+                        <Link to="/newaccount" className="btn btn-primary mb-3">Create new employee account</Link>
+                        <Link to="/editprofile" className="btn btn-primary mb-3">Edit profile</Link>
+                        <Link to="/edithotel" className="btn btn-primary mb-3">Edit hotel and rooms information</Link>
                         <button className="btn btn-danger" onClick={e => logout(e)}>Logout</button>
                     </div>
             </div>

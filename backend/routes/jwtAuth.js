@@ -38,6 +38,49 @@ router.post('/signup', validInfo, async(req, res) => {
     }
 });
 
+// Register employee
+router.post('/signupemployee', validInfo, async(req, res) => {
+    try {
+        // destructure the req.body (firstName, lastName, email, password, hotelID, chainID)
+        const { firstName, lastName, address, ssn, email, password, hotelID, chainName } = req.body;
+
+        // check if user exists (if user exists then throw error)
+        const user = await pool.query('SELECT * FROM employee WHERE EmployeeEmail = $1', [email]);
+
+        if (user.rows.length !== 0) {
+            return res.status(401).json('User already exists');
+        }
+
+        // check if the ssn exists
+        const ssnCheck = await pool.query('SELECT * FROM employee WHERE EmployeeSSN = $1', [ssn]);
+
+        if (ssnCheck.rows.length !== 0) {
+            return res.status(401).json('SSN already exists');
+        }
+
+        // get the chainID
+        const chain = await pool.query('SELECT ChainID FROM chain WHERE ChainName = $1', [chainName]);
+        const chainID = chain.rows[0].chainid;
+
+        // check if the hotelID belongs to the chainID
+        const hotel = await pool.query('SELECT ChainID FROM hotel WHERE HotelID = $1', [hotelID]);
+        if (hotel.rows[0].chainid !== chainID) {
+            return res.status(401).json('Hotel does not belong to the chain');
+        }
+
+        // enter the new user inside our database
+        const newUser = await pool.query(
+            'INSERT INTO employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, EmployeeEmail, EmployeePassword, HotelID, ChainID) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [firstName, lastName, address, parseInt(ssn), email, password, hotelID, chainID]
+        );
+        
+        res.json(newUser.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
 // Login
 router.post('/login', validInfo, async(req, res) => {
     try{
