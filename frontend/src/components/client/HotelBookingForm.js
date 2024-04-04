@@ -93,6 +93,48 @@ const HotelBookingForm = ({ onToggleShowList }) => {
     }
   };
 
+  const handleBookNow = async (result) => {
+    try {
+      const response = await fetch(
+        "http://localhost:4000/api/bookReservation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            arrivalDate: formData.arrivalDate,
+            departureDate: formData.departureDate,
+            // clientId: /* Provide the client ID here */,
+            hotelId: result.hotelId, // Adjust as per your result object structure
+            roomId: result.roomId, // Adjust as per your result object structure
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      // Show notification upon successful booking
+      alert("Reservation booked successfully!");
+      // Clear the search form back to default
+      setFormData({
+        arrivalDate: "",
+        departureDate: "",
+        roomCapacity: "",
+        city: "",
+        hotelChain: "",
+        totalRooms: "1",
+        price: "",
+        starRating: "",
+        amenities: [],
+        view: "",
+      });
+      setSearchResults([]);
+    } catch (error) {
+      console.error("Error booking reservation:", error);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -271,7 +313,12 @@ const HotelBookingForm = ({ onToggleShowList }) => {
 
       <div className="results-container">
         {searchResults.map((result, index) => (
-          <ResultCard key={index} result={result} />
+          <ResultCard
+            key={index}
+            result={result}
+            arrivalDate={formData.arrivalDate}
+            departureDate={formData.departureDate}
+          />
         ))}
       </div>
     </form>

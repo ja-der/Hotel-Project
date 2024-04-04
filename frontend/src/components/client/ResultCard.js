@@ -1,6 +1,11 @@
 import React from "react";
+import "./Client.css"; // Import CSS
 
-const ResultCard = ({ result }) => {
+const ResultCard = ({ result, arrivalDate, departureDate }) => {
+  const handleBookNow = () => {
+    onBookNow(result);
+  };
+
   return (
     <div className="result-card">
       <div className="header">
@@ -10,6 +15,12 @@ const ResultCard = ({ result }) => {
         </p>
       </div>
       <div className="details">
+        <p>
+          <strong>CheckIn Date:</strong> {arrivalDate}
+        </p>
+        <p>
+          <strong>CheckOut Date:</strong> {departureDate}
+        </p>
         <p>
           <strong>Price:</strong> ${result.price}
         </p>
