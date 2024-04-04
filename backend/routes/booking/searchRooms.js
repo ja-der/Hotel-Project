@@ -10,18 +10,21 @@ router.get("/", async (req, res) => {
       city,
       hotelChain,
       totalRooms,
-      price,
       starRating,
       amenities,
       view,
+      minPrice,
+      maxPrice, // Include minPrice and maxPrice
     } = req.query;
 
+    console.log(amenities);
     // Construct the base SQL query
     let sqlQuery = `
     SELECT 
         r.*, 
         h.HotelName,
         h.HotelCity, 
+        h.StarRating,
         c.ChainName
     FROM 
         Room r 
@@ -55,8 +58,12 @@ router.get("/", async (req, res) => {
     }
 
     // Add condition for price
-    if (price) {
-      conditions.push(`r.Price <= ${price}`);
+    // Add condition for price range
+    if (minPrice) {
+      conditions.push(`r.Price >= ${minPrice}`);
+    }
+    if (maxPrice) {
+      conditions.push(`r.Price <= ${maxPrice}`);
     }
 
     // Add condition for starRating
@@ -64,12 +71,17 @@ router.get("/", async (req, res) => {
       conditions.push(`h.StarRating >= ${starRating}`);
     }
 
-    // Add condition for amenities
-    if (amenities && Array.isArray(amenities) && amenities.length > 0) {
-      const amenitiesConditions = amenities.map(
+    if (amenities && typeof amenities === "string" && amenities.trim() !== "") {
+      // Split the string into an array using comma as the delimiter
+      const amenitiesArray = amenities.split(",").map((item) => item.trim());
+
+      // Map each amenity in the array to a condition
+      const amenitiesConditions = amenitiesArray.map(
         (amenity) => `r.Amenities LIKE '%${amenity}%'`
       );
-      conditions.push(`(${amenitiesConditions.join(" OR ")})`);
+
+      // Add the conditions to the overall conditions array
+      conditions.push(`(${amenitiesConditions.join(" AND ")})`);
     }
 
     // Add condition for view
@@ -96,7 +108,7 @@ router.get("/", async (req, res) => {
     // Execute the query and return the result
     console.log(sqlQuery);
     const queryResult = await pool.query(sqlQuery);
-    //console.log(queryResult.rows);
+    // console.log(queryResult.rows);
     res.json(queryResult.rows);
   } catch (err) {
     console.error("Error searching rooms:", err);

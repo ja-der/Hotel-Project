@@ -34,7 +34,7 @@ VALUES
 INSERT INTO Room (Price, Amenities, Capacity, View, Extendable, Issues, HotelID, ChainID)
 VALUES
    -- hotel 1
-    (200.00, 'Wi-Fi, TV, AC, Jacuzzi', 2, 'Mountain view', 'No', NULL, 1, 1);
+    (200.00, 'Wi-Fi, TV, AC, Jacuzzi', 2, 'Mountain', 'No', NULL, 1, 1);
 
 -- Insert data for rooms in each hotel
 -- Hotel 1 Rooms

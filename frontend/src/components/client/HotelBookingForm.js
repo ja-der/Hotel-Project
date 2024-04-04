@@ -10,10 +10,11 @@ const HotelBookingForm = ({ onToggleShowList }) => {
     city: "",
     hotelChain: "",
     totalRooms: "1",
-    price: "",
     starRating: "", // Added starRating field
     amenities: [], // Added amenities field
     view: "", // Added view field
+    minPrice: "", // Added minprice field
+    maxPrice: "", // Added maxprice field
   });
 
   const [hotelChains, setHotelChains] = useState([]);
@@ -75,6 +76,7 @@ const HotelBookingForm = ({ onToggleShowList }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      console.log(formData);
       const queryParams = new URLSearchParams(formData);
       const url = `http://localhost:4000/api/searchRooms?${queryParams}`;
       const response = await fetch(url, {
@@ -183,7 +185,7 @@ const HotelBookingForm = ({ onToggleShowList }) => {
         </select>
       </label>
       <label>
-        Select Star Rating
+        Select Minimum Star Rating
         <select
           name="starRating"
           value={formData.starRating}
@@ -198,17 +200,31 @@ const HotelBookingForm = ({ onToggleShowList }) => {
         </select>
       </label>
       <label>
-        Select Price Range (per night):
+        Select Minimum Price (per night):
         <select
-          name="price"
-          value={formData.price}
+          name="minPrice"
+          value={formData.minPrice}
           onChange={handleInputChange}
         >
           <option value="">Any</option>
-          <option value="1">$100 - $500</option>
-          <option value="2">$500 - $1000</option>
-          <option value="3">$1000 - $1500</option>
-          <option value="4">$1500 - $2000</option>
+          <option value="100">$100</option>
+          <option value="500">$500</option>
+          <option value="1000">$1000</option>
+          <option value="1500">$1500</option>
+        </select>
+      </label>
+      <label>
+        Select Maximum Price (per night):
+        <select
+          name="maxPrice"
+          value={formData.maxPrice}
+          onChange={handleInputChange}
+        >
+          <option value="">Any</option>
+          <option value="500">$500</option>
+          <option value="1000">$1000</option>
+          <option value="1500">$1500</option>
+          <option value="2000">$2000</option>
         </select>
       </label>
       <br />
@@ -241,10 +257,10 @@ const HotelBookingForm = ({ onToggleShowList }) => {
         View:
         <select name="view" value={formData.view} onChange={handleInputChange}>
           <option value="">Any</option>
-          <option value="sea">Sea View</option>
-          <option value="mountain">Mountain View</option>
-          <option value="city">City View</option>
-          <option value="garden">Garden View</option>
+          <option value="Sea">Sea View</option>
+          <option value="Mountain">Mountain View</option>
+          <option value="City">City View</option>
+          <option value="Garden">Garden View</option>
         </select>
       </label>
       <br />
@@ -255,17 +271,17 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           <div className="amenities-checkbox">
             <input
               type="checkbox"
-              name="freeWifi"
-              checked={formData.amenities.includes("freeWifi")}
+              name="Wi-Fi"
+              checked={formData.amenities.includes("Wi-Fi")}
               onChange={handleAmenitiesChange}
             />
-            Free WiFi
+            Free Wi-Fi
           </div>
           <div className="amenities-checkbox">
             <input
               type="checkbox"
-              name="tv"
-              checked={formData.amenities.includes("tv")}
+              name="TV"
+              checked={formData.amenities.includes("TV")}
               onChange={handleAmenitiesChange}
             />
             TV
@@ -300,11 +316,20 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           <div className="amenities-checkbox">
             <input
               type="checkbox"
-              name="jacuzzi"
-              checked={formData.amenities.includes("jacuzzi")}
+              name="Jacuzzi"
+              checked={formData.amenities.includes("Jacuzzi")}
               onChange={handleAmenitiesChange}
             />
             Jacuzzi
+          </div>
+          <div className="amenities-checkbox">
+            <input
+              type="checkbox"
+              name="AC"
+              checked={formData.amenities.includes("AC")}
+              onChange={handleAmenitiesChange}
+            />
+            AC
           </div>
         </div>
       </label>
