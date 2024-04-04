@@ -46,7 +46,7 @@ router.get("/", async (req, res) => {
 
     // Add condition for hotelChain
     if (hotelChain) {
-      conditions.push(`h.ChainID = ${hotelChain}`);
+      conditions.push(`c.ChainName = '${hotelChain}'`);
     }
 
     // Add condition for totalRooms
@@ -64,7 +64,6 @@ router.get("/", async (req, res) => {
       conditions.push(`h.StarRating >= ${starRating}`);
     }
 
-    // Add condition for amenities
     // Add condition for amenities
     if (amenities && Array.isArray(amenities) && amenities.length > 0) {
       const amenitiesConditions = amenities.map(
@@ -93,9 +92,11 @@ router.get("/", async (req, res) => {
     if (conditions.length > 0) {
       sqlQuery += ` WHERE ${conditions.join(" AND ")}`;
     }
+
     // Execute the query and return the result
+    console.log(sqlQuery);
     const queryResult = await pool.query(sqlQuery);
-    console.log(queryResult.rows);
+    //console.log(queryResult.rows);
     res.json(queryResult.rows);
   } catch (err) {
     console.error("Error searching rooms:", err);

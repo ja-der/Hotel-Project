@@ -2,9 +2,9 @@ import React from "react";
 import "./Client.css"; // Import CSS
 
 const ResultCard = ({ result, arrivalDate, departureDate }) => {
-  const handleBookNow = () => {
-    onBookNow(result);
-  };
+  // const handleBookNow = () => {
+  //   onBookNow(result);
+  // };
 
   return (
     <div className="result-card">

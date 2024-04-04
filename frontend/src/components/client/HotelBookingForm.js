@@ -6,7 +6,7 @@ const HotelBookingForm = ({ onToggleShowList }) => {
   const [formData, setFormData] = useState({
     arrivalDate: "",
     departureDate: "",
-    roomCapacity: "",
+    roomCapacity: "1",
     city: "",
     hotelChain: "",
     totalRooms: "1",
@@ -156,33 +156,6 @@ const HotelBookingForm = ({ onToggleShowList }) => {
         />
       </label>
       <br />
-
-      <label>
-        Room Capacity:
-        <input
-          type="number"
-          name="totalRooms"
-          value={formData.totalRooms}
-          onChange={handleInputChange}
-          min="0"
-          max="10"
-        />
-      </label>
-      <br />
-
-      <label>
-        City:
-        <select name="city" value={formData.city} onChange={handleInputChange}>
-          <option value="">Select City</option>
-          {hotelCities.map((city) => (
-            <option key={city.hotelid} value={city.hotelid}>
-              {city.hotelcity}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <br />
       <label>
         Hotel Chain:
         <select
@@ -190,45 +163,33 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           value={formData.hotelChain}
           onChange={handleInputChange}
         >
-          <option value="">Select Hotel Chain</option>
-          {hotelChains.map((chain) => (
-            <option key={chain.chainid} value={chain.chainid}>
-              {chain.chainname}
-            </option>
-          ))}
+          <option value="">Any</option>
+          <option value="Hilton Hotel">Hilton Hotel</option>
+          <option value="Mariott">Mariott</option>
+          <option value="3">idk</option>
+          <option value="4">anotherchain</option>
+          <option value="5">random</option>
         </select>
       </label>
-      <br />
       <label>
-        Total Rooms:
-        <input
-          type="number"
-          name="totalRooms"
-          value={formData.totalRooms}
-          onChange={handleInputChange}
-          min="0"
-          max="10"
-        />
+        City:
+        <select name="city" value={formData.city} onChange={handleInputChange}>
+          <option value="">Any</option>
+          <option value="United States">United States</option>
+          <option value="Ottawa">2- Ottawa</option>
+          <option value="Montreal">Montreal</option>
+          <option value="Vancouver">Vancouver</option>
+          <option value="Halifax">Halifax</option>
+        </select>
       </label>
-      <br />
       <label>
-        Price Range:
-        <input
-          type="number"
-          step="100"
-          value={formData.price}
-          onChange={handleInputChange}
-        />
-      </label>
-      <br />
-      <label>
-        Star Rating:
+        Select Star Rating
         <select
           name="starRating"
           value={formData.starRating}
           onChange={handleInputChange}
         >
-          <option value="">Select Star Rating</option>
+          <option value="">Any</option>
           <option value="1">1 Star</option>
           <option value="2">2 Stars</option>
           <option value="3">3 Stars</option>
@@ -236,6 +197,57 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           <option value="5">5 Stars</option>
         </select>
       </label>
+      <label>
+        Select Price Range (per night):
+        <select
+          name="price"
+          value={formData.price}
+          onChange={handleInputChange}
+        >
+          <option value="">Any</option>
+          <option value="1">$100 - $500</option>
+          <option value="2">$500 - $1000</option>
+          <option value="3">$1000 - $1500</option>
+          <option value="4">$1500 - $2000</option>
+        </select>
+      </label>
+      <br />
+      <br />
+
+      <h3>Additional Criteria</h3>
+      <label>
+        Room Capacity:
+        <input
+          type="number"
+          name="roomCapacity"
+          value={formData.roomCapacity}
+          onChange={handleInputChange}
+          min="1"
+          max="10"
+        />
+      </label>
+      <label>
+        Number of Available Rooms in hotel:
+        <input
+          type="number"
+          name="totalRooms"
+          value={formData.totalRooms}
+          onChange={handleInputChange}
+          min="1"
+          max="10"
+        />
+      </label>
+      <label>
+        View:
+        <select name="view" value={formData.view} onChange={handleInputChange}>
+          <option value="">Any</option>
+          <option value="sea">Sea View</option>
+          <option value="mountain">Mountain View</option>
+          <option value="city">City View</option>
+          <option value="garden">Garden View</option>
+        </select>
+      </label>
+      <br />
       <br />
       <label>
         Amenities:
@@ -297,16 +309,7 @@ const HotelBookingForm = ({ onToggleShowList }) => {
         </div>
       </label>
       <br />
-      <label>
-        View:
-        <select name="view" value={formData.view} onChange={handleInputChange}>
-          <option value="">Select View</option>
-          <option value="sea">Sea View</option>
-          <option value="mountain">Mountain View</option>
-          <option value="city">City View</option>
-          <option value="garden">Garden View</option>
-        </select>
-      </label>
+
       <br />
 
       <button type="submit">Search</button>
