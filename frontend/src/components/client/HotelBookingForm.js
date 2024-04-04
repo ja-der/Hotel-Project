@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Client.css"; // Import CSS file
+import "./Client.css"; //  // Import CSS file
 import ResultCard from "./ResultCard"; // Adjust the path as necessary
 
 const HotelBookingForm = ({ onToggleShowList }) => {

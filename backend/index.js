@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 //middleware
 app.use(cors());
@@ -22,6 +22,6 @@ app.use("/api/searchRooms", require("./routes/booking/searchRooms"));
 // Employee Route
 app.use("/employee", require("./routes/employee"));
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port 4000`);
 });
