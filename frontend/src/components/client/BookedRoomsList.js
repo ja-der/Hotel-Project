@@ -1,11 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-const initialRooms = [
-  { id: 1, name: "Room 101", capacity: 2, price: 100 },
-  { id: 2, name: "Room 102", capacity: 3, price: 150 },
-  // Add more predefined rooms
-];
-
 const BookedRoomsList = (props) => {
   const [rooms, setRooms] = useState({
     id: 0,
@@ -13,11 +6,12 @@ const BookedRoomsList = (props) => {
     capacity: 0,
     price: 0,
   });
-
-  console.log(props.user.clientid);
-  const deleteRoom = (roomId) => {
-    setRooms(rooms.filter((room) => room.id !== roomId));
+  //delete function
+  async function deleteReservation(roomID) {}
+  const deleteRoom = (reservationId) => {
+    setRooms(rooms.filter((room) => room.id !== reservationId));
   };
+  //get reservation
   async function getReservation() {
     const clientid = 1;
     try {
@@ -42,7 +36,7 @@ const BookedRoomsList = (props) => {
   }
   useEffect(() => {
     getReservation();
-  }, []);
+  }, [rooms]);
 
   return (
     <div>
