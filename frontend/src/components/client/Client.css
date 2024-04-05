@@ -38,6 +38,37 @@ p {
   background-color: #d9534f;
 }
 
+.btn-success {
+  background-color: #5cb85c;
+}
+
+.btn-success:hover {
+  background-color: #53a453;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+}
+
+.btn-warning:hover {
+  background-color: #d89230;
+}
+
+.btn-info {
+  background-color: #5bc0de;
+}
+
+.btn-info:hover {
+  background-color: #3b9dba;
+}
+
+.btn-primary {
+  background-color: #337ab7;
+}
+
+.btn-primary:hover {
+  background-color: #23517a;
+}
 /* General form styling */
 form {
   max-width: 600px;
