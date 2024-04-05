@@ -2,7 +2,7 @@ import React, {Fragment, useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
 
-const ReservationCheck = ( ) => {
+const ReservationCheck = ( {setAuth}) => {
     const [inputs, setInputs] = useState({
         reservationID: '',
         employeeID: '',

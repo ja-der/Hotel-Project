@@ -3,7 +3,7 @@ import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const RentForm = () => {
+const RentForm = ({setAuth}) => {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         firstName: '',

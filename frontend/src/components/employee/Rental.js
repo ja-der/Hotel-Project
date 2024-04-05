@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-const Rental = ( ) => {
+const Rental = ({setAuth}) => {
     const [search, setSearch] = useState({
         minPrice: 0,
         maxPrice: 10000,

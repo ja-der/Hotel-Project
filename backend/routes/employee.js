@@ -165,4 +165,70 @@ router.get('/hotel', async(req, res) => {
     }
 });
 
+// get chainName from chainID
+router.get('/chainID', async(req, res) => {
+    try {
+        const {chainID} = req.query;
+        const chainName = await pool.query('SELECT ChainName FROM Chain WHERE ChainID = $1', [chainID]);
+        res.json(chainName.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// update employee profile
+router.put('/update', async(req, res) => {
+    try {
+        const {employeeID, firstName, lastName, address, email, password, ssn, hotelID, chainName} = req.body;
+
+        // get the chainID
+        const chain = await pool.query('SELECT ChainID FROM chain WHERE ChainName = $1', [chainName]);
+        const chainID = chain.rows[0].chainid;
+
+        // check if the hotelID belongs to the chainID
+        const hotel = await pool.query('SELECT ChainID FROM hotel WHERE HotelID = $1', [hotelID]);
+
+        if (hotel.rows[0].chainid !== chainID) {
+            return res.status(401).json('Hotel does not belong to the chain');
+        }
+
+        const updatedEmployee = await pool.query(
+            'UPDATE employee SET EmployeeFirstName = $1, EmployeeLastName = $2, EmployeeAddress = $3, EmployeeEmail = $4, EmployeePassword = $5, EmployeeSSN = $6, HotelID = $7, ChainID = $8 WHERE EmployeeID = $9 RETURNING *', [firstName, lastName, address, email, password, ssn, hotelID, chainID, employeeID]
+        );
+
+        res.json(updatedEmployee.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// delete employee profile
+router.delete('/delete', async(req, res) => {
+    try {
+        const {employeeID} = req.query;
+
+        // check if employee exists
+        const employee = await pool.query('SELECT * FROM employee WHERE EmployeeID = $1', [employeeID]);
+
+        // if employee does not exist then throw error
+        if (employee.rows.length === 0) {
+            return res.status(401).json('Employee does not exist');
+        }
+
+        const deletedEmployee = await pool.query(
+            'DELETE FROM employee WHERE EmployeeID = $1 RETURNING *', [employeeID]
+        );
+
+        res.json(deletedEmployee.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
 module.exports = router;

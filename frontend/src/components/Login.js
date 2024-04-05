@@ -56,7 +56,7 @@ const Login = ({ setAuth }) => {
                     <input className="form-check-input" type="radio" name="role" id="employee" value="employee" checked={role === "employee"} onChange={onChange} />
                     <label className="form-check-label" htmlFor="employee">Employee</label>
                 </div>
-                <button className="mt-3 btn btn-success btn-block">Submit</button>
+                <button className="mt-3 btn btn-success btn-block">Login</button>
             </form>
             <Link to="/signup" className="mt-2 btn btn-primary btn-block">Signup</Link>
         </Fragment>

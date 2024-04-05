@@ -18,6 +18,7 @@ import ReservationCheck from './components/employee/ReservationCheck';
 import Rental from './components/employee/Rental';
 import RentForm from './components/employee/RentForm';
 import NewEmployee from './components/employee/NewEmployee';
+import EditProfile from './components/employee/EditProfile';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -71,9 +72,10 @@ function App() {
             <Route path='/clienthomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} /> 
             <Route path='/employeehomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} /> 
             <Route path='/reservationcheck' element={!isAuthenticated ? <Navigate to='/login'/> : <ReservationCheck/>} />     
-            <Route path='/rental' element={!isAuthenticated ? <Navigate to='/login'/> : <Rental/>} />   
-            <Route path='/rentform' element={!isAuthenticated ? <Navigate to='/login'/> : <RentForm/>} />
-            <Route path='/newaccount' element={!isAuthenticated ? <Navigate to='/login'/> : <NewEmployee/>} />
+            <Route path='/rental' element={!isAuthenticated ? <Navigate to='/login'/> : <Rental setAuth={setAuth}/>} />   
+            <Route path='/rentform' element={!isAuthenticated ? <Navigate to='/login'/> : <RentForm setAuth={setAuth}/>} />
+            <Route path='/newaccount' element={!isAuthenticated ? <Navigate to='/login'/> : <NewEmployee setAuth={setAuth}/>} />
+            <Route path='/editprofile' element={!isAuthenticated ? <Navigate to='/login'/> : <EditProfile setAuth={setAuth}/>} />
             <Route path='/' element={<Navigate to='/login'/>}/> 
           </Routes>
         </div>
