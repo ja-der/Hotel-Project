@@ -41,25 +41,62 @@ const Login = ({ setAuth }) => {
       console.error(err.message);
     }
   };
-   return (
-        <Fragment>
-            <h1 className="mt-5 text-center">Login</h1>
-            <form onSubmit={onSubmitForm}>
-                <input type="email" name="email" placeholder="Email" className="form-control my-3" value={email} onChange={onChange} required />
-                <input type="password" name="password" placeholder="Password" className="form-control my-3" value={password} onChange={onChange} required />
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="role" id="client" value="client" checked={role === "client"} onChange={onChange} />
-                    <label className="form-check-label" htmlFor="client">Client</label>
-                </div>
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="role" id="employee" value="employee" checked={role === "employee"} onChange={onChange} />
-                    <label className="form-check-label" htmlFor="employee">Employee</label>
-                </div>
-                <button className="mt-3 btn btn-success btn-block">Login</button>
-            </form>
-            <Link to="/signup" className="mt-2 btn btn-primary btn-block">Signup</Link>
-        </Fragment>
-    );
+  return (
+    <Fragment>
+      <h1 className="mt-5 text-center">Login</h1>
+      <form onSubmit={onSubmitForm}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          className="form-control my-3"
+          value={email}
+          onChange={onChange}
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          className="form-control my-3"
+          value={password}
+          onChange={onChange}
+          required
+        />
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="role"
+            id="client"
+            value="client"
+            checked={role === "client"}
+            onChange={onChange}
+          />
+          <label className="form-check-label" htmlFor="client">
+            Client
+          </label>
+        </div>
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input"
+            type="radio"
+            name="role"
+            id="employee"
+            value="employee"
+            checked={role === "employee"}
+            onChange={onChange}
+          />
+          <label className="form-check-label" htmlFor="employee">
+            Employee
+          </label>
+        </div>
+        <button className="mt-3 btn btn-success btn-block">Login</button>
+      </form>
+      <Link to="/signup" className="mt-2 btn btn-primary btn-block">
+        Signup
+      </Link>
+    </Fragment>
   );
 };
 
