@@ -11,8 +11,8 @@ const ClientHomepage = ({ setAuth }) => {
   const navigate = useNavigate();
   // const [name, setName] = useState("");
   const [showList, setShowList] = useState(true);
-  
-   // async function getName() {
+
+  // async function getName() {
   //   try {
   //     const response = await fetch("http://localhost:4000/dashboard/", {
   //       method: "GET",
@@ -34,14 +34,16 @@ const ClientHomepage = ({ setAuth }) => {
     ssn: "",
     email: "",
   });
+  const [clientId, setClientId] = useState(null); // State to hold client ID
+
   async function getUser() {
-      try {
+    try {
       const response = await fetch("http://localhost:4000/dashboard/", {
         method: "GET",
         headers: { token: localStorage.token },
       });
       const parseRes = await response.json();
-      console.log(parseRes);
+      // console.log(parseRes);
       setUser({
         clientid: parseRes.clientid,
         firstName: parseRes.clientfirstname,
@@ -50,6 +52,7 @@ const ClientHomepage = ({ setAuth }) => {
         ssn: parseRes.clientssn,
         email: parseRes.clientemail,
       });
+      setClientId(parseRes.clientid); // Set the client ID in state
     } catch (err) {
       console.error(err.message);
     }
@@ -83,7 +86,7 @@ const ClientHomepage = ({ setAuth }) => {
       ) : (
         <HotelBookingForm
           onToggleShowList={toggleShowList}
-          clientId={clientId}
+          clientId={user.clientid}
         />
       )}
       <button className="btn btn-danger" onClick={(e) => logout(e)}>
