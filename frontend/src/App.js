@@ -98,11 +98,7 @@ function App() {
             <Route
               path="/useraccount"
               element={
-                !isAuthenticated ? (
-                  <Navigate to="/login" />
-                ) : (
-                  <ReservationCheck />
-                )
+                !isAuthenticated ? <Navigate to="/login" /> : <UserAccount />
               }
             />
             <Route
