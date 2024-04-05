@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-const Rental = ({setAuth}) => {
+const Rental = () => {
     const [search, setSearch] = useState({
         minPrice: 0,
         maxPrice: 10000,
@@ -148,7 +148,7 @@ const Rental = ({setAuth}) => {
                         <td>{room.extendable}</td>
                         <td>{room.issues}</td>
                         <td>
-                            <Link to="/RentForm" className="btn btn-warning" onClick={() => onRent(room.roomid)}>Rent</Link>
+                            <Link to="/RentForm" className="btn btn-info" onClick={() => onRent(room.roomid)}>Rent</Link>
                         </td>
                     </tr>
                 ))}

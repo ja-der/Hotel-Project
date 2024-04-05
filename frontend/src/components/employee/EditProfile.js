@@ -147,75 +147,82 @@ const EditProfile = ({setAuth}) => {
         <Fragment>
           <h1 className="mt-5 text-center">Edit Profile</h1>
           <form onSubmit={editProfile} >
+            <label htmlFor="firstName">First Name</label>
             <input
               type="text"
               name="firstName"
               placeholder="First Name"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={firstName}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="lastName">Last Name</label>
             <input
               type="text"
               name="lastName"
               placeholder="Last Name"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={lastName}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="address">Address</label>
             <input
               type="text"
               name="address"
               placeholder="Address"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={address}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="ssn">SSN</label>
             <input
               type="number"
               name="ssn"
               placeholder="SSN"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={ssn}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               name="email"
               placeholder="Email"
-              className="form-control my-3"
+              className="form-control mb-2"
                 value={email}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               name="password"
               placeholder="Password"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={password}
               onChange={e => onChange(e)}
               required
             />
-
-            <select name="chainName" className="form-control my-3" onChange={e => onChange(e)} required>
+            <label htmlFor="chainName">Chain Name</label>
+            <select name="chainName" className="form-control mb-2" onChange={e => onChange(e)} required>
                 <option >{chainName}</option>
                 {chainNames.map((chain, index) => (
                     <option key={index} value={chainNames[index]}>{chainNames[index]}</option>
                 ))}
             </select>
 
-            <select name="hotelID" className="form-control my-3" onChange={e => onChange(e)} required>
+            <label htmlFor="hotelID">Hotel ID</label>
+            <select name="hotelID" className="form-control mb-2" onChange={e => onChange(e)} required>
                 <option value={hotelID}>{hotelID}</option>
                 {hotelIDs.map((hotel, index) => (
                     <option key={index} value={hotelIDs[index]}>{hotelIDs[index]}</option>
                 ))}
             </select>
-            <button className="btn btn-success btn-block">Submit</button>
+            <button className="btn btn-success btn-block mt-3">Submit</button>
           </form>
           <button className="btn btn-danger btn-block mt-2" onClick={deleteAccount}>Delete Account</button>
           <Link to="/employeehomepage" className="mt-2 btn btn-warning btn-block">Go back</Link>

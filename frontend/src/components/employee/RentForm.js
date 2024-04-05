@@ -3,7 +3,7 @@ import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const RentForm = ({setAuth}) => {
+const RentForm = () => {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         firstName: '',
@@ -79,7 +79,6 @@ const RentForm = ({setAuth}) => {
                     name="firstName"
                     placeholder="First Name"
                     className="form-control my-3"
-                    value={firstName}
                     onChange={onChange} required
                 />
                 <input
@@ -87,7 +86,6 @@ const RentForm = ({setAuth}) => {
                     name="lastName"
                     placeholder="Last Name"
                     className="form-control my-3"
-                    value={lastName}
                     onChange={onChange} required
                 />
                 <input
@@ -95,7 +93,6 @@ const RentForm = ({setAuth}) => {
                     name="address"
                     placeholder="Address"
                     className="form-control my-3"
-                    value={address}
                     onChange={onChange} required
                 />
                 <input
@@ -103,7 +100,6 @@ const RentForm = ({setAuth}) => {
                     name="ssn"
                     placeholder="SSN"
                     className="form-control my-3"
-                    value={ssn}
                     onChange={onChange} required
                 />
                 <input

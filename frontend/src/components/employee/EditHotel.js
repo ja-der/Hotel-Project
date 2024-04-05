@@ -112,47 +112,52 @@ const EditHotel = ({setAuth}) => {
         <Fragment>
           <h1 className="mt-5 text-center">Edit Hotel Information</h1>
           <form onSubmit={onSubmitForm}>
+            <label htmlFor="hotelAddress">Hotel Address</label>
             <input
               type="text"
               name="hotelAddress"
               placeholder="Address"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={hotelAddress}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="hotelCity">Hotel City</label>
             <input
               type="text"
               name="hotelCity"
               placeholder="City"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={hotelCity}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="hotelPhoneNumber">Hotel Phone Number</label>
             <input
               type="text"
               name="hotelPhoneNumber"
               placeholder="Phone Number"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={hotelPhoneNumber}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="hotelEmail">Hotel Email</label>
             <input
               type="email"
               name="hotelEmail"
               placeholder="Email"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={hotelEmail}
               onChange={e => onChange(e)}
               required
             />
+            <label htmlFor="numberOfRooms">Number of Rooms</label>
             <input
               type="number"
               name="numberOfRooms"
               placeholder="Number of Rooms"
-              className="form-control my-3"
+              className="form-control mb-2"
               value={numberOfRooms}
               onChange={e => onChange(e)}
               required
@@ -167,7 +172,7 @@ const EditHotel = ({setAuth}) => {
                 <option value="5">5</option>
             </select>
 
-            <button className="btn btn-success btn-block mt-4">Submit</button>
+            <button className="btn btn-success btn-block mt-4">Update</button>
           </form>
           <button onClick={deleteHotel} className="btn btn-danger btn-block mt-2" >Delete Hotel</button>
           <Link to="/employeehomepage" className="mt-2 btn btn-warning btn-block">Go back</Link>

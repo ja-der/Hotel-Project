@@ -43,8 +43,7 @@ const EmployeeHomepage = ({setAuth} ) => {
                         <Link to="/newaccount" className="btn btn-warning mb-3">Create new employee account</Link>
                         <Link to="/editprofile" className="btn btn-warning mb-3">Edit profile</Link>
                         <Link to="/edithotel" className="btn btn-primary mb-3">Edit hotel information</Link>
-                        <Link to="/editroom" className="btn btn-primary mb-3">Edit rooms information</Link>
-                        <Link to="/newroom" className="btn btn-primary mb-3">Create new rooms</Link>
+                        <Link to="/editrooms" className="btn btn-primary mb-3">Edit rooms information</Link>
                         <button className="btn btn-danger" onClick={e => logout(e)}>Logout</button>
                     </div>
             </div>

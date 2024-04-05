@@ -294,4 +294,108 @@ router.delete('/deletehotel', async(req, res) => {
     }
 });
 
+// get all rooms of a hotel
+router.get('/rooms', async(req, res) => {
+    try {
+        const {hotelID, chainID} = req.query;
+
+        // check if chain exists
+        const chain = await pool.query('SELECT * FROM chain WHERE ChainID = $1', [chainID]);
+
+        // check if hotel of the chain exists
+        const hotel = await pool.query('SELECT * FROM hotel WHERE HotelID = $1 AND ChainID=$2', [hotelID, chainID]);
+
+        // if chain or hotel does not exist then throw error
+        if (hotel.rows.length === 0 || chain.rows.length === 0) {
+            return res.status(401).json('Hotel does not exist');
+        }
+
+        const rooms = await pool.query('SELECT * FROM room WHERE HotelID = $1 AND ChainID=$2 ORDER BY RoomID', [hotelID, chainID]);
+        res.json(rooms.rows);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// get specific room information
+router.get('/room', async(req, res) => {
+    try {
+        const {roomID, hotelID, chainID} = req.query;
+
+        // check if room exists
+        const room = await pool.query('SELECT * FROM room WHERE RoomID = $1 AND HotelID = $2 AND ChainID=$3', [roomID, hotelID, chainID]);
+
+        // if room does not exist then throw error
+        if (room.rows.length === 0) {
+            return res.status(401).json('Room does not exist');
+        }
+
+        res.json(room.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// delete specific room
+router.delete('/deleteroom', async(req, res) => {
+    try {
+        const {roomID} = req.query;
+
+        // check if room exists
+        const room = await pool.query('SELECT * FROM room WHERE RoomID = $1', [roomID]);
+
+        // if room does not exist then throw error
+        if (room.rows.length === 0) {
+            return res.status(401).json('Room does not exist');
+        }
+
+        const deletedRoom = await pool.query(
+            'DELETE FROM room WHERE RoomID = $1 RETURNING *', [roomID]
+        );
+
+        res.json(deletedRoom.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// update specific room information
+router.put('/updateroom', async(req, res) => {
+    try {
+        const {roomID, hotelID, chainID, price, amenities, capacity, roomView, extendable, issues} = req.body;
+
+        const updatedRoom = await pool.query(
+            'UPDATE room SET Price = $1, Amenities = $2, Capacity = $3, RoomView = $4, Extendable = $5, Issues = $6 WHERE RoomID = $7 AND HotelID = $8 AND ChainID = $9 RETURNING *', [price, amenities, capacity, roomView, extendable, issues, roomID, hotelID, chainID]
+        );
+
+        res.json(updatedRoom.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// add a new room
+router.post('/addroom', async(req, res) => {
+    try {
+        const {hotelID, chainID, price, amenities, capacity, roomView, extendable, issues} = req.body;
+
+        const newRoom = await pool.query(
+            'INSERT INTO room (HotelID, ChainID, Price, Amenities, Capacity, RoomView, Extendable, Issues) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [hotelID, chainID, price, amenities, capacity, roomView, extendable, issues]
+        );
+
+        res.json(newRoom.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
 module.exports = router;
