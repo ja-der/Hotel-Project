@@ -71,7 +71,7 @@ function App() {
       <Router>
         <div className="container">
           <Routes>
-            <Route path='/login' element={!isAuthenticated ? <Login setAuth={setAuth} /> : renderHomepage()} />
+                <Route path='/login' element={!isAuthenticated ? <Login setAuth={setAuth} /> : renderHomepage()} />
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/clienthomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} /> 
             <Route path='/employeehomepage' element={!isAuthenticated ? <Navigate to='/login'/> : renderHomepage()} /> 

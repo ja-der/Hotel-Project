@@ -23,9 +23,9 @@ CREATE TABLE Hotel (
     NumberOfRooms INT NOT NULL,
     ChainID INT NOT NULL,
     FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
-);
-
--- CREATE ROOM TABLE
+  );
+  
+  -- CREATE ROOM TABLE
 CREATE TABLE Room (
     RoomID SERIAL PRIMARY KEY,
     Price DECIMAL(10, 2) NOT NULL,
@@ -241,35 +241,38 @@ INSERT INTO Chain (ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersE
 INSERT INTO Chain (ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber) VALUES ('Goyette Group', '491 Iowa Road', 8, 'info@goyette.com', '320-980-6866');
 INSERT INTO Chain (ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber) VALUES ('Jaskolski Inc', '06684 Roth Point', 8, 'contact@jaskolski.com', '426-791-7238');
 
+
 -- INSERT HOTEL DATA FOR CHAIN 1
 INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID)
 VALUES
-    ('123 Main Street', 'New York', '123-456-7890', 'hotel1@schimmelzieme.com', 4, 5, 1),
-    ('456 Oak Avenue', 'Los Angeles', '987-654-3210', 'hotel2@examschimmelziemeple.com', 3, 5, 1),
-    ('789 Elm Drive', 'Chicago', '555-555-5555', 'hotel3@schimmelzieme.com', 5, 5, 1),
-    ('101 Pine Lane', 'New York', '111-222-3333', 'hotel4@schimmelzieme.com', 4, 5, 1),
-    ('202 Maple Street', 'Boston', '444-444-4444', 'hotel5@schimmelzieme.com', 3, 5, 1),
-    ('303 Cedar Avenue', 'San Francisco', '777-888-9999', 'hotel6@schimmelzieme.com', 4, 5, 1),
-    ('404 Birch Road', 'Los Angele', '333-333-3333', 'hotel7@schimmelzieme.com', 3, 5, 1),
-    ('505 Walnut Circle', 'Boston', '666-777-8888', 'hotel8@schimmelzieme.com', 5, 5, 1);
+    ('123 Main Street', 'Toronto', '123-456-7890', 'hotel1@schimmelzieme.com', 4, 5, 1),
+    ('456 Oak Avenue', 'Montreal', '987-654-3210', 'hotel2@examschimmelziemeple.com', 3, 5, 1),
+    ('789 Elm Drive', 'Ottawa', '555-555-5555', 'hotel3@schimmelzieme.com', 5, 5, 1),
+    ('101 Pine Lane', 'Kingston', '111-222-3333', 'hotel4@schimmelzieme.com', 4, 5, 1),
+    ('202 Maple Street', 'Quebec City', '444-444-4444', 'hotel5@schimmelzieme.com', 3, 5, 1),
+    ('303 Cedar Avenue', 'Vancouver', '777-888-9999', 'hotel6@schimmelzieme.com', 4, 5, 1),
+    ('404 Birch Road', 'Calgary', '333-333-3333', 'hotel7@schimmelzieme.com', 3, 5, 1),
+    ('505 Walnut Circle', 'Toronto', '666-777-8888', 'hotel8@schimmelzieme.com', 5, 5, 1);
+
 
 -- INSERT HOTEL DATA FOR CHAIN 2
 INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('18 Bashford Trail', 'Santa Cruz', '321-201-3503', 'hotel1@walshandsons.com', 1, 5, 2),
-    ('436 Namekagon Point', 'Santa Cruz', '173-161-4827', 'hotel2@walshandsons.com', 3, 5, 2),
+    ('18 Bashford Trail', 'Ottawa', '321-201-3503', 'hotel1@walshandsons.com', 1, 5, 2),
+    ('436 Namekagon Point', 'Kingston', '173-161-4827', 'hotel2@walshandsons.com', 3, 5, 2),
     ('86930 Susan Crossing', 'Toronto', '713-150-3950', 'hotel3@walshandsons.com', 4, 5, 2),
-    ('10 Arkansas Plaza', 'Toronto', '167-369-8443', 'hotel4@walshandsons.com', 1, 5, 2),
+    ('10 Arkansas Plaza', 'Calgary', '167-369-8443', 'hotel4@walshandsons.com', 1, 5, 2),
     ('84681 Bunker Hill Park', 'Montreal', '817-743-5582', 'hotel5@walshandsons.com', 1, 5, 2),
     ('83649 Sheridan Place', 'Montreal', '624-548-0784', 'hotel6@walshandsons.com', 4, 5, 2),
-    ('11371 Larry Drive', 'Montreal', '967-970-2455', 'hotel7@walshandsons.com', 2, 5, 2),
+    ('11371 Larry Drive', 'Quebec City', '967-970-2455', 'hotel7@walshandsons.com', 2, 5, 2),
     ('031 Waywood Circle', 'Vancouver', '810-196-7148', 'hotel8@walshandsons.com', 2, 5, 2);
+
 
 -- INSERT HOTEL DATA FOR CHAIN 3
 INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('98933 Artisan Terrace', 'Seattle', '202-102-9343', 'hotel1@halvorson_hettinger.com', 3, 5, 3),
-    ('39770 Everett Court', 'Seattle', '588-471-1937', 'hotel2@halvorson_hettinger.com', 4, 5, 3),
+    ('98933 Artisan Terrace', 'Vancouver', '202-102-9343', 'hotel1@halvorson_hettinger.com', 3, 5, 3),
+    ('39770 Everett Court', 'Vancouver', '588-471-1937', 'hotel2@halvorson_hettinger.com', 4, 5, 3),
     ('0785 Warbler Drive', 'Calgary', '470-180-9071', 'hotel3@halvorson_hettinger.com', 3, 5, 3),
     ('4 Corben Junction', 'Calgary', '899-324-9669', 'hotel4@halvorson_hettinger.com', 3, 5, 3),
     ('12247 Judy Park', 'Calgary', '145-417-6042', 'hotel5@halvorson_hettinger.com', 2, 5, 3),
@@ -277,23 +280,25 @@ VALUES
     ('439 Dennis Junction', 'Ottawa', '858-386-7379', 'hotel7@halvorson_hettinger.com', 3, 5, 3),
     ('6 Sutherland Place', 'Ottawa', '195-978-9018', 'hotel8@halvorson_hettinger.com', 5, 5, 3);
 
+
 -- INSERT HOTEL DATA FOR CHAIN 4
-INSERT INTO  Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
+INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('559 Meadow Valley Parkway', 'Boston', '501-999-1561', 'hotel1@goyette.com', 4, 5, 4),
-    ('1 Dexter Trail', 'Boston', '325-499-9872', 'hotel2@goyette.com', 5, 5, 4),
-    ('4 Porter Junction', 'Boston', '210-837-4802', 'hotel3@goyette.com', 2, 5, 4),
-    ('44 Bartillon Place', 'Chicago', '474-336-5222', 'hotel4@goyette.com', 2, 5, 4),
-    ('55159 Meadow Vale Place', 'Chicago', '233-713-1707', 'hotel5@goyette.com', 4, 5, 4),
-    ('00217 Memorial Drive', 'Chicago', '923-122-2988', 'hotel6@goyette.com', 3, 5, 4),
-    ('6003 Harbort Alley', 'Chicago', '581-182-5233', 'hotel7@goyette.com', 4, 5, 4),
-    ('529 Stone Corner Circle', 'Miami', '713-385-1886', 'hotel8@goyette.com', 1, 5, 4);
+    ('559 Meadow Valley Parkway', 'Toronto', '501-999-1561', 'hotel1@goyette.com', 4, 5, 4),
+    ('1 Dexter Trail', 'Toronto', '325-499-9872', 'hotel2@goyette.com', 5, 5, 4),
+    ('4 Porter Junction', 'Toronto', '210-837-4802', 'hotel3@goyette.com', 2, 5, 4),
+    ('44 Bartillon Place', 'Montreal', '474-336-5222', 'hotel4@goyette.com', 2, 5, 4),
+    ('55159 Meadow Vale Place', 'Montreal', '233-713-1707', 'hotel5@goyette.com', 4, 5, 4),
+    ('00217 Memorial Drive', 'Montreal', '923-122-2988', 'hotel6@goyette.com', 3, 5, 4),
+    ('6003 Harbort Alley', 'Montreal', '581-182-5233', 'hotel7@goyette.com', 4, 5, 4),
+    ('529 Stone Corner Circle', 'Vancouver', '713-385-1886', 'hotel8@goyette.com', 1, 5, 4);
+
 
 -- INSERT HOTEL DATA FOR CHAIN 5
-INSERT INTO  Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
+INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('2492 Village Green Circle', 'Quebec', '236-158-8589', 'hotel1@jaskolski.com', 5, 5, 5),
-    ('61525 Esker Point', 'Quebec', '227-964-6536', 'hotel2@jaskolski.com', 2, 5, 5),
+    ('2492 Village Green Circle', 'Quebec City', '236-158-8589', 'hotel1@jaskolski.com', 5, 5, 5),
+    ('61525 Esker Point', 'Quebec City', '227-964-6536', 'hotel2@jaskolski.com', 2, 5, 5),
     ('1887 Hagan Parkway', 'Montreal', '500-818-3515', 'hotel3@jaskolski.com', 3, 5, 5),
     ('96 Northport Pass', 'Montreal', '246-832-3503', 'hotel4@jaskolski.com', 1, 5, 5),
     ('8641 Bonner Parkway', 'Ottawa', '323-528-1787', 'hotel5@jaskolski.com', 3, 5, 5),
@@ -590,6 +595,7 @@ INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, Hote
 INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Lea', 'De Cruze', '5083 Westport Junction', '294676900', '2024-04-03', 'ldecruze0@nps.gov', 'password');
 INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Red', 'Galiero', '1139 Novick Road', '322803219', '2024-04-03', 'rgaliero1@answers.com', 'password');
 INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Philip', 'Ubank', '1 Warrior Road', '535798918', '2024-04-03', 'pubank2@narod.ru', 'password');
+
 
 -- INSERT RESERVATION DATA
 INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) VALUES ('2023-12-02', '2023-12-10', 1, 1, 1, 1);

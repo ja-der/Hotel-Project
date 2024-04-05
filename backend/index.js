@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 //middleware
 app.use(cors());
@@ -17,12 +17,13 @@ app.use("/dashboard", require("./routes/dashboard"));
 
 app.use("/api/hotelChains", require("./routes/booking/hotelChains"));
 app.use("/api/hotelcities", require("./routes/booking/hotelCities"));
-app.use("/api/search", require("./routes/booking/searchRooms"));
+app.use("/api/searchRooms", require("./routes/booking/searchRooms"));
+app.use("/api/makeReservation", require("./routes/booking/makeReservation"));
+app.use("/api/personalInfo", require("./routes/booking/personalInfo"));
 
 // Employee Route
-app.use('/employee', require('./routes/employee'));
+app.use("/employee", require("./routes/employee"));
 
-
-app.listen(4000, () => {
-    console.log(`Server is running on port 4000`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port 4000`);
 });
