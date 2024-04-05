@@ -9,18 +9,46 @@ import "./Client.css";
 
 const ClientHomepage = ({ setAuth }) => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [showList, setShowList] = useState(true);
-  async function getName() {
+  // async function getName() {
+  //   try {
+  //     const response = await fetch("http://localhost:4000/dashboard/", {
+  //       method: "GET",
+  //       headers: { token: localStorage.token },
+  //     });
+
+  //     const parseRes = await response.json();
+  //     console.log(parseRes);
+  //     setName(parseRes.clientfirstname);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // }
+  const [user, setUser] = useState({
+    clientid: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    ssn: "",
+    email: "",
+  });
+  async function getUser() {
     try {
       const response = await fetch("http://localhost:4000/dashboard/", {
         method: "GET",
         headers: { token: localStorage.token },
       });
-
       const parseRes = await response.json();
       console.log(parseRes);
-      setName(parseRes.clientfirstname);
+      setUser({
+        clientid: parseRes.clientid,
+        firstName: parseRes.clientfirstname,
+        lastName: parseRes.clientlastname,
+        address: parseRes.clientaddress,
+        ssn: parseRes.clientssn,
+        email: parseRes.clientemail,
+      });
     } catch (err) {
       console.error(err.message);
     }
@@ -38,7 +66,7 @@ const ClientHomepage = ({ setAuth }) => {
   };
 
   useEffect(() => {
-    getName();
+    getUser();
   }, []);
   const goToUserAccount = () => {
     navigate("/useraccount"); // Navigate to the UserAccount component
@@ -46,11 +74,11 @@ const ClientHomepage = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <h1>Hello {name}</h1>
+      <h1>Hello {user.firstName}</h1>
       <p>Yay! You are logged in as a client!</p>
       <button onClick={goToUserAccount}>User Account</button>
       {showList ? (
-        <BookedRoomsList onToggleShowList={toggleShowList} />
+        <BookedRoomsList onToggleShowList={toggleShowList} user={user} />
       ) : (
         <HotelBookingForm onToggleShowList={toggleShowList} />
       )}

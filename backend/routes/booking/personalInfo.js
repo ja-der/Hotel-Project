@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const pool = require("../../db");
 
+//get client info
 router.get("/:email", async (req, res) => {
   const email = req.params.email;
 
@@ -15,7 +16,7 @@ router.get("/:email", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-
+//update client info
 router.put("/updateInfo", async (req, res) => {
   try {
     const { firstName, lastName, address, ssn, email } = req.body;
@@ -47,4 +48,22 @@ router.put("/updateInfo", async (req, res) => {
   }
 });
 
+//get client reservation
+router.get("/reservation/:clientid", async (req, res) => {
+  const id = req.params.clientid;
+  // SELECT *
+  // FROM Room
+  // INNER JOIN Reservation ON Room.RoomID = Reservation.roomid
+  // WHERE reservation.clientid = 1;
+  try {
+    const queryResult = await pool.query(
+      "SELECT * FROM Room INNER JOIN Reservation ON Room.RoomID = Reservation.roomid WHERE reservation.clientid= $1",
+      [id]
+    );
+    res.json(queryResult.rows);
+  } catch (err) {
+    console.error("Error querying hotel chains:", err);
+    res.status(500).send("Server error");
+  }
+});
 module.exports = router;
