@@ -411,15 +411,15 @@ CREATE TABLE Reservation (
     HotelID INT NOT NULL,
     RoomID INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (ClientID) REFERENCES Client(ClientID) ON DELETE CASCADE,
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID) ON DELETE CASCADE
 );
 
 -- INSERT RESERVATION DATA
-INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 1, 2, 1);
-insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 2, 3, 2);
-insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-05-24', '2023-05-30', 3, 3, 4, 3);
-INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 4, 5, 4);
-insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 5, 1, 5);
+INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 1, 1, 1);
+insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 2, 9, 1);
+insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-05-24', '2023-05-30', 3, 3, 11, 1);
+INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 4, 17, 1);
+insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 5, 23, 1);
 
 
 CREATE TABLE Employee (
@@ -445,38 +445,38 @@ insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, Empl
 insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Chere', 'Jacombs', '20 Commercial Junction', 'cjacombs5@slate.com', 'password', '186557489', 6, 1);
 insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Vita', 'Gledstane', '21127 Lake View Plaza', 'vgledstane6@guardian.co.uk', 'password', '514906769', 7, 1);
 insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Mabel', 'Tandey', '5 Thompson Center', 'mtandey7@seattletimes.com', 'password', '624209190', 8, 1);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Miran', 'Shambrooke', '7860 Fulton Crossing', 'mshambrooke0@businessinsider.com', 'password', '545108078', 1, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Zulema', 'Harflete', '33 Scofield Court', 'zharflete1@mysql.com', 'password', '918911594', 2, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dorelle', 'Shyres', '39917 Fuller Center', 'dshyres2@rambler.ru', 'password', '074317452', 3, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rocky', 'MacKniely', '38 Calypso Place', 'rmackniely3@abc.net.au', 'password', '485806234', 4, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Luz', 'Garvagh', '190 Dexter Lane', 'lgarvagh4@tamu.edu', 'password', '708251533', 5, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Flo', 'Dawdary', '2 Kropf Point', 'fdawdary5@thetimes.co.uk', 'password', '731901329', 6, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Fanni', 'Towsey', '70744 Katie Plaza', 'ftowsey6@indiegogo.com', 'password', '646017962', 7, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Wynn', 'Tarburn', '08998 Rutledge Park', 'wtarburn7@ovh.net', 'password', '047202097', 8, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Beverly', 'Rodway', '3 Bunker Hill Plaza', 'brodway0@360.cn', 'password', '062481855', 1, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ferris', 'Holyland', '4045 Everett Trail', 'fholyland1@wired.com', 'password', '441394066', 2, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Elysia', 'Woodley', '209 Lakewood Gardens Drive', 'ewoodley2@howstuffworks.com', 'password', '405191255', 3, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dominique', 'Watmough', '6 Weeping Birch Pass', 'dwatmough3@bravesites.com', 'password', '280000069', 4, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rochelle', 'Mikalski', '9 Anzinger Avenue', 'rmikalski4@tiny.cc', 'password', '730408329', 5, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Micheline', 'Meckiff', '26 Clove Terrace', 'mmeckiff5@nymag.com', 'password', '249416535', 6, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ruy', 'Carbert', '71648 Manufacturers Trail', 'rcarbert6@ustream.tv', 'password', '040566449', 7, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Sibylle', 'Gatchell', '7874 West Circle', 'sgatchell7@usda.gov', 'password', '928849536', 8, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Karmen', 'Cuddehy', '9348 Magdeline Parkway', 'kcuddehy0@purevolume.com', 'password', '539669359', 1, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Alleen', 'Klamman', '86 Carpenter Drive', 'aklamman1@hubpages.com', 'password', '256968058', 2, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Gan', 'Moxon', '0923 Bonner Crossing', 'gmoxon2@mit.edu', 'password', '860151096', 3, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Cicely', 'Bernardotte', '2994 Namekagon Alley', 'cbernardotte3@ibm.com', 'password', '212703229', 4, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Duff', 'Gary', '9273 Pleasure Street', 'dgary4@nature.com', 'password', '529487362', 5, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Evelina', 'Yglesia', '79813 Weeping Birch Pass', 'eyglesia5@reference.com', 'password', '983235964', 6, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Inge', 'Huyhton', '28 Muir Alley', 'ihuyhton6@nytimes.com', 'password', '869582773', 7, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dniren', 'Itzhaiek', '18 Helena Crossing', 'ditzhaiek7@mit.edu', 'password', '882522162', 8, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Bren', 'Jobbins', '5 Village Pass', 'bjobbins0@github.com', 'password', '523980885', 1, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Thorin', 'Prayer', '68635 Birchwood Junction', 'tprayer1@irs.gov', 'password', '498674297', 2, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Jeannie', 'Roxbrough', '29 Summit Way', 'jroxbrough2@godaddy.com', 'password', '030370605', 3, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Napoleon', 'Matignon', '75 Hovde Crossing', 'nmatignon3@noaa.gov', 'password', '600074118', 4, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Tamqrah', 'Caldaro', '9675 Shopko Crossing', 'tcaldaro4@japanpost.jp', 'password', '487233969', 5, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Garry', 'Redit', '709 Ruskin Road', 'gredit5@cbsnews.com', 'password', '161863745', 6, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Guthry', 'Gehricke', '1 Farragut Drive', 'ggehricke6@theglobeandmail.com', 'password', '295802133', 7, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Abbie', 'Parkyns', '9 Reindahl Alley', 'aparkyns7@list-manage.com', 'password', '067912089', 8, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Miran', 'Shambrooke', '7860 Fulton Crossing', 'mshambrooke0@businessinsider.com', 'password', '545108078', 9, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Zulema', 'Harflete', '33 Scofield Court', 'zharflete1@mysql.com', 'password', '918911594', 10, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dorelle', 'Shyres', '39917 Fuller Center', 'dshyres2@rambler.ru', 'password', '074317452', 11, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rocky', 'MacKniely', '38 Calypso Place', 'rmackniely3@abc.net.au', 'password', '485806234', 12, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Luz', 'Garvagh', '190 Dexter Lane', 'lgarvagh4@tamu.edu', 'password', '708251533', 13, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Flo', 'Dawdary', '2 Kropf Point', 'fdawdary5@thetimes.co.uk', 'password', '731901329', 14, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Fanni', 'Towsey', '70744 Katie Plaza', 'ftowsey6@indiegogo.com', 'password', '646017962', 15, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Wynn', 'Tarburn', '08998 Rutledge Park', 'wtarburn7@ovh.net', 'password', '047202097', 16, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Beverly', 'Rodway', '3 Bunker Hill Plaza', 'brodway0@360.cn', 'password', '062481855', 17, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ferris', 'Holyland', '4045 Everett Trail', 'fholyland1@wired.com', 'password', '441394066', 18, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Elysia', 'Woodley', '209 Lakewood Gardens Drive', 'ewoodley2@howstuffworks.com', 'password', '405191255', 19, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dominique', 'Watmough', '6 Weeping Birch Pass', 'dwatmough3@bravesites.com', 'password', '280000069', 20, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rochelle', 'Mikalski', '9 Anzinger Avenue', 'rmikalski4@tiny.cc', 'password', '730408329', 21, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Micheline', 'Meckiff', '26 Clove Terrace', 'mmeckiff5@nymag.com', 'password', '249416535', 22, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ruy', 'Carbert', '71648 Manufacturers Trail', 'rcarbert6@ustream.tv', 'password', '040566449', 23, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Sibylle', 'Gatchell', '7874 West Circle', 'sgatchell7@usda.gov', 'password', '928849536', 24, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Karmen', 'Cuddehy', '9348 Magdeline Parkway', 'kcuddehy0@purevolume.com', 'password', '539669359', 25, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Alleen', 'Klamman', '86 Carpenter Drive', 'aklamman1@hubpages.com', 'password', '256968058', 26, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Gan', 'Moxon', '0923 Bonner Crossing', 'gmoxon2@mit.edu', 'password', '860151096', 27, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Cicely', 'Bernardotte', '2994 Namekagon Alley', 'cbernardotte3@ibm.com', 'password', '212703229', 28, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Duff', 'Gary', '9273 Pleasure Street', 'dgary4@nature.com', 'password', '529487362', 29, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Evelina', 'Yglesia', '79813 Weeping Birch Pass', 'eyglesia5@reference.com', 'password', '983235964', 30, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Inge', 'Huyhton', '28 Muir Alley', 'ihuyhton6@nytimes.com', 'password', '869582773', 31, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dniren', 'Itzhaiek', '18 Helena Crossing', 'ditzhaiek7@mit.edu', 'password', '882522162', 32, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Bren', 'Jobbins', '5 Village Pass', 'bjobbins0@github.com', 'password', '523980885', 33, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Thorin', 'Prayer', '68635 Birchwood Junction', 'tprayer1@irs.gov', 'password', '498674297', 34, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Jeannie', 'Roxbrough', '29 Summit Way', 'jroxbrough2@godaddy.com', 'password', '030370605', 35, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Napoleon', 'Matignon', '75 Hovde Crossing', 'nmatignon3@noaa.gov', 'password', '600074118', 36, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Tamqrah', 'Caldaro', '9675 Shopko Crossing', 'tcaldaro4@japanpost.jp', 'password', '487233969', 37, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Garry', 'Redit', '709 Ruskin Road', 'gredit5@cbsnews.com', 'password', '161863745', 38, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Guthry', 'Gehricke', '1 Farragut Drive', 'ggehricke6@theglobeandmail.com', 'password', '295802133', 39, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Abbie', 'Parkyns', '9 Reindahl Alley', 'aparkyns7@list-manage.com', 'password', '067912089', 40, 5);
 
 CREATE TABLE Rental (
     RentalID SERIAL PRIMARY KEY,
@@ -513,9 +513,9 @@ INSERT INTO Position (JobTitle, Responsibilities, JobLevel, HotelID, ChainID)
 VALUES 
 ('General Manager', 'Oversee all hotel operations', 1, 1, 1),
 ('Front Desk Clerk', 'Check-in/check-out guests, answer queries', 2, 1, 1),
-('Housekeeping', 'Clean and maintain guest rooms', 2, 2, 2),
-('Chef', 'Prepare and cook meals for hotel guests', 2, 2, 2),
-('Waiter/Waitress', 'Serve food and beverages to restaurant guests', 2, 3, 3);
+('Housekeeping', 'Clean and maintain guest rooms', 2, 2, 1),
+('Chef', 'Prepare and cook meals for hotel guests', 2, 2, 1),
+('Waiter/Waitress', 'Serve food and beverages to restaurant guests', 2, 3, 1);
 
 
 CREATE TABLE EmployeePosition (
