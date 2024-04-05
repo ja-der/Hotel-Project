@@ -376,7 +376,7 @@ INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, Hote
 INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, HotelID, ChainID) VALUES (227.99, 'Wi-Fi, AC, Mini Fridge, TV', 3, 'Mountain View', 'Yes', 'None', 2, 2);
 INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, HotelID, ChainID) VALUES (341.67, 'Wi-Fi, AC, Mini Fridge, TV, Balcony', 4, 'Mountain View', 'Yes', 'No hot water', 2, 2);
 INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, HotelID, ChainID) VALUES (243.02, 'Wi-Fi, AC, Mini Fridge, TV, Coffee Maker', 2, 'Ocean View', 'No', 'Faulty AC', 2, 2);
-INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, HotelID, ChainID) VALUES (543.02, 'Wi-Fi, AC, Mini Fridge, TV, Coffee Maker', 5, 'Ocean View', 'No', 'Faulty AC', 2, 1);
+INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, HotelID, ChainID) VALUES (543.02, 'Wi-Fi, AC, Mini Fridge, TV, Coffee Maker', 5, 'Ocean View', 'No', 'Faulty AC', 2, 2);
 
 -- HOTEL 3
 INSERT INTO Room (Price, Amenities, Capacity, RoomView, Extendable, Issues, HotelID, ChainID) VALUES (312.73, 'Wi-Fi, AC, Mini Fridge', 3, 'Ocean View', 'No', 'None', 3, 2);
