@@ -27,38 +27,41 @@ CREATE TABLE Hotel (
     StarRating INT NOT NULL,
     NumberOfRooms INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
 );
 
+-- Cities must be: Toronto, Montreal, Ottawa, Kingston, Quebec City, Vancouver, Calgary
 -- INSERT HOTEL DATA FOR CHAIN 1
 INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID)
 VALUES
-    ('123 Main Street', 'New York', '123-456-7890', 'hotel1@schimmelzieme.com', 4, 5, 1),
-    ('456 Oak Avenue', 'Los Angeles', '987-654-3210', 'hotel2@examschimmelziemeple.com', 3, 5, 1),
-    ('789 Elm Drive', 'Chicago', '555-555-5555', 'hotel3@schimmelzieme.com', 5, 5, 1),
-    ('101 Pine Lane', 'New York', '111-222-3333', 'hotel4@schimmelzieme.com', 4, 5, 1),
-    ('202 Maple Street', 'Boston', '444-444-4444', 'hotel5@schimmelzieme.com', 3, 5, 1),
-    ('303 Cedar Avenue', 'San Francisco', '777-888-9999', 'hotel6@schimmelzieme.com', 4, 5, 1),
-    ('404 Birch Road', 'Los Angele', '333-333-3333', 'hotel7@schimmelzieme.com', 3, 5, 1),
-    ('505 Walnut Circle', 'Boston', '666-777-8888', 'hotel8@schimmelzieme.com', 5, 5, 1);
+    ('123 Main Street', 'Toronto', '123-456-7890', 'hotel1@schimmelzieme.com', 4, 5, 1),
+    ('456 Oak Avenue', 'Montreal', '987-654-3210', 'hotel2@examschimmelziemeple.com', 3, 5, 1),
+    ('789 Elm Drive', 'Ottawa', '555-555-5555', 'hotel3@schimmelzieme.com', 5, 5, 1),
+    ('101 Pine Lane', 'Kingston', '111-222-3333', 'hotel4@schimmelzieme.com', 4, 5, 1),
+    ('202 Maple Street', 'Quebec City', '444-444-4444', 'hotel5@schimmelzieme.com', 3, 5, 1),
+    ('303 Cedar Avenue', 'Vancouver', '777-888-9999', 'hotel6@schimmelzieme.com', 4, 5, 1),
+    ('404 Birch Road', 'Calgary', '333-333-3333', 'hotel7@schimmelzieme.com', 3, 5, 1),
+    ('505 Walnut Circle', 'Toronto', '666-777-8888', 'hotel8@schimmelzieme.com', 5, 5, 1);
+
 
 -- INSERT HOTEL DATA FOR CHAIN 2
 INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('18 Bashford Trail', 'Santa Cruz', '321-201-3503', 'hotel1@walshandsons.com', 1, 5, 2),
-    ('436 Namekagon Point', 'Santa Cruz', '173-161-4827', 'hotel2@walshandsons.com', 3, 5, 2),
+    ('18 Bashford Trail', 'Ottawa', '321-201-3503', 'hotel1@walshandsons.com', 1, 5, 2),
+    ('436 Namekagon Point', 'Kingston', '173-161-4827', 'hotel2@walshandsons.com', 3, 5, 2),
     ('86930 Susan Crossing', 'Toronto', '713-150-3950', 'hotel3@walshandsons.com', 4, 5, 2),
-    ('10 Arkansas Plaza', 'Toronto', '167-369-8443', 'hotel4@walshandsons.com', 1, 5, 2),
+    ('10 Arkansas Plaza', 'Calgary', '167-369-8443', 'hotel4@walshandsons.com', 1, 5, 2),
     ('84681 Bunker Hill Park', 'Montreal', '817-743-5582', 'hotel5@walshandsons.com', 1, 5, 2),
     ('83649 Sheridan Place', 'Montreal', '624-548-0784', 'hotel6@walshandsons.com', 4, 5, 2),
-    ('11371 Larry Drive', 'Montreal', '967-970-2455', 'hotel7@walshandsons.com', 2, 5, 2),
+    ('11371 Larry Drive', 'Quebec City', '967-970-2455', 'hotel7@walshandsons.com', 2, 5, 2),
     ('031 Waywood Circle', 'Vancouver', '810-196-7148', 'hotel8@walshandsons.com', 2, 5, 2);
+
 
 -- INSERT HOTEL DATA FOR CHAIN 3
 INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('98933 Artisan Terrace', 'Seattle', '202-102-9343', 'hotel1@halvorson_hettinger.com', 3, 5, 3),
-    ('39770 Everett Court', 'Seattle', '588-471-1937', 'hotel2@halvorson_hettinger.com', 4, 5, 3),
+    ('98933 Artisan Terrace', 'Vancouver', '202-102-9343', 'hotel1@halvorson_hettinger.com', 3, 5, 3),
+    ('39770 Everett Court', 'Vancouver', '588-471-1937', 'hotel2@halvorson_hettinger.com', 4, 5, 3),
     ('0785 Warbler Drive', 'Calgary', '470-180-9071', 'hotel3@halvorson_hettinger.com', 3, 5, 3),
     ('4 Corben Junction', 'Calgary', '899-324-9669', 'hotel4@halvorson_hettinger.com', 3, 5, 3),
     ('12247 Judy Park', 'Calgary', '145-417-6042', 'hotel5@halvorson_hettinger.com', 2, 5, 3),
@@ -66,29 +69,32 @@ VALUES
     ('439 Dennis Junction', 'Ottawa', '858-386-7379', 'hotel7@halvorson_hettinger.com', 3, 5, 3),
     ('6 Sutherland Place', 'Ottawa', '195-978-9018', 'hotel8@halvorson_hettinger.com', 5, 5, 3);
 
+
 -- INSERT HOTEL DATA FOR CHAIN 4
-INSERT INTO  Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
+INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('559 Meadow Valley Parkway', 'Boston', '501-999-1561', 'hotel1@goyette.com', 4, 5, 4),
-    ('1 Dexter Trail', 'Boston', '325-499-9872', 'hotel2@goyette.com', 5, 5, 4),
-    ('4 Porter Junction', 'Boston', '210-837-4802', 'hotel3@goyette.com', 2, 5, 4),
-    ('44 Bartillon Place', 'Chicago', '474-336-5222', 'hotel4@goyette.com', 2, 5, 4),
-    ('55159 Meadow Vale Place', 'Chicago', '233-713-1707', 'hotel5@goyette.com', 4, 5, 4),
-    ('00217 Memorial Drive', 'Chicago', '923-122-2988', 'hotel6@goyette.com', 3, 5, 4),
-    ('6003 Harbort Alley', 'Chicago', '581-182-5233', 'hotel7@goyette.com', 4, 5, 4),
-    ('529 Stone Corner Circle', 'Miami', '713-385-1886', 'hotel8@goyette.com', 1, 5, 4);
+    ('559 Meadow Valley Parkway', 'Toronto', '501-999-1561', 'hotel1@goyette.com', 4, 5, 4),
+    ('1 Dexter Trail', 'Toronto', '325-499-9872', 'hotel2@goyette.com', 5, 5, 4),
+    ('4 Porter Junction', 'Toronto', '210-837-4802', 'hotel3@goyette.com', 2, 5, 4),
+    ('44 Bartillon Place', 'Montreal', '474-336-5222', 'hotel4@goyette.com', 2, 5, 4),
+    ('55159 Meadow Vale Place', 'Montreal', '233-713-1707', 'hotel5@goyette.com', 4, 5, 4),
+    ('00217 Memorial Drive', 'Montreal', '923-122-2988', 'hotel6@goyette.com', 3, 5, 4),
+    ('6003 Harbort Alley', 'Montreal', '581-182-5233', 'hotel7@goyette.com', 4, 5, 4),
+    ('529 Stone Corner Circle', 'Vancouver', '713-385-1886', 'hotel8@goyette.com', 1, 5, 4);
+
 
 -- INSERT HOTEL DATA FOR CHAIN 5
-INSERT INTO  Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
+INSERT INTO Hotel (HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID) 
 VALUES 
-    ('2492 Village Green Circle', 'Quebec', '236-158-8589', 'hotel1@jaskolski.com', 5, 5, 5),
-    ('61525 Esker Point', 'Quebec', '227-964-6536', 'hotel2@jaskolski.com', 2, 5, 5),
+    ('2492 Village Green Circle', 'Quebec City', '236-158-8589', 'hotel1@jaskolski.com', 5, 5, 5),
+    ('61525 Esker Point', 'Quebec City', '227-964-6536', 'hotel2@jaskolski.com', 2, 5, 5),
     ('1887 Hagan Parkway', 'Montreal', '500-818-3515', 'hotel3@jaskolski.com', 3, 5, 5),
     ('96 Northport Pass', 'Montreal', '246-832-3503', 'hotel4@jaskolski.com', 1, 5, 5),
     ('8641 Bonner Parkway', 'Ottawa', '323-528-1787', 'hotel5@jaskolski.com', 3, 5, 5),
     ('3029 Autumn Leaf Hill', 'Ottawa', '975-244-8235', 'hotel6@jaskolski.com', 4, 5, 5),
     ('3106 Westend Junction', 'Kingston', '436-398-5997', 'hotel7@jaskolski.com', 1, 5, 5),
     ('28 Ridgeview Trail', 'Kingston', '500-801-2838', 'hotel8@jaskolski.com', 1, 5, 5);
+
 
 -- CREATE ROOM TABLE
 CREATE TABLE Room (
@@ -101,8 +107,8 @@ CREATE TABLE Room (
     Issues VARCHAR(255) NOT NULL,
     HotelID INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE,
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
 );
 
 -- INSERT ROOM DATA FOR CHAIN 1
@@ -399,9 +405,9 @@ CREATE TABLE Client (
 );
 
 -- INSERT CLIENT DATA
-INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Lea', 'De Cruze', '5083 Westport Junction', '294676900', '2024-04-03', 'ldecruze0@nps.gov', '$2b$10$mmnQAu66wWWHhxVqpMXXJ.1wlLll/Qyp9P4z6mAqdIFda8Oa17gIi');
-INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Red', 'Galiero', '1139 Novick Road', '322803219', '2024-04-03', 'rgaliero1@answers.com', '$2b$10$P/sFOzclauQABqTMZZJfZuUWSXz4KeCxaT0fifqUQYZPOKi68pgG.');
-INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Philip', 'Ubank', '1 Warrior Road', '535798918', '2024-04-03', 'pubank2@narod.ru', '$2b$10$40lFuv9H2tp0T7mIqxW6t.8amRdAwE2dx69264QluBUgVBqfHK79m');
+INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Lea', 'De Cruze', '5083 Westport Junction', '294676900', '2024-04-03', 'ldecruze0@nps.gov', 'password');
+INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Red', 'Galiero', '1139 Novick Road', '322803219', '2024-04-03', 'rgaliero1@answers.com', 'password');
+INSERT INTO Client (ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RegistrationDate, ClientEmail, ClientPassword) VALUES ('Philip', 'Ubank', '1 Warrior Road', '535798918', '2024-04-03', 'pubank2@narod.ru', 'password');
 
 CREATE TABLE Reservation (
     ReservationID SERIAL PRIMARY KEY,
@@ -411,18 +417,15 @@ CREATE TABLE Reservation (
     HotelID INT NOT NULL,
     RoomID INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID) ON DELETE CASCADE
 );
 
 -- INSERT RESERVATION DATA
-INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 1, 2, 1);
-insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 2, 3, 2);
-insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-05-24', '2023-05-30', 3, 3, 4, 3);
-INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 4, 5, 4);
-insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 5, 1, 5);
+INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 1, 1, 1);
+insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 2, 9, 1);
+insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-05-24', '2023-05-30', 3, 3, 11, 1);
+INSERT INTO Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2023-12-02', '2023-12-10', 1, 4, 17, 1);
+insert into Reservation (CheckInDate, CheckOutDate, ClientID, HotelID, RoomID, ChainID) values ('2024-01-21', '2024-02-01', 2, 5, 23, 1);
 
 
 CREATE TABLE Employee (
@@ -435,8 +438,8 @@ CREATE TABLE Employee (
     EmployeeSSN INT NOT NULL,
     HotelID INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE,
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
 );
 
 -- INSERT EMPLOYEE DATA
@@ -448,38 +451,38 @@ insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, Empl
 insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Chere', 'Jacombs', '20 Commercial Junction', 'cjacombs5@slate.com', 'password', '186557489', 6, 1);
 insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Vita', 'Gledstane', '21127 Lake View Plaza', 'vgledstane6@guardian.co.uk', 'password', '514906769', 7, 1);
 insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Mabel', 'Tandey', '5 Thompson Center', 'mtandey7@seattletimes.com', 'password', '624209190', 8, 1);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Miran', 'Shambrooke', '7860 Fulton Crossing', 'mshambrooke0@businessinsider.com', 'password', '545108078', 1, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Zulema', 'Harflete', '33 Scofield Court', 'zharflete1@mysql.com', 'password', '918911594', 2, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dorelle', 'Shyres', '39917 Fuller Center', 'dshyres2@rambler.ru', 'password', '074317452', 3, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rocky', 'MacKniely', '38 Calypso Place', 'rmackniely3@abc.net.au', 'password', '485806234', 4, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Luz', 'Garvagh', '190 Dexter Lane', 'lgarvagh4@tamu.edu', 'password', '708251533', 5, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Flo', 'Dawdary', '2 Kropf Point', 'fdawdary5@thetimes.co.uk', 'password', '731901329', 6, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Fanni', 'Towsey', '70744 Katie Plaza', 'ftowsey6@indiegogo.com', 'password', '646017962', 7, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Wynn', 'Tarburn', '08998 Rutledge Park', 'wtarburn7@ovh.net', 'password', '047202097', 8, 2);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Beverly', 'Rodway', '3 Bunker Hill Plaza', 'brodway0@360.cn', 'password', '062481855', 1, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ferris', 'Holyland', '4045 Everett Trail', 'fholyland1@wired.com', 'password', '441394066', 2, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Elysia', 'Woodley', '209 Lakewood Gardens Drive', 'ewoodley2@howstuffworks.com', 'password', '405191255', 3, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dominique', 'Watmough', '6 Weeping Birch Pass', 'dwatmough3@bravesites.com', 'password', '280000069', 4, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rochelle', 'Mikalski', '9 Anzinger Avenue', 'rmikalski4@tiny.cc', 'password', '730408329', 5, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Micheline', 'Meckiff', '26 Clove Terrace', 'mmeckiff5@nymag.com', 'password', '249416535', 6, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ruy', 'Carbert', '71648 Manufacturers Trail', 'rcarbert6@ustream.tv', 'password', '040566449', 7, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Sibylle', 'Gatchell', '7874 West Circle', 'sgatchell7@usda.gov', 'password', '928849536', 8, 3);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Karmen', 'Cuddehy', '9348 Magdeline Parkway', 'kcuddehy0@purevolume.com', 'password', '539669359', 1, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Alleen', 'Klamman', '86 Carpenter Drive', 'aklamman1@hubpages.com', 'password', '256968058', 2, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Gan', 'Moxon', '0923 Bonner Crossing', 'gmoxon2@mit.edu', 'password', '860151096', 3, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Cicely', 'Bernardotte', '2994 Namekagon Alley', 'cbernardotte3@ibm.com', 'password', '212703229', 4, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Duff', 'Gary', '9273 Pleasure Street', 'dgary4@nature.com', 'password', '529487362', 5, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Evelina', 'Yglesia', '79813 Weeping Birch Pass', 'eyglesia5@reference.com', 'password', '983235964', 6, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Inge', 'Huyhton', '28 Muir Alley', 'ihuyhton6@nytimes.com', 'password', '869582773', 7, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dniren', 'Itzhaiek', '18 Helena Crossing', 'ditzhaiek7@mit.edu', 'password', '882522162', 8, 4);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Bren', 'Jobbins', '5 Village Pass', 'bjobbins0@github.com', 'password', '523980885', 1, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Thorin', 'Prayer', '68635 Birchwood Junction', 'tprayer1@irs.gov', 'password', '498674297', 2, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Jeannie', 'Roxbrough', '29 Summit Way', 'jroxbrough2@godaddy.com', 'password', '030370605', 3, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Napoleon', 'Matignon', '75 Hovde Crossing', 'nmatignon3@noaa.gov', 'password', '600074118', 4, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Tamqrah', 'Caldaro', '9675 Shopko Crossing', 'tcaldaro4@japanpost.jp', 'password', '487233969', 5, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Garry', 'Redit', '709 Ruskin Road', 'gredit5@cbsnews.com', 'password', '161863745', 6, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Guthry', 'Gehricke', '1 Farragut Drive', 'ggehricke6@theglobeandmail.com', 'password', '295802133', 7, 5);
-insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Abbie', 'Parkyns', '9 Reindahl Alley', 'aparkyns7@list-manage.com', 'password', '067912089', 8, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Miran', 'Shambrooke', '7860 Fulton Crossing', 'mshambrooke0@businessinsider.com', 'password', '545108078', 9, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Zulema', 'Harflete', '33 Scofield Court', 'zharflete1@mysql.com', 'password', '918911594', 10, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dorelle', 'Shyres', '39917 Fuller Center', 'dshyres2@rambler.ru', 'password', '074317452', 11, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rocky', 'MacKniely', '38 Calypso Place', 'rmackniely3@abc.net.au', 'password', '485806234', 12, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Luz', 'Garvagh', '190 Dexter Lane', 'lgarvagh4@tamu.edu', 'password', '708251533', 13, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Flo', 'Dawdary', '2 Kropf Point', 'fdawdary5@thetimes.co.uk', 'password', '731901329', 14, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Fanni', 'Towsey', '70744 Katie Plaza', 'ftowsey6@indiegogo.com', 'password', '646017962', 15, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Wynn', 'Tarburn', '08998 Rutledge Park', 'wtarburn7@ovh.net', 'password', '047202097', 16, 2);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Beverly', 'Rodway', '3 Bunker Hill Plaza', 'brodway0@360.cn', 'password', '062481855', 17, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ferris', 'Holyland', '4045 Everett Trail', 'fholyland1@wired.com', 'password', '441394066', 18, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Elysia', 'Woodley', '209 Lakewood Gardens Drive', 'ewoodley2@howstuffworks.com', 'password', '405191255', 19, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dominique', 'Watmough', '6 Weeping Birch Pass', 'dwatmough3@bravesites.com', 'password', '280000069', 20, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Rochelle', 'Mikalski', '9 Anzinger Avenue', 'rmikalski4@tiny.cc', 'password', '730408329', 21, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Micheline', 'Meckiff', '26 Clove Terrace', 'mmeckiff5@nymag.com', 'password', '249416535', 22, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Ruy', 'Carbert', '71648 Manufacturers Trail', 'rcarbert6@ustream.tv', 'password', '040566449', 23, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Sibylle', 'Gatchell', '7874 West Circle', 'sgatchell7@usda.gov', 'password', '928849536', 24, 3);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Karmen', 'Cuddehy', '9348 Magdeline Parkway', 'kcuddehy0@purevolume.com', 'password', '539669359', 25, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Alleen', 'Klamman', '86 Carpenter Drive', 'aklamman1@hubpages.com', 'password', '256968058', 26, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Gan', 'Moxon', '0923 Bonner Crossing', 'gmoxon2@mit.edu', 'password', '860151096', 27, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Cicely', 'Bernardotte', '2994 Namekagon Alley', 'cbernardotte3@ibm.com', 'password', '212703229', 28, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Duff', 'Gary', '9273 Pleasure Street', 'dgary4@nature.com', 'password', '529487362', 29, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Evelina', 'Yglesia', '79813 Weeping Birch Pass', 'eyglesia5@reference.com', 'password', '983235964', 30, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Inge', 'Huyhton', '28 Muir Alley', 'ihuyhton6@nytimes.com', 'password', '869582773', 31, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Dniren', 'Itzhaiek', '18 Helena Crossing', 'ditzhaiek7@mit.edu', 'password', '882522162', 32, 4);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Bren', 'Jobbins', '5 Village Pass', 'bjobbins0@github.com', 'password', '523980885', 33, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Thorin', 'Prayer', '68635 Birchwood Junction', 'tprayer1@irs.gov', 'password', '498674297', 34, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Jeannie', 'Roxbrough', '29 Summit Way', 'jroxbrough2@godaddy.com', 'password', '030370605', 35, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Napoleon', 'Matignon', '75 Hovde Crossing', 'nmatignon3@noaa.gov', 'password', '600074118', 36, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Tamqrah', 'Caldaro', '9675 Shopko Crossing', 'tcaldaro4@japanpost.jp', 'password', '487233969', 37, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Garry', 'Redit', '709 Ruskin Road', 'gredit5@cbsnews.com', 'password', '161863745', 38, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Guthry', 'Gehricke', '1 Farragut Drive', 'ggehricke6@theglobeandmail.com', 'password', '295802133', 39, 5);
+insert into Employee (EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeEmail, EmployeePassword, EmployeeSSN, HotelID, ChainID) values ('Abbie', 'Parkyns', '9 Reindahl Alley', 'aparkyns7@list-manage.com', 'password', '067912089', 40, 5);
 
 CREATE TABLE Rental (
     RentalID SERIAL PRIMARY KEY,
@@ -491,12 +494,9 @@ CREATE TABLE Rental (
     ChainID INT NOT NULL,
     HotelID INT NOT NULL,
     RoomID INT NOT NULL,
-    FOREIGN KEY (ReservationID) REFERENCES Reservation(ReservationID),
-    FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
-    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID),
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    FOREIGN KEY (ReservationID) REFERENCES Reservation(ReservationID) ON DELETE CASCADE,
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID) ON DELETE CASCADE,
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID) ON DELETE CASCADE
 );
 
 -- INSERT RENTAL DATA
@@ -510,8 +510,8 @@ CREATE TABLE Position (
     JobLevel INT,
     HotelID INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE,
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
 );
 
 -- INSERT POSITION DATA
@@ -519,22 +519,132 @@ INSERT INTO Position (JobTitle, Responsibilities, JobLevel, HotelID, ChainID)
 VALUES 
 ('General Manager', 'Oversee all hotel operations', 1, 1, 1),
 ('Front Desk Clerk', 'Check-in/check-out guests, answer queries', 2, 1, 1),
-('Housekeeping', 'Clean and maintain guest rooms', 2, 2, 2),
-('Chef', 'Prepare and cook meals for hotel guests', 2, 2, 2),
-('Waiter/Waitress', 'Serve food and beverages to restaurant guests', 2, 3, 3);
+('Housekeeping', 'Clean and maintain guest rooms', 2, 2, 1),
+('Chef', 'Prepare and cook meals for hotel guests', 2, 2, 1),
+('Waiter/Waitress', 'Serve food and beverages to restaurant guests', 2, 3, 1);
 
 
 CREATE TABLE EmployeePosition (
     EmployeeID INT NOT NULL,
     JobCode INT NOT NULL,
     PRIMARY KEY (EmployeeID, JobCode),
-    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
-    FOREIGN KEY (JobCode) REFERENCES Position(JobCode)
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID) ON DELETE CASCADE,
+    FOREIGN KEY (JobCode) REFERENCES Position(JobCode) ON DELETE CASCADE
 );
 
 -- INSERT EMPLOYEE POSITION DATA
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 1);
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 2);
 
+CREATE TABLE ArchivesReservation (
+    ArchiveID SERIAL PRIMARY KEY,
+    ReservationID INT,
+    CheckinDate DATE NOT NULL,
+    CheckoutDate DATE NOT NULL,
+    ClientID INT NOT NULL,
+    ClientFirstName VARCHAR(20) NOT NULL,
+    ClientLastName VARCHAR(20) NOT NULL,
+    ClientAddress VARCHAR(255) NOT NULL,
+    ClientSSN INT NOT NULL,
+    RoomID INT NOT NULL,
+    RoomPrice DECIMAL(10, 2) NOT NULL,
+    RoomAmenities VARCHAR(255) NOT NULL,
+    RoomCapacity INT NOT NULL,
+    RoomView VARCHAR(255) NOT NULL,
+    RoomExtendable VARCHAR(3) NOT NULL,
+    RoomIssues VARCHAR(255) NOT NULL,
+    HotelID INT NOT NULL,
+    HotelAddress VARCHAR(255) NOT NULL,
+    HotelCity VARCHAR(255) NOT NULL,
+    HotelPhoneNumber VARCHAR(20) NOT NULL,
+    HotelEmail VARCHAR(100) NOT NULL,
+    StarRating INT NOT NULL,
+    NumberOfRooms INT NOT NULL,
+    ChainID INT NOT NULL,
+    ChainName VARCHAR(255) NOT NULL,
+    HeadquartersAddress VARCHAR(255) NOT NULL,
+    NumberOfHotels INT NOT NULL,
+    HeadquartersEmail VARCHAR(255) NOT NULL,
+    HeadquartersPhoneNumber VARCHAR(20) NOT NULL
+);
 
+CREATE TABLE ArchivesRental (
+    ArchiveID SERIAL PRIMARY KEY,
+    RentalID INT NOT NULL,
+    ReservationID INT,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    ClientID INT NOT NULL,
+    ClientFirstName VARCHAR(20) NOT NULL,
+    ClientLastName VARCHAR(20) NOT NULL,
+    ClientAddress VARCHAR(255) NOT NULL,
+    ClientSSN INT NOT NULL,
+    EmployeeID INT NOT NULL,
+    EmployeeFirstName VARCHAR(20) NOT NULL,
+    EmployeeLastName VARCHAR(20) NOT NULL,
+    EmployeeAddress VARCHAR(255) NOT NULL,
+    EmployeeSSN INT NOT NULL,
+    RoomID INT NOT NULL,
+    RoomPrice DECIMAL(10, 2) NOT NULL,
+    RoomAmenities VARCHAR(255) NOT NULL,
+    RoomCapacity INT NOT NULL,
+    RoomView VARCHAR(255) NOT NULL,
+    RoomExtendable VARCHAR(3) NOT NULL,
+    RoomIssues VARCHAR(255) NOT NULL,
+    HotelID INT NOT NULL,
+    HotelAddress VARCHAR(255) NOT NULL,
+    HotelCity VARCHAR(255) NOT NULL,
+    HotelPhoneNumber VARCHAR(20) NOT NULL,
+    HotelEmail VARCHAR(100) NOT NULL,
+    StarRating INT NOT NULL,
+    NumberOfRooms INT NOT NULL,
+    ChainID INT NOT NULL,
+    ChainName VARCHAR(255) NOT NULL,
+    HeadquartersAddress VARCHAR(255) NOT NULL,
+    NumberOfHotels INT NOT NULL,
+    HeadquartersEmail VARCHAR(255) NOT NULL,
+    HeadquartersPhoneNumber VARCHAR(20) NOT NULL
+);
 
+-- CREATE TRIGGER TO ARCHIVE RESERVATION DATA
+CREATE OR REPLACE FUNCTION archive_reservation()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO ArchivesReservation (ReservationID, CheckinDate, CheckoutDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
+    SELECT ReservationID, CheckInDate, CheckOutDate, Reservation.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Reservation.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Reservation.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Reservation.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
+    FROM Reservation
+    JOIN Client ON Reservation.ClientID = Client.ClientID
+    JOIN Room ON Reservation.RoomID = Room.RoomID
+    JOIN Hotel ON Reservation.HotelID = Hotel.HotelID
+    JOIN Chain ON Reservation.ChainID = Chain.ChainID
+    WHERE ReservationID = NEW.ReservationID;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER archive_reservation_trigger
+AFTER INSERT ON Reservation
+FOR EACH ROW
+EXECUTE FUNCTION archive_reservation();
+
+-- CREATE TRIGGER TO ARCHIVE RENTAL DATA
+CREATE OR REPLACE FUNCTION archive_rental()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO ArchivesRental (RentalID, ReservationID, StartDate, EndDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
+    SELECT RentalID, Rental.ReservationID, StartDate, EndDate, Rental.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Rental.EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, Rental.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Rental.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Rental.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
+    FROM Rental
+    JOIN Client ON Rental.ClientID = Client.ClientID
+    JOIN Employee ON Rental.EmployeeID = Employee.EmployeeID
+    JOIN Room ON Rental.RoomID = Room.RoomID
+    JOIN Hotel ON Rental.HotelID = Hotel.HotelID
+    JOIN Chain ON Rental.ChainID = Chain.ChainID
+    WHERE RentalID = NEW.RentalID;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER archive_rental_trigger
+AFTER INSERT ON Rental
+FOR EACH ROW
+EXECUTE FUNCTION archive_rental();

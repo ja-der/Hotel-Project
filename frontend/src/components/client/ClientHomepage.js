@@ -11,6 +11,8 @@ const ClientHomepage = ({ setAuth }) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [showList, setShowList] = useState(true);
+  const [clientId, setClientId] = useState(null); // State to hold client ID
+
   async function getName() {
     try {
       const response = await fetch("http://localhost:4000/dashboard/", {
@@ -21,6 +23,7 @@ const ClientHomepage = ({ setAuth }) => {
       const parseRes = await response.json();
       console.log(parseRes);
       setName(parseRes.clientfirstname);
+      setClientId(parseRes.clientid); // Set the client ID in state
     } catch (err) {
       console.error(err.message);
     }
@@ -52,7 +55,10 @@ const ClientHomepage = ({ setAuth }) => {
       {showList ? (
         <BookedRoomsList onToggleShowList={toggleShowList} />
       ) : (
-        <HotelBookingForm onToggleShowList={toggleShowList} />
+        <HotelBookingForm
+          onToggleShowList={toggleShowList}
+          clientId={clientId}
+        />
       )}
       <button className="btn btn-danger" onClick={(e) => logout(e)}>
         Logout

@@ -1,11 +1,44 @@
 import React from "react";
 import "./Client.css"; // Import CSS
 
-const ResultCard = ({ result, arrivalDate, departureDate }) => {
-  // const handleBookNow = () => {
-  //   onBookNow(result);
-  // };
+const ResultCard = ({ result, arrivalDate, departureDate, clientId }) => {
+  const handleBookNow = async (result, event) => {
+    event.preventDefault();
+    console.log("Client ID: ", clientId);
+    try {
+      console.log("Booking reservation");
+      console.log("hotelid", result.hotelid);
+      console.log("roomid", result.roomid);
+      console.log(result.chainid);
 
+      const response = await fetch(
+        "http://localhost:4000/api/makeReservation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            arrivalDate: arrivalDate,
+            departureDate: departureDate,
+            clientId: clientId, // Pass the clientId
+            hotelId: result.hotelid,
+            roomId: result.roomid,
+            chainId: result.chainid,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      // Show notification upon successful booking
+      alert("Reservation booked successfully!");
+      // Clear the search form back to default
+      // You may want to handle this part differently based on your requirement
+    } catch (error) {
+      console.error("Error booking reservation:", error);
+    }
+  };
   return (
     <div className="result-card">
       <div className="header">
@@ -40,7 +73,12 @@ const ResultCard = ({ result, arrivalDate, departureDate }) => {
           <strong>Amenities:</strong> {result.amenities}
         </p>
       </div>
-      <button className="book-now-button">Book Now</button>
+      <button
+        className="book-now-button"
+        onClick={(event) => handleBookNow(result, event)}
+      >
+        Book Now
+      </button>
     </div>
   );
 };

@@ -18,6 +18,7 @@ app.use("/dashboard", require("./routes/dashboard"));
 app.use("/api/hotelChains", require("./routes/booking/hotelChains"));
 app.use("/api/hotelcities", require("./routes/booking/hotelCities"));
 app.use("/api/searchRooms", require("./routes/booking/searchRooms"));
+app.use("/api/makeReservation", require("./routes/booking/makeReservation"));
 app.use("/api/personalInfo/:email", require("./routes/personalInfo"));
 
 // Employee Route
