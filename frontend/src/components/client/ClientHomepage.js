@@ -1,11 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import HotelBookingForm from "./HotelBookingForm";
 import BookedRoomsList from "./BookedRoomsList";
+
 import "./Client.css";
 
 const ClientHomepage = ({ setAuth }) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [showList, setShowList] = useState(true);
   async function getName() {
@@ -16,6 +19,7 @@ const ClientHomepage = ({ setAuth }) => {
       });
 
       const parseRes = await response.json();
+      console.log(parseRes);
       setName(parseRes.clientfirstname);
     } catch (err) {
       console.error(err.message);
@@ -36,11 +40,15 @@ const ClientHomepage = ({ setAuth }) => {
   useEffect(() => {
     getName();
   }, []);
+  const goToUserAccount = () => {
+    navigate("/useraccount"); // Navigate to the UserAccount component
+  };
 
   return (
     <Fragment>
       <h1>Hello {name}</h1>
       <p>Yay! You are logged in as a client!</p>
+      <button onClick={goToUserAccount}>User Account</button>
       {showList ? (
         <BookedRoomsList onToggleShowList={toggleShowList} />
       ) : (

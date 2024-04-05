@@ -17,6 +17,7 @@ import Signup from "./components/Signup";
 import ReservationCheck from "./components/employee/ReservationCheck";
 import Rental from "./components/employee/Rental";
 import RentForm from "./components/employee/RentForm";
+import UserAccount from "./components/client/UserAccount";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -86,6 +87,12 @@ function App() {
               path="/employeehomepage"
               element={
                 !isAuthenticated ? <Navigate to="/login" /> : renderHomepage()
+              }
+            />
+            <Route
+              path="/useraccount"
+              element={
+                !isAuthenticated ? <Navigate to="/login" /> : <UserAccount />
               }
             />
             <Route
