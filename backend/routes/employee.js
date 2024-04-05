@@ -231,4 +231,67 @@ router.delete('/delete', async(req, res) => {
     }
 });
 
+// get hotel information
+router.get('/hotelinfo', async(req, res) => {
+    try {
+        const {hotelID} = req.query;
+
+        // check if hotel exists
+        const hotel = await pool.query('SELECT * FROM hotel WHERE HotelID = $1', [hotelID]);
+
+        // if hotel does not exist then throw error
+        if (hotel.rows.length === 0) {
+            return res.status(401).json('Hotel does not exist');
+        }
+
+        res.json(hotel.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// update hotel information
+router.put('/updatehotel', async(req, res) => {
+    try {
+        const {hotelID, hotelAddress, hotelCity, hotelPhoneNumber, hotelEmail, starRating, numberOfRooms} = req.body;
+
+        const updatedHotel = await pool.query(
+            'UPDATE hotel SET HotelAddress = $1, HotelCity = $2, HotelPhoneNumber = $3, HotelEmail = $4, StarRating = $5, NumberOfRooms = $6 WHERE HotelID = $7 RETURNING *', [hotelAddress, hotelCity, hotelPhoneNumber, hotelEmail, parseInt(starRating), parseInt(numberOfRooms), hotelID]
+        );
+
+        res.json(updatedHotel.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
+// delete hotel information
+router.delete('/deletehotel', async(req, res) => {
+    try {
+        const {hotelID} = req.query;
+
+        // check if hotel exists
+        const hotel = await pool.query('SELECT * FROM hotel WHERE HotelID = $1', [hotelID]);
+
+        // if hotel does not exist then throw error
+        if (hotel.rows.length === 0) {
+            return res.status(401).json('Hotel does not exist');
+        }
+
+        const deletedHotel = await pool.query(
+            'DELETE FROM hotel WHERE HotelID = $1 RETURNING *', [hotelID]
+        );
+
+        res.json(deletedHotel.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('Server error');
+    }
+});
+
 module.exports = router;

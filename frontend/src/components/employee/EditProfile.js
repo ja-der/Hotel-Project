@@ -43,6 +43,7 @@ const EditProfile = ({setAuth}) => {
             const response = await fetch(`http://localhost:4000/employee/chainID?chainID=${inputs.chainID}`)
             const parseRes = await response.json();
             setInputs({ ...inputs, chainName: parseRes.chainname });
+            console.log(chainName);
         } catch (err) {
             console.error(err.message);
         }
@@ -178,7 +179,7 @@ const EditProfile = ({setAuth}) => {
               name="ssn"
               placeholder="SSN"
               className="form-control my-3"
-                value={ssn}
+              value={ssn}
               onChange={e => onChange(e)}
               required
             />

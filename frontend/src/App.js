@@ -19,6 +19,7 @@ import Rental from './components/employee/Rental';
 import RentForm from './components/employee/RentForm';
 import NewEmployee from './components/employee/NewEmployee';
 import EditProfile from './components/employee/EditProfile';
+import EditHotel from './components/employee/EditHotel';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -76,6 +77,7 @@ function App() {
             <Route path='/rentform' element={!isAuthenticated ? <Navigate to='/login'/> : <RentForm setAuth={setAuth}/>} />
             <Route path='/newaccount' element={!isAuthenticated ? <Navigate to='/login'/> : <NewEmployee setAuth={setAuth}/>} />
             <Route path='/editprofile' element={!isAuthenticated ? <Navigate to='/login'/> : <EditProfile setAuth={setAuth}/>} />
+            <Route path='/edithotel' element={!isAuthenticated ? <Navigate to='/login'/> : <EditHotel setAuth={setAuth}/>} />
             <Route path='/' element={<Navigate to='/login'/>}/> 
           </Routes>
         </div>
