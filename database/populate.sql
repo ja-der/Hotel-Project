@@ -187,6 +187,51 @@ CREATE TABLE ArchivesRental (
     HeadquartersPhoneNumber VARCHAR(20) NOT NULL
 );
 
+-- TRIGGERS
+
+-- CREATE TRIGGER TO ARCHIVE RESERVATION DATA
+CREATE OR REPLACE FUNCTION archive_reservation()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO ArchivesReservation (ReservationID, CheckinDate, CheckoutDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
+    SELECT ReservationID, CheckInDate, CheckOutDate, Reservation.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Reservation.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Reservation.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Reservation.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
+    FROM Reservation
+    JOIN Client ON Reservation.ClientID = Client.ClientID
+    JOIN Room ON Reservation.RoomID = Room.RoomID
+    JOIN Hotel ON Reservation.HotelID = Hotel.HotelID
+    JOIN Chain ON Reservation.ChainID = Chain.ChainID
+    WHERE ReservationID = NEW.ReservationID;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER archive_reservation_trigger
+AFTER INSERT ON Reservation
+FOR EACH ROW
+EXECUTE FUNCTION archive_reservation();
+
+-- CREATE TRIGGER TO ARCHIVE RENTAL DATA
+CREATE OR REPLACE FUNCTION archive_rental()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO ArchivesRental (RentalID, ReservationID, StartDate, EndDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
+    SELECT RentalID, Rental.ReservationID, StartDate, EndDate, Rental.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Rental.EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, Rental.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Rental.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Rental.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
+    FROM Rental
+    JOIN Client ON Rental.ClientID = Client.ClientID
+    JOIN Employee ON Rental.EmployeeID = Employee.EmployeeID
+    JOIN Room ON Rental.RoomID = Room.RoomID
+    JOIN Hotel ON Rental.HotelID = Hotel.HotelID
+    JOIN Chain ON Rental.ChainID = Chain.ChainID
+    WHERE RentalID = NEW.RentalID;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER archive_rental_trigger
+AFTER INSERT ON Rental
+FOR EACH ROW
+EXECUTE FUNCTION archive_rental();
+
 -- DATA POPULATION
 
 -- INSERT CHAINS DATA
@@ -606,50 +651,3 @@ VALUES
 -- INSERT EMPLOYEE POSITION DATA
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 1);
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 2);
-
-
--- TRIGGERS
-
--- CREATE TRIGGER TO ARCHIVE RESERVATION DATA
-CREATE OR REPLACE FUNCTION archive_reservation()
-RETURNS TRIGGER AS $$
-BEGIN
-    INSERT INTO ArchivesReservation (ReservationID, CheckinDate, CheckoutDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
-    SELECT ReservationID, CheckInDate, CheckOutDate, Reservation.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Reservation.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Reservation.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Reservation.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
-    FROM Reservation
-    JOIN Client ON Reservation.ClientID = Client.ClientID
-    JOIN Room ON Reservation.RoomID = Room.RoomID
-    JOIN Hotel ON Reservation.HotelID = Hotel.HotelID
-    JOIN Chain ON Reservation.ChainID = Chain.ChainID
-    WHERE ReservationID = NEW.ReservationID;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER archive_reservation_trigger
-AFTER INSERT ON Reservation
-FOR EACH ROW
-EXECUTE FUNCTION archive_reservation();
-
--- CREATE TRIGGER TO ARCHIVE RENTAL DATA
-CREATE OR REPLACE FUNCTION archive_rental()
-RETURNS TRIGGER AS $$
-BEGIN
-    INSERT INTO ArchivesRental (RentalID, ReservationID, StartDate, EndDate, ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, RoomID, RoomPrice, RoomAmenities, RoomCapacity, RoomView, RoomExtendable, RoomIssues, HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber)
-    SELECT RentalID, Rental.ReservationID, StartDate, EndDate, Rental.ClientID, ClientFirstName, ClientLastName, ClientAddress, ClientSSN, Rental.EmployeeID, EmployeeFirstName, EmployeeLastName, EmployeeAddress, EmployeeSSN, Rental.RoomID, Price, Amenities, Capacity, RoomView, Extendable, Issues, Rental.HotelID, HotelAddress, HotelCity, HotelPhoneNumber, HotelEmail, StarRating, NumberOfRooms, Rental.ChainID, ChainName, HeadquartersAddress, NumberOfHotels, HeadquartersEmail, HeadquartersPhoneNumber
-    FROM Rental
-    JOIN Client ON Rental.ClientID = Client.ClientID
-    JOIN Employee ON Rental.EmployeeID = Employee.EmployeeID
-    JOIN Room ON Rental.RoomID = Room.RoomID
-    JOIN Hotel ON Rental.HotelID = Hotel.HotelID
-    JOIN Chain ON Rental.ChainID = Chain.ChainID
-    WHERE RentalID = NEW.RentalID;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER archive_rental_trigger
-AFTER INSERT ON Rental
-FOR EACH ROW
-EXECUTE FUNCTION archive_rental();
-
