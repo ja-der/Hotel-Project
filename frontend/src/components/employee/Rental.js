@@ -1,8 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
-import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
 
-const Rental = ( ) => {
+const Rental = () => {
     const [search, setSearch] = useState({
         minPrice: 0,
         maxPrice: 10000,
@@ -12,10 +11,6 @@ const Rental = ( ) => {
     });
 
     const [inputs, setInputs] = useState({
-        firstName: '',
-        lastName: '',
-        address: '',
-        ssn: 0,
         roomID: 0,
         hotelID: 0,
         chainID: 0,
@@ -25,7 +20,7 @@ const Rental = ( ) => {
     const [rooms, setRooms] = useState([]);
 
     const {minPrice, maxPrice, capacity, startDate, endDate} = search;
-    const {firstName, lastName, address, ssn, roomID, hotelID, chainID, employeeID} = inputs;
+    const {hotelID, chainID, employeeID} = inputs;
 
     // retrieve employeeID, hotelID, chainID from localStorage
     async function getInfo() {
@@ -45,6 +40,8 @@ const Rental = ( ) => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             const tomorrowString = tomorrow.toISOString().split('T')[0];
+            document.getElementById("endDate").setAttribute('min', tomorrowString);
+
         } catch (err) {
             console.error(err.message);
         }
@@ -151,7 +148,7 @@ const Rental = ( ) => {
                         <td>{room.extendable}</td>
                         <td>{room.issues}</td>
                         <td>
-                            <Link to="/RentForm" className="btn btn-warning" onClick={() => onRent(room.roomid)}>Rent</Link>
+                            <Link to="/RentForm" className="btn btn-info" onClick={() => onRent(room.roomid)}>Rent</Link>
                         </td>
                     </tr>
                 ))}
