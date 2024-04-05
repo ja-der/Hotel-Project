@@ -74,10 +74,9 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
   };
 
   const [searchResults, setSearchResults] = useState([]);
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // Function to trigger search
+  const searchRooms = async () => {
     try {
-      console.log(formData);
       const queryParams = new URLSearchParams(formData);
       const url = `http://localhost:4000/api/searchRooms?${queryParams}`;
       const response = await fetch(url, {
@@ -94,6 +93,11 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
     } catch (error) {
       console.error("Error searching hotels:", error);
     }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await searchRooms();
   };
 
   return (
@@ -306,6 +310,7 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
             arrivalDate={formData.arrivalDate}
             departureDate={formData.departureDate}
             clientId={clientId}
+            onSearch={searchRooms}
           />
         ))}
       </div>

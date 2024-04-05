@@ -1,16 +1,16 @@
 import React from "react";
 import "./Client.css"; // Import CSS
 
-const ResultCard = ({ result, arrivalDate, departureDate, clientId }) => {
+const ResultCard = ({
+  result,
+  arrivalDate,
+  departureDate,
+  clientId,
+  onSearch,
+}) => {
   const handleBookNow = async (result, event) => {
     event.preventDefault();
-    console.log("Client ID: ", clientId);
     try {
-      console.log("Booking reservation");
-      console.log("hotelid", result.hotelid);
-      console.log("roomid", result.roomid);
-      console.log(result.chainid);
-
       const response = await fetch(
         "http://localhost:4000/api/makeReservation",
         {
@@ -33,8 +33,7 @@ const ResultCard = ({ result, arrivalDate, departureDate, clientId }) => {
       }
       // Show notification upon successful booking
       alert("Reservation booked successfully!");
-      // Clear the search form back to default
-      // You may want to handle this part differently based on your requirement
+      onSearch();
     } catch (error) {
       console.error("Error booking reservation:", error);
     }
