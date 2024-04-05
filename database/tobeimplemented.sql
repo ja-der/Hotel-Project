@@ -25,6 +25,7 @@ DROP TABLE Chain;
 Table Creation Queries
 --------------------------------------------------------------
 */
+-- CREATE CHAINS TABLE
 CREATE TABLE Chain (
     ChainID SERIAL PRIMARY KEY,
     ChainName VARCHAR(255) NOT NULL,
@@ -37,29 +38,28 @@ CREATE TABLE Chain (
 -- added hotel city and hotel name
 CREATE TABLE Hotel (
     HotelID SERIAL PRIMARY KEY,
-    HotelName VARCHAR(50) NOT NULL,
     HotelAddress VARCHAR(255) NOT NULL,
-    HotelCity VARCHAR(50) NOT NULL,
+    HotelCity VARCHAR(255) NOT NULL,
     HotelPhoneNumber VARCHAR(20) NOT NULL,
     HotelEmail VARCHAR(100) NOT NULL,
     StarRating INT NOT NULL,
     NumberOfRooms INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
 );
 
 CREATE TABLE Room (
     RoomID SERIAL PRIMARY KEY,
     Price DECIMAL(10, 2) NOT NULL,
-    Amenities TEXT,
+    Amenities VARCHAR(255) NOT NULL,
     Capacity INT NOT NULL,
-    View VARCHAR(50),
-    Extendable VARCHAR(255) NOT NULL,
-    Issues TEXT,
+    RoomView VARCHAR(255) NOT NULL,
+    Extendable VARCHAR(25) NOT NULL,
+    Issues VARCHAR(255) NOT NULL,
     HotelID INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE,
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
 );
 
 CREATE TABLE Client (
@@ -80,9 +80,8 @@ CREATE TABLE Reservation (
     ClientID INT NOT NULL,
     HotelID INT NOT NULL,
     RoomID INT NOT NULL,
-    FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    ChainID INT NOT NULL,
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID) ON DELETE CASCADE
 );
 
 CREATE TABLE Employee (
@@ -90,24 +89,28 @@ CREATE TABLE Employee (
     EmployeeFirstName VARCHAR(20) NOT NULL,
     EmployeeLastName VARCHAR(20) NOT NULL,
     EmployeeAddress VARCHAR(255) NOT NULL,
+    EmployeeEmail VARCHAR(100) NOT NULL,
+    EmployeePassword VARCHAR(255) NOT NULL,
     EmployeeSSN INT NOT NULL,
-    EmployeeRole VARCHAR(50) NOT NULL,
     HotelID INT NOT NULL,
     ChainID INT NOT NULL,
-    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
-    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID) ON DELETE CASCADE,
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID) ON DELETE CASCADE
 );
+
 
 CREATE TABLE Rental (
     RentalID SERIAL PRIMARY KEY,
     StartDate DATE,
     EndDate DATE,
-    ReservationID INT NOT NULL,
+    ReservationID INT,
     EmployeeID INT NOT NULL,
+    ClientID INT NOT NULL,
     ChainID INT NOT NULL,
     HotelID INT NOT NULL,
     RoomID INT NOT NULL,
     FOREIGN KEY (ReservationID) REFERENCES Reservation(ReservationID),
+    FOREIGN KEY (ClientID) REFERENCES Client(ClientID),
     FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
     FOREIGN KEY (ChainID) REFERENCES Chain(ChainID),
     FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
@@ -115,11 +118,14 @@ CREATE TABLE Rental (
 );
 
 CREATE TABLE Position (
-    JobTitle VARCHAR(255) PRIMARY KEY,
+    JobCode SERIAL PRIMARY KEY,
+    JobTitle VARCHAR(255) NOT NULL,
     Responsibilities VARCHAR(1000),
-    Level INT,
-    EmployeeID INT NOT NULL,
-    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+    JobLevel INT,
+    HotelID INT NOT NULL,
+    ChainID INT NOT NULL,
+    FOREIGN KEY (HotelID) REFERENCES Hotel(HotelID),
+    FOREIGN KEY (ChainID) REFERENCES Chain(ChainID)
 );
 
 

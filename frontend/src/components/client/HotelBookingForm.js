@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Client.css"; //  // Import CSS file
 import ResultCard from "./ResultCard"; // Adjust the path as necessary
 
-const HotelBookingForm = ({ onToggleShowList }) => {
+const HotelBookingForm = ({ onToggleShowList, clientId }) => {
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in "yyyy-mm-dd" format
   const [formData, setFormData] = useState({
-    arrivalDate: "",
-    departureDate: "",
+    arrivalDate: today,
+    departureDate: today,
     roomCapacity: "1",
     city: "",
     hotelChain: "",
@@ -73,10 +74,9 @@ const HotelBookingForm = ({ onToggleShowList }) => {
   };
 
   const [searchResults, setSearchResults] = useState([]);
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // Function to trigger search
+  const searchRooms = async () => {
     try {
-      console.log(formData);
       const queryParams = new URLSearchParams(formData);
       const url = `http://localhost:4000/api/searchRooms?${queryParams}`;
       const response = await fetch(url, {
@@ -95,46 +95,9 @@ const HotelBookingForm = ({ onToggleShowList }) => {
     }
   };
 
-  const handleBookNow = async (result) => {
-    try {
-      const response = await fetch(
-        "http://localhost:4000/api/bookReservation",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            arrivalDate: formData.arrivalDate,
-            departureDate: formData.departureDate,
-            // clientId: /* Provide the client ID here */,
-            hotelId: result.hotelId, // Adjust as per your result object structure
-            roomId: result.roomId, // Adjust as per your result object structure
-          }),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      // Show notification upon successful booking
-      alert("Reservation booked successfully!");
-      // Clear the search form back to default
-      setFormData({
-        arrivalDate: "",
-        departureDate: "",
-        roomCapacity: "",
-        city: "",
-        hotelChain: "",
-        totalRooms: "1",
-        price: "",
-        starRating: "",
-        amenities: [],
-        view: "",
-      });
-      setSearchResults([]);
-    } catch (error) {
-      console.error("Error booking reservation:", error);
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await searchRooms();
   };
 
   return (
@@ -166,22 +129,24 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           onChange={handleInputChange}
         >
           <option value="">Any</option>
-          <option value="Hilton Hotel">Hilton Hotel</option>
-          <option value="Mariott">Mariott</option>
-          <option value="3">idk</option>
-          <option value="4">anotherchain</option>
-          <option value="5">random</option>
+          <option value="Schimmel-Zieme">Schimmel-Zieme</option>
+          <option value="Walsh and Sons">Walsh and Sons</option>
+          <option value="Halvorson-Hettinger">Halvorson-Hettinger</option>
+          <option value="Goyette Group">Goyette Group</option>
+          <option value="Jaskolski Inc">Jaskolski Inc</option>
         </select>
       </label>
       <label>
         City:
         <select name="city" value={formData.city} onChange={handleInputChange}>
           <option value="">Any</option>
-          <option value="United States">United States</option>
-          <option value="Ottawa">2- Ottawa</option>
+          <option value="Toronto">Toronto</option>
           <option value="Montreal">Montreal</option>
+          <option value="Ottawa">Ottawa</option>
+          <option value="Kingston">Kingston</option>
+          <option value="Quebec City">Quebec City</option>
           <option value="Vancouver">Vancouver</option>
-          <option value="Halifax">Halifax</option>
+          <option value="Calgary">Calgary</option>
         </select>
       </label>
       <label>
@@ -257,10 +222,8 @@ const HotelBookingForm = ({ onToggleShowList }) => {
         View:
         <select name="view" value={formData.view} onChange={handleInputChange}>
           <option value="">Any</option>
-          <option value="Sea">Sea View</option>
-          <option value="Mountain">Mountain View</option>
-          <option value="City">City View</option>
-          <option value="Garden">Garden View</option>
+          <option value="Ocean View">Ocean View</option>
+          <option value="Mountain View">Mountain View</option>
         </select>
       </label>
       <br />
@@ -289,17 +252,17 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           <div className="amenities-checkbox">
             <input
               type="checkbox"
-              name="roomService"
-              checked={formData.amenities.includes("roomService")}
+              name="Mini Fridge"
+              checked={formData.amenities.includes("Mini Fridge")}
               onChange={handleAmenitiesChange}
             />
-            Room Service
+            Mini Fridge
           </div>
           <div className="amenities-checkbox">
             <input
               type="checkbox"
-              name="balcony"
-              checked={formData.amenities.includes("balcony")}
+              name="Balcony"
+              checked={formData.amenities.includes("Balcony")}
               onChange={handleAmenitiesChange}
             />
             Balcony
@@ -307,11 +270,11 @@ const HotelBookingForm = ({ onToggleShowList }) => {
           <div className="amenities-checkbox">
             <input
               type="checkbox"
-              name="Jacuzzi"
-              checked={formData.amenities.includes("Jacuzzi")}
+              name="Coffee Maker"
+              checked={formData.amenities.includes("Coffee Maker")}
               onChange={handleAmenitiesChange}
             />
-            Jacuzzi
+            Coffee Maker
           </div>
           <div className="amenities-checkbox">
             <input
@@ -321,6 +284,15 @@ const HotelBookingForm = ({ onToggleShowList }) => {
               onChange={handleAmenitiesChange}
             />
             AC
+          </div>
+          <div className="amenities-checkbox">
+            <input
+              type="checkbox"
+              name="Kitchenette"
+              checked={formData.amenities.includes("Kitchenette")}
+              onChange={handleAmenitiesChange}
+            />
+            Kitchenette
           </div>
         </div>
       </label>
@@ -337,6 +309,8 @@ const HotelBookingForm = ({ onToggleShowList }) => {
             result={result}
             arrivalDate={formData.arrivalDate}
             departureDate={formData.departureDate}
+            clientId={clientId}
+            onSearch={searchRooms}
           />
         ))}
       </div>

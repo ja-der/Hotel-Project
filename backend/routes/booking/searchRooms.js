@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
     let sqlQuery = `
     SELECT 
         r.*, 
-        h.HotelName,
+        h.HotelID,
         h.HotelCity, 
         h.StarRating,
         c.ChainName
@@ -56,7 +56,6 @@ router.get("/", async (req, res) => {
       conditions.push(`h.NumberOfRooms >= ${totalRooms}`);
     }
 
-    // Add condition for price
     // Add condition for price range
     if (minPrice) {
       conditions.push(`r.Price >= ${minPrice}`);
@@ -85,7 +84,7 @@ router.get("/", async (req, res) => {
 
     // Add condition for view
     if (view) {
-      conditions.push(`r.View = '${view}'`);
+      conditions.push(`r.RoomView = '${view}'`);
     }
 
     // Add condition to check for room availability during specified dates
@@ -105,7 +104,7 @@ router.get("/", async (req, res) => {
     }
 
     // Execute the query and return the result
-    console.log(sqlQuery);
+    console.log("search triggered");
     const queryResult = await pool.query(sqlQuery);
     // console.log(queryResult.rows);
     res.json(queryResult.rows);
