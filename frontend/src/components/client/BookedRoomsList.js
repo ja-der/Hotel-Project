@@ -7,7 +7,21 @@ const BookedRoomsList = (props) => {
     price: 0,
   });
   //delete function
-  async function deleteReservation(roomID) {}
+  async function deleteReservation(reservationId) {
+    try {
+      const roomid = 1;
+      const response = await fetch(
+        `http://localhost:4000/api/personalInfo/delete-reservation/${roomid}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      setRooms(rooms.filter((room) => room.id !== reservationId));
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
   const deleteRoom = (reservationId) => {
     setRooms(rooms.filter((room) => room.id !== reservationId));
   };
@@ -22,7 +36,6 @@ const BookedRoomsList = (props) => {
         throw new Error("Network response was not ok " + response.statusText);
       }
       const data = await response.json(); // Convert the response body to JSON
-      console.log(data.roomview);
       const transformedData = data.map((item) => ({
         name: item.roomview,
         capacity: item.capacity,
@@ -46,7 +59,7 @@ const BookedRoomsList = (props) => {
           {rooms.map((room) => (
             <li key={room.id}>
               {room.name} - Capacity: {room.capacity} - Price: ${room.price}
-              <button onClick={() => deleteRoom(room.id)}>Delete</button>
+              <button onClick={() => deleteReservation(room.id)}>Delete</button>
             </li>
           ))}
         </ul>

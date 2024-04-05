@@ -66,4 +66,18 @@ router.get("/reservation/:clientid", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
+//delete reservation
+router.get("/delete-reservation/:reservationid", async (req, res) => {
+  const id = req.params.reservationid;
+  try {
+    const queryResult = await pool.query(
+      "DELETE from Reservation WHERE reservationid= $1",
+      [id]
+    );
+  } catch (err) {
+    console.error("Error querying hotel chains:", err);
+    res.status(500).send("Server error");
+  }
+});
 module.exports = router;
