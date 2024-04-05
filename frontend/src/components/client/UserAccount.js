@@ -52,14 +52,14 @@ function UserAccount() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Submit updated info
-    // fetch("/api/user", {
-    //   method: "PUT",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(user),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log("User updated:", data))
-    //   .catch((error) => console.error("Error updating user:", error));
+    fetch("http://localhost:4000/api/personalInfo/updateInfo", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("User updated:", data))
+      .catch((error) => console.error("Error updating user:", error));
   };
 
   return (
