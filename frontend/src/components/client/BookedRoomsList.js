@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Client.css"; //  // Import CSS file
 
 const BookedRoomsList = ({ onToggleShowList, clientid }) => {
   const [reservations, setReservations] = useState([]);
@@ -48,7 +49,7 @@ const BookedRoomsList = ({ onToggleShowList, clientid }) => {
   }, [clientid, reservations]); // Only fetch reservations when clientid changes
 
   return (
-    <div>
+    <div className="booked-rooms-container">
       <h2>Booked Reservations</h2>
       {reservations.length > 0 ? (
         <ul>

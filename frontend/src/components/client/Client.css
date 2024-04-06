@@ -425,3 +425,85 @@ button[type="submit"]:hover {
 .logout-button:hover {
   background-color: #c82333;
 }
+
+.homepage-button {
+  background-color: #05e63d !important; /* Darker light green background color */
+  color: #fff !important; /* White text color */
+  border: none !important; /* Remove border */
+  padding: 10px 20px !important; /* Add padding */
+  font-size: 16px !important; /* Set font size */
+  cursor: pointer !important; /* Add pointer cursor on hover */
+  border-radius: 5px !important; /* Add border radius */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Add box shadow */
+  transition: background-color 0.3s ease !important; /* Smooth transition */
+}
+
+.homepage-button:hover {
+  background-color: #0d8f09 !important; /* Slightly lighter green on hover */
+}
+
+/* Style for the booking list */
+
+/* Client.css */
+
+.booked-rooms-container {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.booked-rooms-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.booked-rooms-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.booked-rooms-container li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booked-rooms-container li button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.booked-rooms-container li button:hover {
+  background-color: #c82333;
+}
+
+.booked-rooms-container p {
+  color: #777;
+}
+
+.booked-rooms-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.booked-rooms-container button:hover {
+  background-color: #0056b3;
+}

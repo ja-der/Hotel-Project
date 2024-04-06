@@ -107,7 +107,6 @@ router.get("/", async (req, res) => {
 
     // Execute the query and return the result
     const queryResult = await pool.query(sqlQuery);
-    console.log(queryResult.rows);
     res.json(queryResult.rows);
   } catch (err) {
     console.error("Error searching rooms:", err);

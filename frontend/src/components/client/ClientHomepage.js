@@ -92,7 +92,9 @@ const ClientHomepage = ({ setAuth }) => {
         <div className="dashboard-buttons">
           <button onClick={goToUserAccount}>User Account</button>
           <button onClick={goToHotelCapacities}>Hotel Capacities</button>
-          <button onClick={goToHome}>Homepage</button>
+          <button className="homepage-button" onClick={goToHome}>
+            Homepage
+          </button>
         </div>
         {showList ? (
           <BookedRoomsList
