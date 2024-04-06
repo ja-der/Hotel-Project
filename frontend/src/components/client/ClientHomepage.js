@@ -100,7 +100,6 @@ const ClientHomepage = ({ setAuth }) => {
         <BookedRoomsList
           onToggleShowList={toggleShowList}
           onRefresh={fetchBookings}
-          user={user}
           clientid={user.clientid}
         />
       ) : (

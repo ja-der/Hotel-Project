@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-const BookedRoomsList = (props) => {
+const BookedRoomsList = ({ onToggleShowList, clientid }) => {
   const [rooms, setRooms] = useState({
     id: 0,
     name: "tien",
@@ -27,7 +27,6 @@ const BookedRoomsList = (props) => {
   };
   //get reservation
   async function getReservation() {
-    const clientid = 1;
     try {
       const response = await fetch(
         `http://localhost:4000/api/personalInfo/reservation/${clientid}`
@@ -66,7 +65,7 @@ const BookedRoomsList = (props) => {
       ) : (
         <p>No rooms booked yet.</p>
       )}
-      <button onClick={props.onToggleShowList}>Book your next Stay!</button>
+      <button onClick={onToggleShowList}>Book your next Stay!</button>
     </div>
   );
 };
