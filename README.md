@@ -6,7 +6,9 @@ Built with React.js for frontend, Node.js and Express for backend, and PostgreSQ
 ### Note: Make sure to have Node.js and PostgreSQL installed.
 
 ### Database
-Please execute the queries in the data.sql file.
+Please create a database, we suggest naming it `ehotel`. Then execute the queries in `data.sql`. 
+
+Make sure that the database is running on port `5432`
 
 ### Frontend
 
@@ -24,7 +26,7 @@ Make sure the front-end application run on `http://localhost:3000`
 ```
     POSTGRES_USER = "postgres" //change it to your postgresql user
     HOST = "localhost"
-    DATABASE = "ehotel"
+    DATABASE = "ehotel" // change it accordingly to your database name
     PASSWORD = "12345" // change it to your postgresql user password
     jwtSecret = "secret"
 ```
