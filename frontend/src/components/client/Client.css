@@ -315,3 +315,35 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #0056b3; /* Darker background color on hover */
 }
+
+.results-container {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.results-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.results-container th,
+.results-container td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.results-container th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+}
+
+.results-container tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.results-container tbody tr:hover {
+  background-color: #ddd;
+}
