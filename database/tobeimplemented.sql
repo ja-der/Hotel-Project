@@ -11,15 +11,23 @@
 Drop Table Queries
 --------------------------------------------------------------
 */
-DROP TABLE Rental;
-DROP TABLE Position;
-DROP TABLE Employee;
-DROP TABLE Reservation;
-DROP TABLE Client;
-DROP TABLE Room;
-DROP TABLE Hotel;
-DROP TABLE Chain;
+-- Start by dropping tables with foreign keys referencing them
+DROP TABLE IF EXISTS ArchivesRental;
+DROP TABLE IF EXISTS ArchivesReservation;
+DROP TABLE IF EXISTS EmployeePosition;
+DROP TABLE IF EXISTS Rental;
+DROP TABLE IF EXISTS Reservation;
+DROP TABLE IF EXISTS Room;
+DROP TABLE IF EXISTS Employee;
+DROP TABLE IF EXISTS Client;
+DROP TABLE IF EXISTS Position;
 
+-- Then drop the tables that these tables reference
+DROP TABLE IF EXISTS Hotel;
+DROP TABLE IF EXISTS Chain;
+
+DROP VIEW IF EXISTS AvailableRoomsPerCity;
+DROP VIEW IF EXISTS HotelRoomCapacities;
 /*
 --------------------------------------------------------------
 Queries (Au moins 4 Requetes)

@@ -347,3 +347,40 @@ button[type="submit"]:hover {
 .results-container tbody tr:hover {
   background-color: #ddd;
 }
+
+.roomCapacityDisplay {
+  max-width: 800px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px; /* Add some padding around the container */
+}
+
+/* Style for the table */
+.roomCapacityDisplay table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Style for table header */
+.roomCapacityDisplay thead th {
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style for table body */
+.roomCapacityDisplay tbody td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Style for odd rows */
+.roomCapacityDisplay tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Style for even rows */
+.roomCapacityDisplay tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
