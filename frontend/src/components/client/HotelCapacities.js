@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// HotelCapacities.js
 
-const HotelCapacities = () => {
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+
+const HotelCapacities = ({ chainName }) => {
   // State to hold hotel capacities data
   const [hotelCapacities, setHotelCapacities] = useState([]);
 
   // Function to fetch hotel capacities data
   const fetchHotelCapacities = async () => {
     try {
-      // Fetch hotel capacities data from your API endpoint for all chains and hotels
+      // Fetch hotel capacities data from your API endpoint for the specified chain
       const response = await fetch(
-        "http://localhost:4000/api/findHotelCapacity"
+        `http://localhost:4000/api/findHotelCapacity?chainName=${chainName}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -25,11 +27,11 @@ const HotelCapacities = () => {
 
   useEffect(() => {
     fetchHotelCapacities(); // Fetch hotel capacities data on component mount
-  }, []);
+  }, [chainName]);
 
   return (
     <div>
-      <h2>Hotel Capacities of </h2>
+      <h2>Hotel Capacities of {chainName}</h2>
       {/* Display hotel capacities data */}
       <table>
         <thead>
@@ -53,6 +55,10 @@ const HotelCapacities = () => {
       </table>
     </div>
   );
+};
+
+HotelCapacities.propTypes = {
+  chainName: PropTypes.string.isRequired,
 };
 
 export default HotelCapacities;

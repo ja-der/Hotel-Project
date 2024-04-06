@@ -25,6 +25,7 @@ import EditRoomInfo from "./components/employee/EditRoomInfo";
 import AddRoom from "./components/employee/AddRoom";
 import UserAccount from "./components/client/UserAccount";
 import HotelCapacities from "./components/client/HotelCapacities";
+import ChainCapacity from "./components/client/ChainCapacity";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -110,6 +111,12 @@ function App() {
                 ) : (
                   <HotelCapacities />
                 )
+              }
+            />
+            <Route
+              path="/chaincapacity"
+              element={
+                !isAuthenticated ? <Navigate to="/login" /> : <ChainCapacity />
               }
             />
             <Route

@@ -4,10 +4,18 @@ const pool = require("../../db");
 
 router.get("/", async (req, res) => {
   try {
-    // Fetch data from the existing view1
-    console.log("poop");
-    const fetchDataQuery = "SELECT * FROM HotelRoomCapacities";
-    const queryResult = await pool.query(fetchDataQuery);
+    const { chainName } = req.query;
+
+    // Check if chainName is provided
+    if (!chainName) {
+      return res.status(400).json({ error: "Chain name is required" });
+    }
+
+    // Fetch data from the existing view for the specified chain
+    const fetchDataQuery = `
+      SELECT * FROM HotelRoomCapacities;
+    `;
+    const queryResult = await pool.query(fetchDataQuery, [chainName]);
     res.json(queryResult.rows);
   } catch (err) {
     console.error("Error querying hotel capacity:", err);

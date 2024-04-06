@@ -78,7 +78,7 @@ const ClientHomepage = ({ setAuth }) => {
     navigate("/useraccount"); // Navigate to the UserAccount component
   };
   const goToHotelCapacities = () => {
-    navigate("/hotelcapacities"); // Added function to navigate to Hotel Capacities page
+    navigate("/chaincapacity"); // Added function to navigate to Hotel Capacities page
   };
 
   return (
