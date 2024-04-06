@@ -186,3 +186,18 @@ CREATE TABLE ArchivesRental (
     HeadquartersEmail VARCHAR(255) NOT NULL,
     HeadquartersPhoneNumber VARCHAR(20) NOT NULL
 );
+
+CREATE VIEW AvailableRoomsPerCity AS
+SELECT
+    HotelCity,
+    COUNT(Room.RoomID) AS AvailableRooms
+FROM
+    Hotel
+LEFT JOIN
+    Room ON Hotel.HotelID = Room.HotelID
+LEFT JOIN
+    Reservation ON Room.RoomID = Reservation.RoomID
+WHERE
+    Reservation.RoomID IS NULL
+GROUP BY
+    HotelCity;

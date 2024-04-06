@@ -3,13 +3,14 @@ const pool = require("../../db");
 
 router.get("/", async (req, res) => {
   try {
-    const queryResult = await pool.query(
-      "SELECT chainid, chainname FROM chain"
-    );
+    // Fetch data from the existing view
+    const fetchDataQuery = "SELECT * FROM AvailableRoomsPerCity";
+    const queryResult = await pool.query(fetchDataQuery);
     res.json(queryResult.rows);
   } catch (err) {
-    console.error("Error querying hotel chains:", err);
+    console.error("Error querying available rooms:", err);
     res.status(500).send("Server error");
   }
 });
+
 module.exports = router;
