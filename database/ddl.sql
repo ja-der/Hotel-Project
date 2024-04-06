@@ -205,9 +205,8 @@ GROUP BY
 
 --Capacity of All Rooms in a Specific Hotel
 CREATE OR REPLACE VIEW HotelRoomCapacities AS
-SELECT h.HotelID,
-       h.HotelAddress,
-       SUM(r.Capacity) AS TotalCapacity
+SELECT c.ChainID, c.ChainName, c.HeadquartersAddress AS ChainAddress, h.HotelID, COALESCE(SUM(r.Capacity), 0) AS TotalCapacity
 FROM Hotel h
-JOIN Room r ON h.HotelID = r.HotelID
-GROUP BY h.HotelID, h.HotelAddress;
+JOIN Chain c ON h.ChainID = c.ChainID
+LEFT JOIN Room r ON h.HotelID = r.HotelID
+GROUP BY c.ChainID, c.ChainName, c.HeadquartersAddress, h.HotelID;
