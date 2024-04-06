@@ -9,9 +9,9 @@ const BookedRoomsList = (props) => {
   //delete function
   async function deleteReservation(reservationId) {
     try {
-      const roomid = 1;
+      const reservationId = 1;
       const response = await fetch(
-        `http://localhost:4000/api/personalInfo/delete-reservation/${roomid}`
+        `http://localhost:4000/api/personalInfo/delete-reservation/${reservationId}`
       );
 
       if (!response.ok) {

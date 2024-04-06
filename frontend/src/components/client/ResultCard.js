@@ -43,33 +43,45 @@ const ResultCard = ({
       <div className="header">
         <h3>{result.chainname}</h3>
         <p>
-          {result.hotelcity}, {result.country}
+          {result.hotelcity}, {result.hoteladdress}
         </p>
       </div>
       <div className="details">
+        <div className="hotel-info">
+          <p>
+            <strong>Hotel Phone Number:</strong> {result.hotelphonenumber}
+          </p>
+          <p>
+            <strong>Star Rating:</strong> {result.starrating}
+          </p>
+        </div>
+        <div className="room-info">
+          <p>
+            <strong>Room Price:</strong> ${result.price}
+          </p>
+          <p>
+            <strong>Room Capacity:</strong> {result.capacity}
+          </p>
+          <p>
+            <strong>Room View:</strong> {result.roomview}
+          </p>
+          <p>
+            <strong>Extendable:</strong> {result.extendable}
+          </p>
+          <p>
+            <strong>Issues:</strong> {result.issues}
+          </p>
+          <p>
+            <strong>Amenities:</strong> {result.amenities}
+          </p>
+        </div>
+      </div>
+      <div className="booking-info">
         <p>
-          <strong>CheckIn Date:</strong> {arrivalDate}
+          <strong>Check-In Date:</strong> {arrivalDate}
         </p>
         <p>
-          <strong>CheckOut Date:</strong> {departureDate}
-        </p>
-        <p>
-          <strong>Price:</strong> ${result.price}
-        </p>
-        <p>
-          <strong>Capacity:</strong> {result.capacity}
-        </p>
-        <p>
-          <strong>View:</strong> {result.view}
-        </p>
-        <p>
-          <strong>Extendable:</strong> {result.extendable}
-        </p>
-        <p>
-          <strong>Issues:</strong> {result.issues}
-        </p>
-        <p>
-          <strong>Amenities:</strong> {result.amenities}
+          <strong>Check-Out Date:</strong> {departureDate}
         </p>
       </div>
       <button

@@ -8,6 +8,21 @@ import BookedRoomsList from "./BookedRoomsList";
 import "./Client.css";
 
 const ClientHomepage = ({ setAuth }) => {
+  const [bookings, setBookings] = useState([]); // State to hold bookings
+  // Fetch bookings
+  const fetchBookings = async () => {
+    // Assuming you have an endpoint to fetch bookings
+    const response = await fetch("API_ENDPOINT_HERE");
+    if (response.ok) {
+      const data = await response.json();
+      setBookings(data); // Update your state with the new bookings
+    }
+  };
+
+  useEffect(() => {
+    fetchBookings(); // Initial fetch
+  }, []);
+
   const navigate = useNavigate();
   // const [name, setName] = useState("");
   const [showList, setShowList] = useState(true);
@@ -82,7 +97,12 @@ const ClientHomepage = ({ setAuth }) => {
       <p>Yay! You are logged in as a client!</p>
       <button onClick={goToUserAccount}>User Account</button>
       {showList ? (
-        <BookedRoomsList onToggleShowList={toggleShowList} user={user} />
+        <BookedRoomsList
+          onToggleShowList={toggleShowList}
+          onRefresh={fetchBookings}
+          user={user}
+          clientid={user.clientid}
+        />
       ) : (
         <HotelBookingForm
           onToggleShowList={toggleShowList}

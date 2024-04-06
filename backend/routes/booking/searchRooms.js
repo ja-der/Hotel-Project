@@ -23,6 +23,8 @@ router.get("/", async (req, res) => {
         r.*, 
         h.HotelID,
         h.HotelCity, 
+        h.HotelAddress,
+        h.HotelPhoneNumber,
         h.StarRating,
         c.ChainName
     FROM 
@@ -104,9 +106,8 @@ router.get("/", async (req, res) => {
     }
 
     // Execute the query and return the result
-    console.log("search triggered");
     const queryResult = await pool.query(sqlQuery);
-    // console.log(queryResult.rows);
+    console.log(queryResult.rows);
     res.json(queryResult.rows);
   } catch (err) {
     console.error("Error searching rooms:", err);
