@@ -384,3 +384,44 @@ button[type="submit"]:hover {
 .roomCapacityDisplay tbody tr:nth-child(even) {
   background-color: #ffffff;
 }
+
+.dashboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.dashboard-buttons {
+  margin-bottom: 20px;
+}
+
+.dashboard-buttons button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.logout-button {
+  background-color: #dc3545;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}

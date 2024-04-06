@@ -80,29 +80,36 @@ const ClientHomepage = ({ setAuth }) => {
   const goToHotelCapacities = () => {
     navigate("/chaincapacity"); // Added function to navigate to Hotel Capacities page
   };
+  const goToHome = () => {
+    setShowList(true); // Set showList to true to display the homepage
+  };
 
   return (
     <Fragment>
-      <h1>Hello {user.firstName}</h1>
-      <p>Yay! You are logged in as a client!</p>
-      <button onClick={goToUserAccount}>User Account</button>
-      <button onClick={goToHotelCapacities}>Hotel Capacities</button>{" "}
-      {/* Added button for navigating to Hotel Capacities page */}
-      {showList ? (
-        <BookedRoomsList
-          onToggleShowList={toggleShowList}
-          onRefresh={fetchBookings}
-          clientid={user.clientid}
-        />
-      ) : (
-        <HotelBookingForm
-          onToggleShowList={toggleShowList}
-          clientId={user.clientid}
-        />
-      )}
-      <button className="btn btn-danger" onClick={(e) => logout(e)}>
-        Logout
-      </button>
+      <div className="dashboard-container">
+        <h1 className="dashboard-heading">Hello {user.firstName}</h1>
+        <p>Yay! You are logged in as a client!</p>
+        <div className="dashboard-buttons">
+          <button onClick={goToUserAccount}>User Account</button>
+          <button onClick={goToHotelCapacities}>Hotel Capacities</button>
+          <button onClick={goToHome}>Homepage</button>
+        </div>
+        {showList ? (
+          <BookedRoomsList
+            onToggleShowList={toggleShowList}
+            onRefresh={fetchBookings}
+            clientid={user.clientid}
+          />
+        ) : (
+          <HotelBookingForm
+            onToggleShowList={toggleShowList}
+            clientId={user.clientid}
+          />
+        )}
+        <button className="btn btn-dange" onClick={(e) => logout(e)}>
+          Logout
+        </button>
+      </div>
     </Fragment>
   );
 };
