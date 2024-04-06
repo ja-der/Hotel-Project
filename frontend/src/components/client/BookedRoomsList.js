@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 const BookedRoomsList = ({ onToggleShowList, clientid }) => {
-  const [rooms, setRooms] = useState({
-    id: 0,
-    name: "tien",
-    capacity: 0,
-    price: 0,
-  });
-  //delete function
+  const [reservations, setReservations] = useState([]);
+
   async function deleteReservation(reservationId) {
     try {
-      const reservationId = 1;
       const response = await fetch(
         `http://localhost:4000/api/personalInfo/delete-reservation/${reservationId}`
       );
@@ -17,16 +12,16 @@ const BookedRoomsList = ({ onToggleShowList, clientid }) => {
       if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
       }
-      setRooms(rooms.filter((room) => room.id !== reservationId));
+      // Filter out the deleted reservation from the reservations array
+      setReservations(
+        reservations.filter((reservation) => reservation.id !== reservationId)
+      );
     } catch (error) {
       console.error("Error:", error);
     }
   }
-  const deleteRoom = (reservationId) => {
-    setRooms(rooms.filter((room) => room.id !== reservationId));
-  };
-  //get reservation
-  async function getReservation() {
+
+  async function getReservations() {
     try {
       const response = await fetch(
         `http://localhost:4000/api/personalInfo/reservation/${clientid}`
@@ -34,36 +29,41 @@ const BookedRoomsList = ({ onToggleShowList, clientid }) => {
       if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
       }
-      const data = await response.json(); // Convert the response body to JSON
-      const transformedData = data.map((item) => ({
-        name: item.roomview,
-        capacity: item.capacity,
-        price: item.price,
-        id: item.reservationid,
-      }));
-      setRooms(transformedData);
+      const data = await response.json();
+      setReservations(
+        data.map((item) => ({
+          name: item.roomview,
+          capacity: item.capacity,
+          price: item.price,
+          id: item.reservationid,
+        }))
+      );
     } catch (error) {
       console.error("Error:", error);
     }
   }
+
   useEffect(() => {
-    getReservation();
-  }, [rooms]);
+    getReservations();
+  }, [clientid]); // Only fetch reservations when clientid changes
 
   return (
     <div>
-      <h2>Booked Rooms</h2>
-      {rooms.length > 0 ? (
+      <h2>Booked Reservations</h2>
+      {reservations.length > 0 ? (
         <ul>
-          {rooms.map((room) => (
-            <li key={room.id}>
-              {room.name} - Capacity: {room.capacity} - Price: ${room.price}
-              <button onClick={() => deleteReservation(room.id)}>Delete</button>
+          {reservations.map((reservation) => (
+            <li key={reservation.id}>
+              {reservation.name} - Capacity: {reservation.capacity} - Price: $
+              {reservation.price}
+              <button onClick={() => deleteReservation(reservation.id)}>
+                Delete
+              </button>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No rooms booked yet.</p>
+        <p>No reservations booked yet.</p>
       )}
       <button onClick={onToggleShowList}>Book your next Stay!</button>
     </div>
