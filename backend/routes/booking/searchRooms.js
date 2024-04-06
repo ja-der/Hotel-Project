@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
 
     // Add condition for hotelChain
     if (hotelChain) {
-      conditions.push(`c.ChainID = ${hotelChain}`); // Changed to ChainID
+      conditions.push(`c.ChainName = '${hotelChain}'`);
     }
 
     // Add condition for totalRooms
@@ -91,8 +91,8 @@ router.get("/", async (req, res) => {
     if (arrivalDate && departureDate) {
       conditions.push(`
         r.RoomID NOT IN (
-          SELECT RoomID
-          FROM Reservation
+          SELECT RoomID 
+          FROM Reservation 
           WHERE (CheckInDate <= '${departureDate}' AND CheckOutDate >= '${arrivalDate}')
         )
       `);
@@ -104,9 +104,9 @@ router.get("/", async (req, res) => {
     }
 
     // Execute the query and return the result
-    // console.log(sqlQuery);
+    console.log("search triggered");
     const queryResult = await pool.query(sqlQuery);
-    //console.log(queryResult.rows);
+    // console.log(queryResult.rows);
     res.json(queryResult.rows);
   } catch (err) {
     console.error("Error searching rooms:", err);

@@ -129,11 +129,11 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
           onChange={handleInputChange}
         >
           <option value="">Any</option>
-          <option value="1">Schimmel-Zieme</option>
-          <option value="2">Walsh and Sons</option>
-          <option value="3">Halvorson-Hettinger</option>
-          <option value="4">Goyette Group</option>
-          <option value="5">Jaskolski Inc</option>
+          <option value="Schimmel-Zieme">Schimmel-Zieme</option>
+          <option value="Walsh and Sons">Walsh and Sons</option>
+          <option value="Halvorson-Hettinger">Halvorson-Hettinger</option>
+          <option value="Goyette Group">Goyette Group</option>
+          <option value="Jaskolski Inc">Jaskolski Inc</option>
         </select>
       </label>
       <label>
