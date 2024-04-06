@@ -24,6 +24,7 @@ import EditRooms from "./components/employee/EditRooms";
 import EditRoomInfo from "./components/employee/EditRoomInfo";
 import AddRoom from "./components/employee/AddRoom";
 import UserAccount from "./components/client/UserAccount";
+import HotelCapacities from "./components/client/HotelCapacities";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -99,6 +100,16 @@ function App() {
               path="/useraccount"
               element={
                 !isAuthenticated ? <Navigate to="/login" /> : <UserAccount />
+              }
+            />
+            <Route
+              path="/hotelcapacities"
+              element={
+                !isAuthenticated ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <HotelCapacities />
+                )
               }
             />
             <Route

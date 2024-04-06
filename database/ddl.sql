@@ -204,10 +204,10 @@ GROUP BY
     HotelCity;
 
 --Capacity of All Rooms in a Specific Hotel
-CREATE VIEW RoomCapacityPerHotel AS
+CREATE OR REPLACE VIEW HotelRoomCapacities AS
 SELECT h.HotelID,
-       h.HotelName,
+       h.HotelAddress,
        SUM(r.Capacity) AS TotalCapacity
 FROM Hotel h
 JOIN Room r ON h.HotelID = r.HotelID
-GROUP BY h.HotelID, h.HotelName;
+GROUP BY h.HotelID, h.HotelAddress;

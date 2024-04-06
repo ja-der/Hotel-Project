@@ -4,8 +4,9 @@ const pool = require("../../db");
 
 router.get("/", async (req, res) => {
   try {
-    // Fetch data from the existing view
-    const fetchDataQuery = "SELECT * FROM RoomCapacityPerHotel";
+    // Fetch data from the existing view1
+    console.log("poop");
+    const fetchDataQuery = "SELECT * FROM HotelRoomCapacities";
     const queryResult = await pool.query(fetchDataQuery);
     res.json(queryResult.rows);
   } catch (err) {

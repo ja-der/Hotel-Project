@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import HotelBookingForm from "./HotelBookingForm";
 import BookedRoomsList from "./BookedRoomsList";
+import HotelCapacities from "./HotelCapacities"; // Imported the new page component
 
 import "./Client.css";
 
@@ -76,12 +77,17 @@ const ClientHomepage = ({ setAuth }) => {
   const goToUserAccount = () => {
     navigate("/useraccount"); // Navigate to the UserAccount component
   };
+  const goToHotelCapacities = () => {
+    navigate("/hotelcapacities"); // Added function to navigate to Hotel Capacities page
+  };
 
   return (
     <Fragment>
       <h1>Hello {user.firstName}</h1>
       <p>Yay! You are logged in as a client!</p>
       <button onClick={goToUserAccount}>User Account</button>
+      <button onClick={goToHotelCapacities}>Hotel Capacities</button>{" "}
+      {/* Added button for navigating to Hotel Capacities page */}
       {showList ? (
         <BookedRoomsList
           onToggleShowList={toggleShowList}
