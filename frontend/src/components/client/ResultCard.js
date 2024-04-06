@@ -7,6 +7,7 @@ const ResultCard = ({
   departureDate,
   clientId,
   onSearch,
+  onRefreshAvailableRoomsPerCity,
 }) => {
   const handleBookNow = async (result, event) => {
     event.preventDefault();
@@ -34,6 +35,7 @@ const ResultCard = ({
       // Show notification upon successful booking
       alert("Reservation booked successfully!");
       onSearch();
+      onRefreshAvailableRoomsPerCity();
     } catch (error) {
       console.error("Error booking reservation:", error);
     }

@@ -76,7 +76,6 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
   };
 
   const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAvailableRoomsPerCity = async () => {
@@ -86,16 +85,31 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
         );
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
+        console.log(data);
+
         setAvailableRoomsPerCity(data);
       } catch (error) {
         console.error("Error fetching available rooms per city:", error);
-      } finally {
-        setLoading(false); // Set loading to false after fetching
       }
     };
 
     fetchAvailableRoomsPerCity();
   }, []);
+
+  const fetchAvailableRoomsPerCity = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:4000/api/availableRoomsPerCity"
+      );
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
+      console.log(data);
+
+      setAvailableRoomsPerCity(data);
+    } catch (error) {
+      console.error("Error fetching available rooms per city:", error);
+    }
+  };
 
   // Function to trigger search
   const searchRooms = async () => {
@@ -125,11 +139,8 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
 
   return (
     <>
-      <h2>Available Rooms Per City</h2>
-
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      <div className="results-container">
+        <h2>Available Rooms Per City</h2>
         <table>
           <thead>
             <tr>
@@ -140,14 +151,13 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
           <tbody>
             {availableRoomsPerCity.map((cityData, index) => (
               <tr key={index}>
-                <td>{cityData.HotelCity}</td>
-                <td>{cityData.AvailableRooms}</td>
+                <td>{cityData.hotelcity}</td>
+                <td>{cityData.availablerooms}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      )}
-
+      </div>
       <form onSubmit={handleSubmit}>
         <label>
           Arrival Date:
@@ -367,6 +377,7 @@ const HotelBookingForm = ({ onToggleShowList, clientId }) => {
               departureDate={formData.departureDate}
               clientId={clientId}
               onSearch={searchRooms}
+              onRefreshAvailableRoomsPerCity={fetchAvailableRoomsPerCity}
             />
           ))}
         </div>
