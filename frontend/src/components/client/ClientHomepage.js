@@ -27,20 +27,6 @@ const ClientHomepage = ({ setAuth }) => {
   // const [name, setName] = useState("");
   const [showList, setShowList] = useState(true);
 
-  // async function getName() {
-  //   try {
-  //     const response = await fetch("http://localhost:4000/dashboard/", {
-  //       method: "GET",
-  //       headers: { token: localStorage.token },
-  //     });
-
-  //     const parseRes = await response.json();
-  //     console.log(parseRes);
-  //     setName(parseRes.clientfirstname);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // }
   const [user, setUser] = useState({
     clientid: "",
     firstName: "",

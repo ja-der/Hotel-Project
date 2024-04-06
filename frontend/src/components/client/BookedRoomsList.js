@@ -45,7 +45,7 @@ const BookedRoomsList = ({ onToggleShowList, clientid }) => {
 
   useEffect(() => {
     getReservations();
-  }, [clientid]); // Only fetch reservations when clientid changes
+  }, [clientid, reservations]); // Only fetch reservations when clientid changes
 
   return (
     <div>
