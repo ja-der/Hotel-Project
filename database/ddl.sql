@@ -187,6 +187,7 @@ CREATE TABLE ArchivesRental (
     HeadquartersPhoneNumber VARCHAR(20) NOT NULL
 );
 
+--Number of Available Rooms per City
 CREATE VIEW AvailableRoomsPerCity AS
 SELECT
     HotelCity,
@@ -201,3 +202,12 @@ WHERE
     Reservation.RoomID IS NULL
 GROUP BY
     HotelCity;
+
+--Capacity of All Rooms in a Specific Hotel
+CREATE VIEW RoomCapacityPerHotel AS
+SELECT h.HotelID,
+       h.HotelName,
+       SUM(r.Capacity) AS TotalCapacity
+FROM Hotel h
+JOIN Room r ON h.HotelID = r.HotelID
+GROUP BY h.HotelID, h.HotelName;
