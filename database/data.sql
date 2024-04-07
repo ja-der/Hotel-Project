@@ -662,3 +662,43 @@ VALUES
 -- INSERT EMPLOYEE POSITION DATA
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 1);
 INSERT INTO EmployeePosition (EmployeeID, JobCode) VALUES (1, 2);
+
+
+-- VIEWS
+
+--Number of Available Rooms per City
+CREATE VIEW AvailableRoomsPerCity AS
+SELECT
+    HotelCity,
+    COUNT(Room.RoomID) AS AvailableRooms
+FROM
+    Hotel
+LEFT JOIN
+    Room ON Hotel.HotelID = Room.HotelID
+LEFT JOIN
+    Reservation ON Room.RoomID = Reservation.RoomID
+WHERE
+    Reservation.RoomID IS NULL
+GROUP BY
+    HotelCity;
+
+--Capacity of All Rooms in a Specific Hotel
+CREATE OR REPLACE VIEW HotelRoomCapacities AS
+SELECT c.ChainID, c.ChainName, c.HeadquartersAddress AS ChainAddress, h.HotelID, COALESCE(SUM(r.Capacity), 0) AS TotalCapacity
+FROM Hotel h
+JOIN Chain c ON h.ChainID = c.ChainID
+LEFT JOIN Room r ON h.HotelID = r.HotelID
+GROUP BY c.ChainID, c.ChainName, c.HeadquartersAddress, h.HotelID;
+
+
+-- INDEXES
+
+-- Used for indexing by room price to speed up searches for rooms within a specific price range:
+CREATE INDEX idx_room_price ON Room(Price);
+
+-- Used for Hotel.ChainID to optimize queries filtering hotels by their chain:
+CREATE INDEX idx_hotel_chainid ON Hotel(ChainID);
+ls to different chains or adding new hotels to existing chains.
+
+---- On Client.LastName and Client.FirstName to improve search performance for clients by name:
+CREATE INDEX idx_client_lastname_firstname ON Client(LastName, FirstName);

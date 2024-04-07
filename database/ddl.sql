@@ -187,6 +187,9 @@ CREATE TABLE ArchivesRental (
     HeadquartersPhoneNumber VARCHAR(20) NOT NULL
 );
 
+
+-- VIEWS
+
 --Number of Available Rooms per City
 CREATE VIEW AvailableRoomsPerCity AS
 SELECT
@@ -210,3 +213,15 @@ FROM Hotel h
 JOIN Chain c ON h.ChainID = c.ChainID
 LEFT JOIN Room r ON h.HotelID = r.HotelID
 GROUP BY c.ChainID, c.ChainName, c.HeadquartersAddress, h.HotelID;
+
+
+-- INDEXES
+
+-- Used for indexing by room price to speed up searches for rooms within a specific price range:
+CREATE INDEX idx_room_price ON Room(Price);
+
+-- Used for Hotel.ChainID to optimize queries filtering hotels by their chain:
+CREATE INDEX idx_hotel_chainid ON Hotel(ChainID);
+
+---- On Client.LastName and Client.FirstName to improve search performance for clients by name:
+CREATE INDEX idx_client_lastname_firstname ON Client(ClientLastName, ClientFirstName);
